@@ -1,0 +1,26 @@
+<?
+$MESS["T_IBLOCK_DESC_NEWS_DATE"] = "Выводить дату элемента";
+$MESS["T_IBLOCK_DESC_NEWS_PICTURE"] = "Выводить изображение для анонса";
+$MESS["T_IBLOCK_DESC_NEWS_TEXT"] = "Выводить текст анонса";
+$MESS["T_IBLOCK_DESC_NEWS_USE_SHARE"] = "Отображать панель соц. закладок";
+$MESS["T_IBLOCK_DESC_NEWS_SHARE_HIDE"] = "Не раскрывать панель соц. закладок по умолчанию";
+$MESS["T_IBLOCK_DESC_NEWS_SHARE_TEMPLATE"] = "Шаблон компонента панели соц. закладок";
+$MESS["T_IBLOCK_DESC_NEWS_SHARE_SYSTEM"] = "Используемые соц. закладки и сети";
+$MESS["T_IBLOCK_DESC_NEWS_SHARE_SHORTEN_URL_LOGIN"] = "Логин для bit.ly";
+$MESS["T_IBLOCK_DESC_NEWS_SHARE_SHORTEN_URL_KEY"] = "Ключ для для bit.ly";
+$MESS["SERVICES_TOP_BANNER_IBLOCK_ID"] = "Верхний баннер: ID инфоблока";
+$MESS["SERVICES_TOP_BANNER_SECTION_ID"] = "Верхний баннер: ID раздела";
+$MESS["SERVICES_FIRST_TIZZERS_IBLOCK_ID"] = "Первый блок тизеров: ID инфоблока";
+$MESS["SERVICES_FIRST_TIZZERS_SECTION_ID"] = "Первый блок тизеров: ID раздела";
+$MESS["SERVICES_FIRST_TIZZERS_TITLE"] = "Первый блок тизеров: заголовок";
+$MESS["SERVICES_SECOND_TIZZERS_IBLOCK_ID"] = "Второй блок тизеров: ID инфоблока";
+$MESS["SERVICES_SECOND_TIZZERS_SECTION_ID"] = "Второй блок тизеров: ID раздела";
+$MESS["SERVICES_SECOND_TIZZERS_TITLE"] = "Второй блок тизеров: заголовок";
+$MESS["SERVICES_THIRD_TIZZERS_IBLOCK_ID"] = "Третий блок тизеров: ID инфоблока";
+$MESS["SERVICES_THIRD_TIZZERS_SECTION_ID"] = "Третий блок тизеров: ID раздела";
+$MESS["SERVICES_THIRD_TIZZERS_TITLE"] = "Третий блок тизеров: заголовок";
+$MESS["SERVICES_FOURTH_TIZZERS_IBLOCK_ID"] = "Четвертый блок тизеров: ID инфоблока";
+$MESS["SERVICES_FOURTH_TIZZERS_SECTION_ID"] = "Четвертый блок тизеров: ID раздела";
+$MESS["SERVICES_FOURTH_TIZZERS_TITLE"] = "Четвертый блок тизеров: заголовок";
+$MESS["SERVICES_FAQ_PREVIEW_IBLOCK_ID"] = "Вопросы и ответы: ID инфоблока";
+$MESS["SERVICES_FAQ_PREVIEW_SECTION_ID"] = "Вопросы и ответы: ID раздела";

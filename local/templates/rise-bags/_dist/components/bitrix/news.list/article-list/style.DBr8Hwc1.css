@@ -1,0 +1,1 @@
+.articles{container:articles/inline-size}.articles .container{display:flex;flex-direction:column;gap:clamp(20px,3.6cqw,40px)}.articles__header{display:flex;flex-direction:column;gap:20px}.articles__header h1,.articles__header p{margin:0}.articles__list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(20px,3.6cqw,40px)}

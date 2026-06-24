@@ -1,0 +1,128 @@
+// @use "@scss/base/vars";
+@use "@scss/extends/index";
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	min-height: 100vh;
+	min-height: 100dvh;
+	text-size-adjust: none;
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	scrollbar-gutter: stable;
+}
+
+* {
+	&::-webkit-scrollbar {
+		background-color: transparent;
+		width: var(--scrollbar-width);
+		border-radius: var(--scrollbar-border-radius);
+		height: var(--scrollbar-height);
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--scrollbar-thumb-color);
+		border-radius: var(--scrollbar-thumb-border-radius);
+	}
+}
+
+body {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	font-family: var(--site-base-font-family);
+	font-weight: var(--site-base-font-weight);
+	font-size: var(--site-base-font-size);
+	line-height: var(--site-base-line-height);
+	letter-spacing: var(--site-base-letter-spacing);
+	color: var(--site-base-text-color);
+	background-color: var(--site-bg-color);
+	overflow-x: hidden !important;
+	-webkit-font-smoothing: antialiased;
+	scrollbar-gutter: stable;
+
+	&.body-locked {
+		overflow: hidden;
+	}
+}
+
+footer {
+	margin-top: auto;
+}
+
+button,
+[data-fancybox],
+input[type="submit"] {
+	cursor: pointer;
+}
+
+input[type="number"] {
+	appearance: none;
+	-moz-appearance: textfield;
+
+	&::-webkit-inner-spin-button,
+	&::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+}
+
+picture,
+img {
+	display: flex;
+}
+
+a {
+	color: var(--dark);
+	text-decoration: none;
+	cursor: pointer;
+
+	&:not(.product-item-header) {
+		@extend %hover-opacity;
+	}
+}
+
+address {
+	font-style: normal;
+}
+
+q {
+	font-style: italic;
+}
+
+cite {
+	font-weight: 500;
+	font-style: normal;
+}
+
+button,
+input,
+label {
+	cursor: pointer;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+}
+
+ul,
+ol {
+	clear: both;
+}

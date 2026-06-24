@@ -1,0 +1,277 @@
+@use "@scss/base/container-queries" as *;
+@use "@scss/functions/_font-size" as *;
+
+.bx-catalog-element {
+	container: bx-catalog-element / inline-size;
+
+	&-description {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
+		margin: 30px 0;
+
+		&-section {
+			&-title {
+				display: inline-block;
+				margin-bottom: 24px;
+
+				padding: 4px;
+				background-color: transparent;
+				font-family: var(--site-base-font-family);
+				font-weight: 500;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+				border: none;
+				border-bottom: 1px solid var(--gray-500);
+			}
+		}
+
+		.content {
+			& *:first-child {
+				margin-top: 0;
+			}
+		}
+	}
+
+	.title {
+		margin-bottom: 8px;
+	}
+
+	.product-item-subscribe-block {
+		max-width: 190px;
+	}
+
+	.grid {
+		width: 100%;
+		display: grid;
+		gap: 24px;
+		margin-bottom: 24px;
+
+		@include container-up(bx-catalog-element, 850px) {
+			grid-template-columns: 2fr 3fr;
+		}
+
+		&-item {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+
+			&--gallery {
+				max-width: 640px;
+				height: fit-content;
+
+				@include container-up(bx-catalog-element, 850px) {
+					&--gallery {
+						position: sticky;
+						top: 80px;
+
+						max-width: 100%;
+					}
+				}
+			}
+
+			// .tabs {
+			// 	padding-top: 40px;
+			// }
+		}
+	}
+
+	&-slider {
+		position: relative;
+		width: 100%;
+		height: 100%;
+
+		&-container {
+			width: 100%;
+			// max-width: 640px;
+			height: auto;
+			aspect-ratio: 1/1;
+			background-color: var(--white);
+			border: 1px solid var(--gray-500);
+			border-radius: 12px;
+		}
+
+		.swiper-slide {
+			display: flex;
+			width: 100% !important;
+			padding: 16px 16px 8px;
+
+			img {
+				width: 100%;
+				height: auto;
+				object-fit: contain;
+				aspect-ratio: 1/1;
+			}
+		}
+
+		.swiper-pagination {
+			bottom: 0 !important;
+			margin-bottom: 8px;
+		}
+	}
+
+	&-slider-hover {
+		position: absolute;
+		inset: 0;
+		z-index: 8;
+		display: grid;
+		grid-template-columns: repeat(
+			var(--catalog-element-slider-hover-count),
+			1fr
+		);
+		pointer-events: none;
+
+		&__area {
+			display: block;
+			min-width: 0;
+			pointer-events: auto;
+		}
+	}
+
+	&__sidebar {
+		position: absolute;
+		top: 12px;
+		right: 12px;
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		z-index: 2;
+		border-radius: 4px;
+		background-color: var(--gray-500);
+	}
+
+	&-buy-info {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.product-label {
+		&-container {
+			position: absolute;
+			bottom: 36px;
+			left: 20px;
+			z-index: 2;
+		}
+
+		&--discount {
+			position: absolute;
+			top: 20px;
+			left: 20px;
+			z-index: 2;
+		}
+
+		&--quantity {
+			padding: 0;
+		}
+	}
+
+	&-price {
+		&-container {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+			margin-bottom: 12px;
+		}
+
+		&-value {
+			display: flex;
+			align-items: baseline;
+			flex-wrap: wrap;
+			row-gap: 6px;
+			column-gap: 20px;
+			margin: 0;
+		}
+
+		&--current {
+			font-weight: 600;
+			color: var(--primary);
+		}
+
+		&--old {
+			text-decoration: line-through;
+			color: var(--gray-700);
+		}
+
+		&-label {
+			margin: 0;
+			width: fit-content;
+			padding: 4px 12px;
+			background-color: var(--info);
+			border-radius: 4px;
+			font-size: 14px;
+		}
+	}
+
+	&-amount-description-container {
+		font-size: 14px;
+	}
+
+	&-buttons {
+		&-container {
+			container: bx-catalog-element-buttons/ inline-size;
+		}
+
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		row-gap: 12px;
+		max-width: 400px;
+
+		@include container-up(bx-catalog-element, 400px) {
+			flex-direction: row;
+			justify-content: space-between;
+		}
+
+		.main-btn {
+			min-height: 36px;
+			min-width: 190px;
+		}
+
+		// button {
+		//   flex-grow: 1;
+		// }
+
+		// .oneclickbuy-btn {
+		//   width: 100%;
+		// }
+	}
+
+	.prop-list-item-name {
+		font-size: 1em;
+		color: var(--gray-700);
+	}
+
+	.prop-list-item-value {
+		font-size: 1em;
+	}
+
+	// .tabs {
+	// 	.swiper-button-disabled {
+	// 		display: none;
+	// 	}
+
+	// 	.swiper-button-prev,
+	// 	.swiper-button-next {
+	// 		height: 100%;
+	// 		top: 0;
+	// 		margin-top: 0;
+	// 		background-color: var(--white);
+	// 		border-color: transparent;
+	// 		border-radius: 0;
+	// 	}
+
+	// 	.swiper-button-prev {
+	// 		left: 0;
+	// 	}
+
+	// 	.swiper-button-next {
+	// 		right: 0;
+	// 	}
+
+	// 	.swiper-slide {
+	// 		width: 100% !important;
+	// 		max-width: fit-content;
+	// 	}
+	// }
+}

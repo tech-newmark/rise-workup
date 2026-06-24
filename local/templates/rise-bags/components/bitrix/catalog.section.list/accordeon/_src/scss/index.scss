@@ -1,0 +1,29 @@
+.catalog-section-list--accordeon-view {
+	margin-bottom: 40px;
+	.catalog-section-list__title {
+		display: inline-block;
+		font-size: 18px;
+		font-weight: 600;
+		text-transform: uppercase;
+		margin-bottom: 16px;
+		color: var(--primary);
+	}
+
+	.accordeon {
+		// border: none;
+		border: 1px solid var(--gray-500);
+		border-radius: 16px;
+
+		&-body-content {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+
+		&-item.expanded {
+			.accordeon-body {
+				padding: 0 20px 16px 32px;
+			}
+		}
+	}
+}

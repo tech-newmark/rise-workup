@@ -1,0 +1,40 @@
+ul.prop-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.prop-list {
+	display: flex;
+	flex-direction: column;
+
+	&-item {
+		position: relative;
+		display: flex;
+		align-items: flex-end;
+		gap: 4px;
+		padding: 4px 0;
+
+		&::before {
+			content: "";
+			flex-grow: 1;
+			border-bottom: 1px dashed var(--gray-600);
+			margin: 0 6px;
+			order: 1;
+		}
+
+		&-name {
+			font-size: 14px;
+			line-height: 1;
+			color: var(--gray-700);
+		}
+
+		&-value {
+			font-size: 14px;
+			line-height: 1;
+			text-align: right;
+			color: var(--primary);
+			order: 2;
+		}
+	}
+}

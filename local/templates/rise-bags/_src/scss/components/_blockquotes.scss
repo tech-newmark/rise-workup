@@ -1,0 +1,22 @@
+blockquote {
+	position: relative;
+	margin: 0;
+	margin-bottom: 0.5em;
+	padding-left: 26px;
+	font-style: italic;
+
+	&::before {
+		position: absolute;
+		content: "";
+		top: 0;
+		left: 0;
+		width: 2px;
+		height: 100%;
+		background-color: var(--primary);
+	}
+
+	cite {
+		display: block;
+		font-weight: 500;
+	}
+}

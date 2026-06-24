@@ -1,0 +1,102 @@
+$max-width: 440px;
+.bx-coupon {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 32px;
+
+  &-label {
+    font-size: 14px;
+    padding-left: 16px;
+  }
+
+  &-input {
+    display: flex;
+    max-width: $max-width;
+    width: 100%;
+    position: relative;
+
+    &::after {
+      position: absolute;
+
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+
+      width: 16px;
+      height: 16px;
+      content: "";
+      background-image: url("../../images/arrow-sm.svg");
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+
+  [class^="bx-coupon-item-"] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+    max-width: $max-width;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--gray-500);
+    background-color: var(--gray-800);
+
+    &:first-child {
+      margin-top: 12px;
+    }
+  }
+
+  &-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+
+    .bx-soa-tooltip {
+      width: 100%;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--dark);
+
+      &-success {
+        color: var(--success);
+      }
+
+      &-danger,
+      &-warning {
+        color: var(--danger);
+      }
+    }
+  }
+
+  &-remove {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    background-image: url("@img/cross-icon.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+  }
+
+  input {
+    width: 100%;
+    font-size: clamp(14px, 2.2vw, 16px);
+    font-weight: 400;
+    border: 1px solid transparent;
+    background-color: var(--secondary);
+    font-family: var(--primary-font);
+    padding: 8px 12px;
+    min-height: 40px;
+    border-radius: 4px;
+  }
+}

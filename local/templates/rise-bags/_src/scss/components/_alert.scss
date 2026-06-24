@@ -1,0 +1,46 @@
+.alert {
+	font-size: 16px;
+	padding: 16px var(--base-gap);
+	border-radius: var(--base-br);
+	margin: 16px 0;
+	max-width: 760px;
+	background-color: var(--gray-500);
+
+	&-success,
+	&--success {
+		border: 1px solid var(--success);
+	}
+
+	&-warning,
+	&--warning {
+		border: 1px solid var(--warning);
+	}
+
+	&-danger,
+	&--danger {
+		border: 1px solid var(--danger);
+	}
+
+	&-line {
+		padding: 0;
+		border: none;
+		background-color: transparent;
+
+		&.alert-danger {
+			color: var(--danger);
+		}
+	}
+
+	a {
+		text-decoration: underline;
+		text-underline-offset: 4px;
+		color: var(--primary);
+	}
+}
+
+.bx-soa-section-content {
+	.alert {
+		padding: 12px 18px;
+		font-size: 14px;
+	}
+}

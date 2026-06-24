@@ -1,0 +1,245 @@
+@use "@scss/base/container-queries" as *;
+
+.bx-basket-line {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100svw;
+	height: fit-content;
+	padding: 12px var(--container-offset);
+	background-color: var(--white);
+	z-index: 3;
+	border-top: 1px solid var(--dark);
+	// z-index: 11;
+
+	min-height: 60px;
+	display: flex;
+	width: 100%;
+	align-items: center;
+
+	@include container-up("header", 1091px) {
+		position: relative;
+		bottom: revert;
+		left: revert;
+		width: revert;
+		height: revert;
+		padding: revert;
+		background-color: revert;
+		border-top: revert;
+	}
+
+	&-tooltip {
+		flex-direction: column;
+		gap: 4px;
+		padding: 6px;
+		background-color: var(--white);
+		border-radius: 6px;
+		border: 1px solid var(--primary);
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+	}
+
+	&-block {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		justify-content: space-around;
+		width: 100%;
+
+		&-section {
+			display: flex;
+			flex-direction: row;
+			align-items: flex-end;
+			justify-content: center;
+			gap: 6px;
+			text-align: center;
+			gap: 2px;
+
+			&-icon {
+				display: flex;
+				position: relative;
+				width: fit-content;
+				margin: 0 auto;
+			}
+
+			&-label {
+				position: absolute;
+				top: -8px;
+				left: calc(100% - 10px);
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 12px;
+				line-height: 1;
+				min-width: 24px;
+				background-color: var(--primary);
+				border-radius: 8px;
+				padding: 2px 4px;
+				color: var(--white);
+			}
+
+			svg {
+				width: auto;
+				height: 20px;
+				fill: var(--dark);
+
+				transition: fill var(--main-transition);
+			}
+
+			@media (hover: hover) {
+				&:focus svg,
+				&:hover svg {
+					fill: var(--primary);
+				}
+			}
+
+			a,
+			button {
+				display: flex;
+				flex-direction: column;
+				gap: 2px;
+				font-size: 14px;
+				font-weight: 400;
+				color: var(--dark);
+
+				@include container-up("header", 620px) {
+					height: 40px;
+				}
+
+				@include container-up("header", 1091px) {
+					height: revert;
+				}
+
+				span:not(.bx-basket-line-block-section-label) {
+					display: none;
+					@include container-up("header", 620px) {
+						display: flex;
+					}
+
+					@include container-up("header", 1091px) {
+						display: none;
+					}
+
+					@include container-up("header", 1450px) {
+						display: flex;
+					}
+				}
+			}
+
+			@include container-up("header", 768px) {
+				&:has(.search-title-opener) {
+					display: none;
+				}
+			}
+
+			@include container-up("header", 960px) {
+				&:has(.filter-opener) {
+					display: none !important;
+				}
+			}
+
+			small {
+				font-size: 12px;
+				color: var(--primary);
+			}
+
+			strong {
+				font-size: 14px;
+			}
+
+			&:has(.bx-basket-line-tooltip) {
+				position: relative;
+			}
+
+			&:has(.bx-basket-line-tooltip) .bx-basket-line-tooltip {
+				display: none;
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				transform: translateX(-50%);
+				width: fit-content;
+				min-width: 180px;
+			}
+
+			@media (hover: hover) {
+				&:has(.bx-basket-line-tooltip):focus .bx-basket-line-tooltip,
+				&:has(.bx-basket-line-tooltip):hover .bx-basket-line-tooltip {
+					display: flex;
+				}
+			}
+		}
+	}
+
+	&-list {
+		&-header {
+			background-color: var(--light);
+			padding: 8px 12px;
+			margin: 0 -12px;
+			font-size: 14px;
+			line-height: 1;
+			font-weight: 600;
+			color: var(--primary);
+		}
+
+		&-item {
+			position: relative;
+			padding: 16px 0;
+
+			& + .list-item {
+				border-top: 1px solid var(--light);
+			}
+
+			&-remove {
+				position: absolute;
+				top: 10px;
+				right: 0;
+				border: none;
+				background-color: transparent;
+				width: 32px;
+				height: 32px;
+				padding: 2px;
+				margin: 0;
+				cursor: pointer;
+				margin-left: auto;
+			}
+
+			&-header {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 16px;
+			}
+		}
+
+		&-wrapper {
+			position: absolute;
+			top: 100%;
+			right: 0;
+			width: fit-content;
+			min-width: 100%;
+
+			padding: 12px;
+			padding-top: 0;
+			background-color: var(--white);
+
+			box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+			border-radius: 0px 0px 30px 30px;
+			z-index: 99;
+		}
+	}
+
+	.filter-opener,
+	.search-title-opener {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: transparent;
+		border: none;
+		padding: 0;
+
+		svg {
+			width: 24px;
+			fill: var(--dark);
+		}
+	}
+}

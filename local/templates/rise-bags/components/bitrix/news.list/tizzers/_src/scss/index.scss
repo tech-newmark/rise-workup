@@ -1,0 +1,136 @@
+@use "@scss/base/container-queries" as *;
+
+.tizzers {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--base-gap);
+
+	&-container {
+		container: tizzers/ inline-size;
+	}
+
+	&:not(.tizzers--big) {
+		@include container-up("tizzers", 620px) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include container-up("tizzers", 1140px) {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+
+	&--big {
+		.tizzers__item {
+			&-content-wrapper {
+				gap: clamp(10px, 2.4vw, 24px);
+			}
+
+			&-text {
+				color: var(--black);
+			}
+
+			&:nth-child(even) {
+				background-color: var(--primary);
+				color: var(--white);
+
+				.tizzers__item-text {
+					color: var(--white);
+				}
+
+				.main-btn {
+					border-color: var(--white);
+				}
+			}
+
+			img {
+				position: absolute;
+				opacity: 0.5;
+				top: clamp(20px, 3vw, 30px);
+				width: auto;
+				height: calc(100% - 2 * clamp(20px, 3vw, 30px));
+				right: clamp(20px, 3vw, 30px);
+			}
+
+			.main-btn {
+				width: fit-content;
+			}
+		}
+
+		@include container-up("tizzers", 650px) {
+			.tizzers__item img {
+				position: relative;
+				opacity: 1;
+				height: 160px;
+				top: revert;
+				right: revert;
+			}
+		}
+
+		@include container-up("tizzers", 1040px) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	&__item {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 20px;
+
+		padding: clamp(20px, 3vw, 30px);
+		border-radius: var(--base-br);
+		background-color: var(--gray-500);
+
+		position: relative;
+
+		&--column {
+			flex-direction: column;
+			gap: 10px;
+
+			.tizzers__item-content-wrapper {
+				order: 1;
+			}
+		}
+
+		&--clear {
+			background-color: transparent;
+			padding: 0;
+		}
+
+		img {
+			width: auto;
+			height: 40px;
+			object-fit: contain;
+		}
+
+		&-title {
+			font-size: 18px;
+			font-weight: 600;
+		}
+
+		&-text {
+			font-size: 16px;
+			color: var(--gray-900);
+			margin: 0;
+		}
+
+		&-content-wrapper {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+
+		&-number {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 60px;
+			height: 60px;
+			background-color: var(--primary);
+			border-radius: 50%;
+			color: var(--white);
+			font-size: 24px;
+			font-weight: 700;
+		}
+	}
+}

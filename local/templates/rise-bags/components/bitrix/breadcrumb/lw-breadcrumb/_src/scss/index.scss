@@ -1,0 +1,25 @@
+.breadcrumbs {
+	width: 100%;
+	padding: 20px 0;
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+
+		align-items: center;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		&-item {
+			font-size: 14px;
+
+			a span {
+				color: var(--gray-900);
+			}
+			span {
+				color: var(--primary);
+			}
+		}
+	}
+}

@@ -1,0 +1,20 @@
+.radio-inline {
+	position: relative;
+	width: fit-content;
+	border-bottom: 2px solid transparent;
+
+	input[type="radio"] {
+		display: none;
+	}
+
+	&:has(input[type="radio"]:checked) {
+		color: var(--primary);
+		border-color: var(--primary);
+	}
+}
+
+.form-group:has(.radio-inline) {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+}

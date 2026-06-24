@@ -1,0 +1,37 @@
+@use "./blockquotes";
+@use "./tables";
+
+@use "./alert";
+@use "./main-btn";
+@use "./main-link";
+
+@use "./bx-coupon";
+
+@use "./loader";
+@use "./product-label";
+@use "./counter";
+@use "./accordeon";
+@use "./prop-list";
+@use "./sku-prop-list";
+@use "./content-page";
+@use "./contacts";
+@use "./clear-btn";
+@use "./tabs";
+@use "./swiper";
+@use "./mobile-menu";
+@use "./search-btn";
+@use "./contact-block";
+
+// forms controls, partials, templates
+
+@use "./forms/templates/bx-popup";
+@use "./forms/templates/popup-form";
+@use "./forms/templates/oneclickbuy";
+@use "./forms/templates/bx-authform";
+@use "./forms/templates/ajax-popup";
+
+@use "./forms/partials/_captcha-block";
+
+@use "./forms/controls/main-textarea";
+@use "./forms/controls/main-input";
+@use "./forms/controls/main-checkbox";

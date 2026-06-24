@@ -1,0 +1,32 @@
+.order-cancel {
+	.main-btn {
+		width: fit-content;
+		max-width: 250px;
+	}
+
+	.bx_my_order_cancel {
+		margin-top: clamp(20px, 3vw, 40px);
+	}
+
+	.main-textarea-wrapper {
+		textarea {
+			height: 100px;
+			max-width: 700px;
+		}
+	}
+
+	p {
+		margin: 0;
+
+		a {
+			color: var(--primary);
+			font-weight: 600;
+		}
+	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(10px, 1.2vw, 14px);
+	}
+}

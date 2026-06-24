@@ -1,0 +1,94 @@
+.popup-window {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding: 20px;
+	border-radius: 4px;
+	width: 80vw;
+	max-width: 440px;
+}
+
+.popup-window-overlay {
+	width: 100% !important;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popup-window.popup-window-with-titlebar {
+	padding: 12px;
+
+	.popup-window-content {
+		padding: 12px 0;
+	}
+}
+
+.popup-window-titlebar {
+	display: flex;
+	align-items: center;
+	height: fit-content;
+	padding-bottom: 12px;
+	border-bottom: 1px solid var(--primary);
+
+	&-text {
+		display: flex;
+		align-items: center;
+		font-size: 18px;
+		line-height: 1;
+		font-weight: 500;
+
+		min-height: 40px;
+		overflow: initial;
+		text-overflow: initial;
+		white-space: initial;
+		padding: 0;
+		color: var(--dark);
+	}
+}
+
+.popup-window-close-icon {
+	position: absolute;
+	top: -16px;
+	right: -16px;
+	left: initial;
+	bottom: initial;
+	width: 32px;
+	height: 32px;
+	opacity: 1;
+	background-color: #ffffff;
+	border-radius: 50%;
+	border: 1px solid var(--gray-600);
+
+	&::after {
+		width: 20px;
+		height: 20px;
+		background-image: url("@img/cross-icon.svg");
+	}
+}
+
+.popup-window-content {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	padding: 12px 0;
+
+	img {
+		width: 80px;
+		height: auto;
+		object-fit: contain;
+	}
+}
+
+.popup-window-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	padding: 0;
+
+	.main-btn {
+		margin: 0;
+		max-width: 100%;
+		flex: 1 1;
+		font-size: 16px;
+		font-weight: 500;
+		white-space: nowrap;
+	}
+}

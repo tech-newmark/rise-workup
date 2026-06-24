@@ -1,0 +1,54 @@
+.swiper {
+  &-slide {
+    height: auto;
+  }
+
+  &-button-disabled {
+    display: none;
+  }
+
+  &-button-prev,
+  &-button-next {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    background-color: var(--gray-800);
+
+    svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--primary);
+    }
+
+    &:hover {
+      background-color: var(--primary);
+
+      svg {
+        fill: var(--white);
+      }
+    }
+  }
+
+  &-button-next {
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &-pagination {
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+    padding: 8px 0;
+
+    &-bullet {
+      background-color: #919191;
+      border-radius: 5px;
+
+      &-active {
+        width: 32px;
+      }
+    }
+  }
+}

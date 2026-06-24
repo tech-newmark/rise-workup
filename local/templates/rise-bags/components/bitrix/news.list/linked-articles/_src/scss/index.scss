@@ -1,0 +1,41 @@
+@use "@scss/base/container-queries" as *;
+
+.linked-articles {
+  container: linked-articles / inline-size;
+
+  &__header {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: clamp(20px, 3.6cqw, 40px);
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    gap: 40px;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  .main-btn {
+    width: fit-content;
+    max-width: 300px;
+  }
+
+  @include container-up(linked-articles, 700px) {
+    .linked-articles__header {
+      grid-template-columns: 1fr auto;
+    }
+
+    .main-btn {
+      grid-column: 2/3;
+      grid-row: 1/-1;
+
+      align-self: start;
+      justify-self: end;
+    }
+  }
+}

@@ -1,0 +1,81 @@
+@use "@scss/base/container-queries" as *;
+
+.subscribe {
+	container: subscribe / inline-size;
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		padding: clamp(32px, 4vw, 72px) clamp(24px, 3.6vw, 64px);
+
+		background-image: url("../img/subscribe-bg.png");
+		background-size: cover;
+		background-position: left top;
+		border-radius: var(--base-br);
+
+		@include container-up(subscribe, 620px) {
+			position: relative;
+			padding-right: calc(35% + var(--base-gap));
+			&::after {
+				position: absolute;
+				top: calc(-30px + (-5vw));
+				right: 0;
+				content: "";
+				width: 35%;
+				height: calc(100% + 30px + 5vw);
+				background-image: url("../img/subscribe-img.png");
+				background-size: contain;
+				background-position: center top;
+				background-repeat: no-repeat;
+			}
+		}
+	}
+
+	.alert-danger {
+		font-weight: 600;
+		color: var(--danger);
+	}
+
+	&__title {
+		font-size: clamp(20px, 3.2vw, 32px);
+		font-weight: 600;
+		text-transform: uppercase;
+		color: var(--white);
+	}
+
+	&__text {
+		font-size: 16px;
+		color: var(--white);
+	}
+
+	&__fields {
+		display: flex;
+		flex-direction: column;
+
+		gap: var(--base-gap);
+		border: none;
+		margin: 0;
+		padding: 0;
+
+		label {
+			flex-grow: 1;
+			width: 100%;
+		}
+
+		[type="submit"] {
+			width: 100%;
+			background-color: var(--dark);
+		}
+
+		@include container-up(subscribe, 474px) {
+			flex-direction: row;
+			align-items: center;
+
+			label,
+			[type="submit"] {
+				width: revert;
+			}
+		}
+	}
+}

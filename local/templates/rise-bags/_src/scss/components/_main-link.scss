@@ -1,0 +1,10 @@
+.main-link {
+	display: flex;
+	font-size: 16px;
+	color: var(--primary);
+
+	&.underlined {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+}

@@ -1,0 +1,28 @@
+.main-checkbox {
+	input[type="checkbox"] {
+		display: none;
+	}
+
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	width: fit-content;
+	position: relative;
+
+	&::before {
+		position: relative;
+		width: 20px;
+		height: 20px;
+		content: "";
+		border: 1px solid var(--primary);
+		border-radius: 3px;
+	}
+
+	&:has(input[type="checkbox"]:checked)::before {
+		background-color: var(--primary);
+		background-image: url("@img/check-icon-white.svg");
+		background-size: 14px;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+}

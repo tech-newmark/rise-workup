@@ -1,0 +1,17 @@
+@use "@scss/base/reset";
+@use "@scss/base/vars";
+@use "@scss/base/fonts";
+@use "@scss/base/typography";
+@use "@scss/base/container-queries" as *;
+@use "@scss/extends/index" as *;
+@use "@scss/vendors/index" as *;
+@use "@scss/mixins/index" as *;
+
+@use "@scss/layout/containers";
+@use "@scss/layout/header";
+@use "@scss/layout/section";
+@use "@scss/layout/content-block";
+
+@use "@scss/components/index" as *;
+
+@use "@scss/layout/footer";

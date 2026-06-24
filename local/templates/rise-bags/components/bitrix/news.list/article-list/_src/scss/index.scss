@@ -1,0 +1,28 @@
+@use "@scss/base/container-queries" as *;
+
+.articles {
+  container: articles / inline-size;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3.6cqw, 40px);
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    h1,
+    p {
+      margin: 0;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    gap: clamp(20px, 3.6cqw, 40px);
+  }
+}

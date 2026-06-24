@@ -1,0 +1,1 @@
+.registration .main-input-wrapper{display:flex;flex-direction:column;gap:6px}.registration .main-input-wrapper label{flex-direction:row;gap:0;padding-left:12px;font-size:14px}.registration .main-input-wrapper label span{color:var(--danger)}.registration .alert{font-size:14px}

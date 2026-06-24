@@ -1,0 +1,1 @@
+<a href="/politic" style="display: flex; justify-content: center; color: #ffffff;">Политика конфиденциальности</a>

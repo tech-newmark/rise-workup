@@ -1,0 +1,23 @@
+@use "@scss/extends";
+.main-input-wrapper {
+	label {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	input {
+		@extend %form-input;
+		width: 100%;
+
+		&::placeholder {
+			@extend %form-input-placeholder;
+		}
+	}
+
+	&.invalid-fld {
+		input {
+			border-color: var(--danger);
+		}
+	}
+}

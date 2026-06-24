@@ -1,0 +1,1 @@
+<img src="/local/templates/rise-bags/_src/images/bags.png" alt="">

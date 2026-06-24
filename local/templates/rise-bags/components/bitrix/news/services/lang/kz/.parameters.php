@@ -1,0 +1,26 @@
+<?php
+$MESS["T_IBLOCK_DESC_NEWS_DATE"] = "Элементтің күнін шығару";
+$MESS["T_IBLOCK_DESC_NEWS_PICTURE"] = "Аңдатпа кескінін шығару";
+$MESS["T_IBLOCK_DESC_NEWS_SHARE_HIDE"] = "Әлеуметтік бетбелгілер панелін әдепкі бойынша ашпау";
+$MESS["T_IBLOCK_DESC_NEWS_SHARE_SHORTEN_URL_KEY"] = "bit.ly үшін кілт";
+$MESS["T_IBLOCK_DESC_NEWS_SHARE_SHORTEN_URL_LOGIN"] = "bit.ly үшін логин";
+$MESS["T_IBLOCK_DESC_NEWS_SHARE_SYSTEM"] = "Қолданылатын әлеуметтік бетбелгілер мен желілер";
+$MESS["T_IBLOCK_DESC_NEWS_SHARE_TEMPLATE"] = "Әлеуметтік бетбелгілер панелінің компонентінің қалыбы";
+$MESS["T_IBLOCK_DESC_NEWS_TEXT"] = "Аңдатпа мәтінін шығару";
+$MESS["T_IBLOCK_DESC_NEWS_USE_SHARE"] = "Әлеуметтік бетбелгілер панелін көрсету";
+$MESS["SERVICES_TOP_BANNER_IBLOCK_ID"] = "Жоғарғы баннер: инфоблок ID";
+$MESS["SERVICES_TOP_BANNER_SECTION_ID"] = "Жоғарғы баннер: бөлім ID";
+$MESS["SERVICES_FIRST_TIZZERS_IBLOCK_ID"] = "Бірінші тизерлер блогы: инфоблок ID";
+$MESS["SERVICES_FIRST_TIZZERS_SECTION_ID"] = "Бірінші тизерлер блогы: бөлім ID";
+$MESS["SERVICES_FIRST_TIZZERS_TITLE"] = "Бірінші тизерлер блогы: блок тақырыбы";
+$MESS["SERVICES_SECOND_TIZZERS_IBLOCK_ID"] = "Екінші тизерлер блогы: инфоблок ID";
+$MESS["SERVICES_SECOND_TIZZERS_SECTION_ID"] = "Екінші тизерлер блогы: бөлім ID";
+$MESS["SERVICES_SECOND_TIZZERS_TITLE"] = "Екінші тизерлер блогы: блок тақырыбы";
+$MESS["SERVICES_THIRD_TIZZERS_IBLOCK_ID"] = "Үшінші тизерлер блогы: инфоблок ID";
+$MESS["SERVICES_THIRD_TIZZERS_SECTION_ID"] = "Үшінші тизерлер блогы: бөлім ID";
+$MESS["SERVICES_THIRD_TIZZERS_TITLE"] = "Үшінші тизерлер блогы: блок тақырыбы";
+$MESS["SERVICES_FOURTH_TIZZERS_IBLOCK_ID"] = "Төртінші тизерлер блогы: инфоблок ID";
+$MESS["SERVICES_FOURTH_TIZZERS_SECTION_ID"] = "Төртінші тизерлер блогы: бөлім ID";
+$MESS["SERVICES_FOURTH_TIZZERS_TITLE"] = "Төртінші тизерлер блогы: блок тақырыбы";
+$MESS["SERVICES_FAQ_PREVIEW_IBLOCK_ID"] = "Сұрақтар мен жауаптар: инфоблок ID";
+$MESS["SERVICES_FAQ_PREVIEW_SECTION_ID"] = "Сұрақтар мен жауаптар: бөлім ID";

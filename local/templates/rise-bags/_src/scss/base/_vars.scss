@@ -1,0 +1,64 @@
+$base-font-size: 16px;
+
+:root {
+  --primary-font: "Inter", sans-serif;
+  --secondary-font: "SegoeUI", sans-serif;
+  --roboto-font: "Roboto", sans-serif;
+
+  --content-width: 1680px;
+  --container-offset: clamp(10px, 2vw, 60px);
+  --container-width: calc(var(--content-width) + (var(--container-offset) * 2));
+  --content-fluid-width: 1920px;
+  --container-fluid-offset: 0;
+  --container-fluid-width: calc(
+    var(--content-fluid-width) + (var(--container-offset) * 2)
+  );
+
+  --black: #000000;
+  --white: #ffffff;
+  --primary: #2b519d;
+  --secondary: #f8f8f8;
+  --warning: #f5c542;
+  --danger: #e63e3e;
+  --success: #42c486;
+  --info: #fff8db;
+  --dark: #222222;
+  --light: #f4f4f4;
+  --violet: rgba(176, 115, 255, 0.5);
+  --gray-800: #f8f8f8;
+  --gray-700: #888888;
+  --gray-600: #cccccc;
+  --gray-500: #f5f5f5;
+  --gray-900: #919191;
+  --gray-400: #e8e7e8;
+  --yellow: #ffdc60;
+
+  --scrollbar-color: var(--secondary);
+  --scrollbar-width: 10px;
+  --scrollbar-height: 6px;
+  --scrollbar-border-radius: 0;
+  --scrollbar-thumb-color: var(--primary);
+  --scrollbar-thumb-border-radius: 0;
+
+  --site-base-font-family: var(--primary-font);
+  --site-base-font-weight: 400;
+  --site-base-font-size: $base-font-size;
+  --site-base-line-height: 1.2;
+  --site-base-letter-spacing: 0.015em;
+  --site-base-text-color: var(--dark);
+  --site-bg-color: var(--white);
+
+  --main-transition: 0.25s ease;
+
+  // border-radius
+  --base-br: 30px;
+
+  // controls
+  --control-inner-offset: 16px 24px;
+  --control-border: 1px solid var(--gray-500);
+  --control-bg: var(--gray-800);
+  --control-border-radius: var(--base-br);
+
+  --base-gap: 24px;
+  --base-br: 30px;
+}

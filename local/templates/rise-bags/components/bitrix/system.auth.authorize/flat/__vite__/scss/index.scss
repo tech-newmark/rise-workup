@@ -1,0 +1,33 @@
+.bx-authform {
+	max-width: 640px;
+	margin: 0 auto;
+
+	&__socserv-block {
+		padding: 16px 0;
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		margin-bottom: 16px;
+		&-footer {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+
+			*[type="submit"] {
+				width: 100%;
+			}
+		}
+	}
+
+	&__footer {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+		text-align: center;
+		justify-content: center;
+	}
+}

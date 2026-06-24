@@ -1,0 +1,77 @@
+@use "@scss/base/container-queries" as *;
+
+.review-card {
+  &-container {
+    height: 100%;
+    container: review-card / inline-size;
+  }
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: clamp(20px, 3vw, 30px);
+  height: 100%;
+  border: 2px solid var(--primary);
+  border-radius: var(--base-br);
+
+  &__rating {
+    svg {
+      fill: var(--gray-500);
+    }
+
+    svg.active {
+      fill: var(--yellow);
+    }
+  }
+
+  &__text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+    margin: 0;
+
+    @include container-up(review-card, 500px) {
+      -webkit-line-clamp: 3;
+    }
+  }
+
+  .clear-btn {
+    display: none;
+  }
+
+  .clear-btn.active {
+    display: flex;
+  }
+
+  &__author {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 20px;
+    row-gap: clamp(4px, 2cqw, 8px);
+    margin-top: auto;
+
+    &-name {
+      color: var(--primary);
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    &-job {
+      margin: 0;
+    }
+  }
+
+  @include container-up(review-card, 500px) {
+    .review-card__author:has(img) {
+      grid-template-columns: auto 1fr;
+      grid-template-rows: repeat(2, auto);
+
+      img {
+        grid-column: 1 / 2;
+        grid-row: 1 / -1;
+      }
+    }
+  }
+}

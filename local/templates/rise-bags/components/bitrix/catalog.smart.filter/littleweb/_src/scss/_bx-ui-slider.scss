@@ -1,0 +1,98 @@
+/* .bx-ui-slider */
+
+:root {
+	--handle-width: 20px;
+	--handle-height: 20px;
+	--bx-ui-slider-handle-bg: var(--white);
+	--bx-ui-slider-handle-inner-pin-color: var(--primary);
+	--bx-ui-slider-handle-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
+	--slider-track-height: 20px;
+	--slider-pricebar-height: 2px;
+	--slider-range-height: var(--slider-tranck-height);
+	--slider-track-container-inner-offset: 5px;
+	--bx-filter-inner-offset: var(--base-gap);
+	--bx-ui-slider-pricebar-vd-bg: var(--light);
+	--bx-ui-slider-pricebar-v-bg: var(--primary);
+	--bx-ui-slider-pricebar-vn-bg: rgba(122, 122, 122, 1);
+}
+
+.bx-ui-slider {
+	&-track-container {
+		padding: var(--slider-track-container-inner-offset);
+	}
+
+	&-track {
+		position: relative;
+
+		height: var(--slider-track-height);
+		padding: 0;
+		background-color: transparent;
+	}
+
+	&-pricebar-vd,
+	&-pricebar-vn,
+	&-pricebar-v {
+		position: absolute;
+		top: 50%;
+		bottom: 0;
+		transform: translateY(-50%);
+		height: var(--slider-pricebar-height);
+	}
+
+	&-pricebar-vd {
+		background-color: var(--bx-ui-slider-pricebar-vd-bg);
+	}
+
+	&-pricebar-vn {
+		background-color: var(--bx-ui-slider-pricebar-vn-bg);
+	}
+
+	&-pricebar-v {
+		background-color: var(--bx-ui-slider-pricebar-v-bg);
+	}
+
+	&-range {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+
+		background-color: transparent;
+		height: var(--slider-range-height);
+		width: calc(100% - (var(--handle-width) * 2));
+		margin: 0 auto;
+		z-index: 99;
+	}
+
+	&-handle {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: var(--handle-width);
+		height: var(--handle-height);
+		border-radius: 50%;
+		background-color: var(--bx-ui-slider-handle-bg);
+		cursor: pointer;
+		box-shadow: var(--bx-ui-slider-handle-box-shadow);
+
+		&::after {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 4px;
+			height: 4px;
+			content: "";
+			border-radius: 50%;
+			background-color: var(--bx-ui-slider-handle-inner-pin-color);
+		}
+	}
+
+	&-handle--left {
+		left: 0;
+		margin-left: calc(-1 * var(--handle-width));
+	}
+	&-handle--right {
+		right: 0;
+		margin-right: calc(-1 * var(--handle-width));
+	}
+}

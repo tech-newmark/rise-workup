@@ -1,0 +1,32 @@
+@use "@scss/base/container-queries" as *;
+
+.catalog-section {
+	container: catalog-section / inline-size;
+	margin-bottom: 32px;
+
+	&-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--base-gap);
+
+		@include container-up("catalog-section", 534px) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include container-up("catalog-section", 768px) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+
+		@include container-up("catalog-section", 1024px) {
+			grid-template-columns: repeat(4, 1fr);
+		}
+
+		@include container-up("catalog-section", 1440px) {
+			grid-template-columns: repeat(6, 1fr);
+		}
+
+		@include container-up("catalog-section", 1720px) {
+			grid-template-columns: repeat(8, 1fr);
+		}
+	}
+}

@@ -1,0 +1,95 @@
+@use "@scss/base/container-queries" as *;
+
+.profile {
+	container: profile / inline-size;
+
+	.container {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.title {
+		margin-bottom: clamp(30px, 3.8vw, 50px);
+	}
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 10px 30px;
+
+		span {
+			font-weight: 600;
+		}
+	}
+
+	&__body {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(20px, 3vw, 30px);
+		padding-bottom: clamp(20px, 4vw, 30px);
+	}
+
+	&__footer {
+		display: grid;
+		gap: 12px;
+
+		@include container-up(profile, 460px) {
+			grid-template-columns: repeat(2, 1fr);
+			max-width: 520px;
+		}
+	}
+
+	&__section {
+		padding: 24px;
+		border: 1px solid var(--light);
+		border-radius: var(--base-br);
+
+		&--safety {
+			.grid {
+				margin-bottom: 8px;
+			}
+		}
+	}
+
+	.grid {
+		display: grid;
+		gap: 20px clamp(10px, 2vw, 20px);
+
+		@include container-up(profile, 620px) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.main-input-wrapper {
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+		}
+	}
+
+	form {
+		max-width: 840px;
+	}
+
+	.alert {
+		margin: 0;
+		padding: 0;
+		background-color: transparent;
+		max-width: 100%;
+		border: none;
+		padding-bottom: 10px;
+
+		&-warning {
+			padding-bottom: clamp(10px, 2vw, 20px);
+		}
+
+		&-success {
+			width: 100%;
+			color: var(--success);
+		}
+
+		&-danger {
+			color: var(--danger);
+		}
+	}
+}

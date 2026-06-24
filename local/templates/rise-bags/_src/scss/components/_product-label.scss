@@ -1,0 +1,39 @@
+.product-label {
+  display: flex;
+  width: fit-content;
+  font-size: 12px;
+  line-height: 1;
+  text-wrap: nowrap;
+  padding: 4px;
+  border-radius: 4px;
+  background-color: var(--info);
+  color: var(--dark);
+
+  &-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  &--discount {
+    background-color: var(--danger);
+    color: var(--white);
+  }
+
+  &--popular {
+    background-color: var(--warning);
+  }
+
+  &--hit {
+    background-color: var(--violet);
+  }
+
+  &--new {
+    background-color: var(--success);
+  }
+
+  &--quantity {
+    background-color: transparent;
+    color: var(--success);
+  }
+}

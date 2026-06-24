@@ -1,0 +1,1 @@
+<img width="1680" src="/local/templates/rise-bags/_src/images/form-img-inner-page.jpg" height="500">

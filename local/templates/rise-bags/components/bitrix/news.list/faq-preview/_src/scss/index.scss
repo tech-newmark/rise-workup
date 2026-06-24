@@ -1,0 +1,42 @@
+@use "@scss/base/container-queries" as *;
+
+.faq-preview {
+	container: faq-preview / inline-size;
+	.container {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 16px clamp(24px, 4vw, 80px);
+
+		@include container-up("faq-preview", 960px) {
+			grid-template-columns: 440px auto;
+		}
+	}
+
+	.section-header {
+		margin-bottom: 0;
+	}
+
+	.accordeon-item {
+		border: 1px solid var(--primary);
+		border-radius: 16px;
+	}
+
+	.accordeon-item.expanded .accordeon-body {
+		padding: 0 20px 16px 20px;
+		color: var(--gray-900);
+	}
+
+	.accordeon-opener {
+		width: 32px;
+		height: auto;
+		aspect-ratio: 1 / 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background-color: var(--primary);
+		svg {
+			fill: var(--white);
+		}
+	}
+}

@@ -1,0 +1,8 @@
+textarea {
+	width: 100%;
+	height: 100px;
+	resize: none;
+	overflow: hidden;
+	overflow-y: auto;
+	padding: var(--control-inner-offset);
+}

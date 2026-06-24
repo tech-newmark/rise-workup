@@ -1,0 +1,42 @@
+@use "@scss/base/container-queries" as *;
+
+.article-detail {
+	&-container {
+		container: article-detail / inline-size;
+		margin-bottom: clamp(20px, 3.6cqw, 40px);
+	}
+
+	&__header {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		margin-bottom: 14px;
+	}
+
+	&__img {
+		aspect-ratio: 3/2;
+		width: 100%;
+		height: auto;
+		object-fit: contain;
+		margin-bottom: 14px;
+
+		@include container-up(article-detail, 800px) {
+			max-width: 700px;
+		}
+	}
+
+	h1 {
+		margin: 0;
+	}
+
+	img {
+		border-radius: var(--base-br);
+	}
+
+	time {
+		font-size: 16px;
+		line-height: 150%;
+		color: var(--gray-700);
+		font-weight: 600;
+	}
+}

@@ -1,0 +1,64 @@
+@use "@scss/base/container-queries" as *;
+
+.article-card {
+	&-container {
+		height: 100%;
+		container: article-card / inline-size;
+	}
+
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr;
+	gap: 16px clamp(16px, 3.4vw, 40px);
+	height: 100%;
+
+	@include container-up(article-card, 768px) {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: none;
+	}
+
+	img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 3/2;
+		object-fit: contain;
+		object-position: left top;
+		border-radius: var(--base-br);
+		background-color: var(--gray-500);
+	}
+
+	&__body {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+
+		span {
+			font-size: 16px;
+			line-height: 150%;
+			color: var(--gray-700);
+			font-weight: 600;
+		}
+
+		h2 {
+			margin: 0;
+			font-size: clamp(20px, 3cqw, 24px);
+			text-transform: none;
+			-webkit-line-clamp: 2;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+		}
+
+		.clear-btn {
+			margin-top: auto;
+		}
+	}
+
+	&__desc {
+		margin: 0;
+		-webkit-line-clamp: 3;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+}

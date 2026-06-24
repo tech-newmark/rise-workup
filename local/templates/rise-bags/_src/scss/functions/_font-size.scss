@@ -1,0 +1,52 @@
+@use "sass:math";
+@use "@scss/base/vars" as *;
+
+$base-font-size-norm: math.div($base-font-size, 1px);
+
+@function rem($value) {
+  $base: math.div($base-font-size, 1px);
+  @return math.div($value, $base) * 1rem;
+}
+
+@function font-size($min-size, $max-size, $unit: "vw", $max-width: 1920px) {
+  $min-num: null;
+  $max-num: null;
+
+  // Извлекаем числовые значения, даже если переданы с 'px'
+  @if math.unit($min-size) == "px" {
+    $min-num: math.div($min-size, 1px);
+  } @else {
+    $min-num: $min-size;
+  }
+
+  @if math.unit($max-size) == "px" {
+    $max-num: math.div($max-size, 1px);
+  } @else {
+    $max-num: $max-size;
+  }
+
+  // Рассчитываем slope (наклон) в vw
+  $diff: $max-num - $min-num;
+  $vw-slope: math.div($diff, math.div($max-width - 320px, 1px)) * 100;
+
+  // Рассчитываем базовое значение (base), чтобы на 320px было точно min
+  // Формула: base + slope * 320 = min  =>  base = min - slope * 320
+  $base: $min-num - math.div($vw-slope * 320, 100);
+
+  // Конвертируем в rem для clamp
+  $min-rem: rem($min-num);
+  $max-rem: rem($max-num);
+  $base-rem: rem($base);
+
+  // Округляем slope до 4 знаков после запятой
+  $vw-rounded: math.div(math.round($vw-slope * 10000), 10000);
+
+  // Формула: clamp(min, calc(base + slope * vw), max)
+  // На 320px: base + slope * 320 = min
+  // На 1920px: base + slope * 1920 = max
+  @return clamp(
+    #{$min-rem},
+    calc(#{$base-rem} + #{$vw-rounded}#{$unit}),
+    #{$max-rem}
+  );
+}

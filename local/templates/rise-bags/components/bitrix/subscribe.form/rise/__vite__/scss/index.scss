@@ -1,0 +1,56 @@
+.subscribe {
+	&__content {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		padding: clamp(32px, 4vw, 72px) clamp(24px, 3.6vw, 64px);
+		padding-right: calc(35% + var(--base-gap));
+		background-image: url("../img/subscribe-bg.png");
+		background-size: cover;
+		background-position: center;
+		border-radius: var(--base-br);
+
+		&::after {
+			position: absolute;
+			top: -100px;
+			right: 0;
+			content: "";
+			width: 35%;
+			height: calc(100% + 100px);
+			background-image: url("../img/subscribe-img.png");
+			background-size: contain;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
+
+	&__title {
+		font-size: clamp(20px, 3.2vw, 32px);
+		font-weight: 600;
+		text-transform: uppercase;
+		color: var(--white);
+	}
+
+	&__text {
+		font-size: 16px;
+		color: var(--white);
+	}
+
+	&__fields {
+		display: flex;
+		align-items: center;
+		gap: var(--base-gap);
+		border: none;
+		margin: 0;
+		padding: 0;
+
+		label {
+			flex-grow: 1;
+		}
+
+		[type="submit"] {
+			background-color: var(--dark);
+		}
+	}
+}

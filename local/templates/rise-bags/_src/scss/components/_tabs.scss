@@ -1,0 +1,31 @@
+.tabs {
+	&__button {
+		padding: 4px;
+		background-color: transparent;
+		font-family: var(--site-base-font-family);
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		border: none;
+		border-bottom: 1px solid var(--gray-500);
+		// border-radius: 30px;
+
+		&.active {
+			color: var(--primary);
+			border-color: var(--primary);
+			background-color: var(--white);
+		}
+	}
+
+	&__content-list-item {
+		padding: clamp(10px, 2vw, 30px) 0;
+
+		& > *:first-child {
+			margin-top: 0;
+		}
+
+		& > *last-child {
+			margin-bottom: 0;
+		}
+	}
+}

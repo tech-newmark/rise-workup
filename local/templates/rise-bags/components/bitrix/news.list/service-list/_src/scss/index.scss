@@ -1,0 +1,63 @@
+@use "@scss/base/container-queries" as *;
+
+.service-card {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	height: 100%;
+	padding: clamp(20px, 4vw, 30px);
+	background-color: var(--gray-500);
+	border-radius: var(--base-br);
+
+	img {
+		width: 220px;
+		height: 220px;
+		margin: 0 auto;
+		object-fit: contain;
+	}
+
+	&__title {
+		font-size: 18px;
+		line-height: 1.4;
+		margin: 0;
+		margin-top: auto;
+		color: var(--black);
+	}
+
+	&__desc {
+		margin: 0;
+		color: var(--gray-900);
+	}
+	.main-btn {
+		@media (min-width: 560px) {
+			width: fit-content;
+		}
+	}
+}
+
+.service-list {
+	.swiper {
+		&-slide {
+			width: 90%;
+			max-width: 300px;
+
+			@media (min-width: 560px) {
+				width: 100%;
+				max-width: 400px;
+			}
+
+			@media (min-width: 1240px) {
+				max-width: 530px;
+			}
+		}
+
+		&-pagination {
+			position: static;
+			padding: 20px 0;
+
+			&-bullet-active {
+				background-color: var(--primary);
+			}
+		}
+	}
+}

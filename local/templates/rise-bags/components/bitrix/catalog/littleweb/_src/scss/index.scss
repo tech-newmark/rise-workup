@@ -1,0 +1,52 @@
+@use "@scss/base/container-queries" as *;
+
+.catalog {
+	container: catalog / inline-size;
+
+	margin-bottom: 40px;
+
+	&__header {
+		margin-bottom: 32px;
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--base-gap);
+
+		@include container-up("catalog", 960px) {
+			grid-template-columns: 320px auto;
+		}
+
+		&-item {
+			&--sidebar {
+				display: none;
+				position: sticky;
+				top: 40px;
+				height: fit-content;
+
+				@include container-up("catalog", 960px) {
+					display: block;
+				}
+			}
+
+			&--main {
+				position: sticky;
+				top: 32px;
+
+				display: flex;
+				flex-direction: column;
+				gap: 24px;
+
+				height: fit-content;
+			}
+		}
+	}
+}
+
+// .catalog-action-row {
+// 	position: relative;
+
+// 	display: flex;
+// 	align-items: center;
+// 	gap: 24px;
+// }

@@ -1,0 +1,16 @@
+.bx-authform {
+	.main-input-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+
+		label {
+			padding-left: 12px;
+			font-size: 14px;
+		}
+	}
+
+	.alert {
+		font-size: 14px;
+	}
+}

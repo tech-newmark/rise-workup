@@ -1,0 +1,29 @@
+.search-page {
+	form {
+		display: flex;
+		position: relative;
+		max-width: 700px;
+		margin-bottom: clamp(30px, 4.6vw, 40px);
+	}
+
+	.main-input-wrapper {
+		width: 100%;
+
+		input {
+			background-color: var(--white);
+			border: 1px solid var(--primary);
+			border-radius: 30px;
+		}
+	}
+
+	.search-btn {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		right: 0;
+	}
+
+	a {
+		color: var(--primary);
+	}
+}

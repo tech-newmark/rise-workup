@@ -1,0 +1,35 @@
+%hover-opacity {
+	transition: opacity 0.3s ease-in-out;
+	opacity: 1;
+
+	@media (hover: hover) {
+		&:hover {
+			opacity: 0.6;
+		}
+	}
+
+	&:focus {
+		opacity: 0.6;
+	}
+
+	&:active {
+		opacity: 0.4;
+	}
+}
+
+%form-input {
+	font-size: clamp(14px, 2.2vw, 16px);
+	font-weight: 400;
+	border: 1px solid transparent;
+	background-color: var(--secondary);
+	font-family: var(--primary-font);
+	padding: 8px 12px;
+	min-height: 40px;
+	border-radius: 4px;
+}
+
+%form-input-placeholder {
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--dark);
+}
