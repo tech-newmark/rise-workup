@@ -7,13 +7,20 @@ if (!CModule::IncludeModule("iblock")) {
   return;
 }
 
-// Получаем все активные разделы инфоблока #2
+$catalogBaseUrl = "/catalog/";
+
+// Catalog header menu must not depend on the current page's left menu files.
 $sectionsById = [];
 $rsSections = CIBlockSection::GetList(
   ["LEFT_MARGIN" => "ASC"],
-  ["IBLOCK_ID" => 2, "ACTIVE" => "Y"],
+  [
+    "IBLOCK_ID" => 2,
+    "ACTIVE" => "Y",
+    "GLOBAL_ACTIVE" => "Y",
+    "<=DEPTH_LEVEL" => 2,
+  ],
   false,
-  ["ID", "CODE", "IBLOCK_SECTION_ID", "DEPTH_LEVEL", "PICTURE", "DETAIL_PICTURE"]
+  ["ID", "NAME", "CODE", "IBLOCK_SECTION_ID", "DEPTH_LEVEL", "PICTURE", "DETAIL_PICTURE"]
 );
 
 while ($section = $rsSections->Fetch()) {
@@ -22,49 +29,61 @@ while ($section = $rsSections->Fetch()) {
   $sectionsById[(int)$section["ID"]] = $section;
 }
 
-// Индексируем пункты меню по SECTION_ID и CODE
-$menuItemsBySectionId = [];
-$menuItemsByCode = [];
+$getSectionCodePath = static function (int $sectionId) use (&$getSectionCodePath, $sectionsById): string {
+  if (!isset($sectionsById[$sectionId])) {
+    return "";
+  }
 
-foreach ($arResult as $item) {
-  if (!empty($item["PARAMS"]["SECTION_ID"])) {
-    $menuItemsBySectionId[(int)$item["PARAMS"]["SECTION_ID"]] = $item;
-  }
-  $linkPath = trim((string)$item["LINK"], "/");
-  if ($linkPath !== "") {
-    $parts = explode("/", $linkPath);
-    $code = (string)end($parts);
-    if ($code !== "") {
-      $menuItemsByCode[$code] = $item;
-    }
-  }
-}
+  $section = $sectionsById[$sectionId];
+  $code = trim((string)$section["CODE"], "/");
+  $parentId = (int)$section["IBLOCK_SECTION_ID"];
 
-$findMenuItem = static function (array $section) use ($menuItemsBySectionId, $menuItemsByCode): ?array {
-  $id = (int)$section["ID"];
-  if (isset($menuItemsBySectionId[$id])) {
-    return $menuItemsBySectionId[$id];
+  if ($parentId <= 0) {
+    return $code;
   }
-  if (!empty($section["CODE"]) && isset($menuItemsByCode[$section["CODE"]])) {
-    return $menuItemsByCode[$section["CODE"]];
+
+  $parentPath = $getSectionCodePath($parentId);
+  if ($parentPath === "") {
+    return $code;
   }
-  return null;
+
+  return $parentPath . "/" . $code;
 };
 
-// Группируем: разделы 1-го уровня инфоблока → PARENT, их подразделы → CHILD
+$makeMenuItem = static function (array $section) use ($catalogBaseUrl, $getSectionCodePath): array {
+  $id = (int)$section["ID"];
+  $codePath = $getSectionCodePath($id);
+  $link = $codePath !== "" ? rtrim($catalogBaseUrl, "/") . "/" . $codePath . "/" : $catalogBaseUrl;
+
+  return [
+    "TEXT" => htmlspecialcharsbx((string)$section["NAME"]),
+    "LINK" => $link,
+    "SELECTED" => false,
+    "PERMISSION" => "X",
+    "ADDITIONAL_LINKS" => [],
+    "ITEM_TYPE" => "D",
+    "ITEM_INDEX" => 0,
+    "PARAMS" => [
+      "FROM_IBLOCK" => true,
+      "SECTION_ID" => $id,
+      "DEPTH_LEVEL" => (int)$section["DEPTH_LEVEL"],
+    ],
+    "CHAIN" => [],
+    "DEPTH_LEVEL" => (int)$section["DEPTH_LEVEL"],
+    "IS_PARENT" => false,
+    "IMAGE_SRC" => $section["IMAGE_SRC"],
+  ];
+};
+
+// Группируем: разделы 1-го уровня инфоблока -> PARENT, их подразделы -> CHILD
 foreach ($sectionsById as $parentId => $parentSection) {
   if ((int)$parentSection["DEPTH_LEVEL"] !== 1) {
     continue;
   }
 
-  $parentMenuItem = $findMenuItem($parentSection);
-  if ($parentMenuItem === null) {
-    continue;
-  }
-
-  $parentMenuItem["IMAGE_SRC"] = $parentSection["IMAGE_SRC"];
-
+  $parentMenuItem = $makeMenuItem($parentSection);
   $children = [];
+
   foreach ($sectionsById as $childSection) {
     if (
       (int)$childSection["DEPTH_LEVEL"] !== 2 ||
@@ -73,18 +92,15 @@ foreach ($sectionsById as $parentId => $parentSection) {
       continue;
     }
 
-    $childMenuItem = $findMenuItem($childSection);
-    if ($childMenuItem === null) {
-      continue;
-    }
-
-    $childMenuItem["IMAGE_SRC"] = $childSection["IMAGE_SRC"];
-    $children[] = $childMenuItem;
+    $children[] = $makeMenuItem($childSection);
   }
+
+  $parentMenuItem["IS_PARENT"] = !empty($children);
+  $parentMenuItem["PARAMS"]["IS_PARENT"] = !empty($children);
 
   $groupedMenu[] = [
     "PARENT" => $parentMenuItem,
-    "CHILD"  => $children,
+    "CHILD" => $children,
   ];
 }
 

@@ -3,8 +3,17 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 $this->setFrameMode(true);
 
 if ($arResult["SECTIONS"]): ?>
-	<div class="catalog-section-list">
-		<h2>Каталог нашей продукции</h2>
+	<section class="section catalog-section-list">
+		<div class="section-header">
+			<h2>Каталог нашей продукции</h2>
+			<?
+			$APPLICATION->IncludeFile(
+				SITE_DIR . 'include/front-catalog-preview-text.php',
+				array(),
+				array('MODE' => 'html', 'NAME' => 'текст', 'SHOW_BORDER' => true)
+			);
+			?>
+		</div>
 		<ul>
 			<? $intCurrentDepth = 1;
 			$boolFirst = true;
@@ -64,5 +73,5 @@ if ($arResult["SECTIONS"]): ?>
 				echo '</li>', "\n";
 			} ?>
 		</ul>
-	</div>
+	</section>
 <? endif; ?>

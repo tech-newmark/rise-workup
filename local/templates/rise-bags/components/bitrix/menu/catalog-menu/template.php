@@ -42,38 +42,3 @@
 		</div>
 	</div>
 <? endif ?>
-
-<?/*
-			$menuItems = [];
-			foreach ($arResult as $item) {
-				$depthLevel = (int)$item["DEPTH_LEVEL"];
-				if ($depthLevel === 1 || $depthLevel >= 4) {
-					continue;
-				}
-				$item["RENDER_LEVEL"] = $depthLevel - 1;
-				$menuItems[] = $item;
-			}
-
-			$itemCount = count($menuItems);
-			for ($i = 0; $i < $itemCount; $i++):
-				$arItem = $menuItems[$i];
-				$currentLevel = (int)$arItem["RENDER_LEVEL"];
-				$nextLevel = isset($menuItems[$i + 1]) ? (int)$menuItems[$i + 1]["RENDER_LEVEL"] : 0;
-			?>
-
-				<? if ($arItem["IS_PARENT"]): ?>
-
-					<li>
-						<a href="<?= $arItem["LINK"] ?>" class="parent"><?= $arItem["TEXT"] ?></a>
-						<ul class="sublist">
-						<? else: ?>
-							<li>
-								<a href="<?= $arItem["LINK"] ?>" class="<?= $arItem["SELECTED"] ? 'root-item-selected' : 'root-item' ?>"><?= $arItem["TEXT"] ?></a>
-								</li>
-							<? endif ?>
-
-				<? if ($nextLevel < $currentLevel): ?>
-					<?= str_repeat("</ul></li>", ($currentLevel - $nextLevel)); ?>
-				<? endif ?>
-
-			<? endfor */ ?>
