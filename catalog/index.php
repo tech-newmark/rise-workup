@@ -1,6 +1,8 @@
 <?
 define("HIDE_SIDEBAR", true);
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Каталог RISE: сумки, рюкзаки и аксессуары собственного производства. Розничные цены, новинки, модели в наличии, доставка по Санкт-Петербургу и России. Для оптовых клиентов — прайс по запросу.");
+$APPLICATION->SetPageProperty("title", "Каталог сумок и рюкзаков RISE в Санкт-Петербурге — купить в розницу");
 $APPLICATION->SetTitle("Каталог");
 ?>
 <? $APPLICATION->IncludeComponent(

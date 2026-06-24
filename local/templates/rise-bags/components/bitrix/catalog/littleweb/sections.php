@@ -42,7 +42,14 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 	<div class="container">
 		<div class="section-header">
 			<h1 class="title">Каталог</h1>
-			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga atque est doloremque ullam. Voluptas repellat asperiores vero, ad iste odio illo odit, molestiae quisquam animi ratione blanditiis consequuntur explicabo dicta!</p>
+
+			<?
+			$APPLICATION->IncludeFile(
+				SITE_DIR . 'include/catalog-preview-text.php',
+				array(),
+				array('MODE' => 'html', 'NAME' => 'текст превью', 'SHOW_BORDER' => true)
+			);
+			?>
 		</div>
 
 		<?

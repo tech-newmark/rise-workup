@@ -1,8 +1,10 @@
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Оптовым клиентам");
-?><? $APPLICATION->IncludeComponent(
-	"bitrix:news", 
-	"services", 
+?>
+
+<? $APPLICATION->IncludeComponent(
+	"bitrix:news",
+	"services",
 	[
 		"ADD_ELEMENT_CHAIN" => "N",
 		"ADD_SECTIONS_CHAIN" => "N",

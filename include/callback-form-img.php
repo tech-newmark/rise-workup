@@ -1,1 +1,1 @@
-<img width="1680" src="/local/templates/rise-bags/_src/images/seo-img.png" height="500">
+<img width="717" alt="Форма.png" src="/upload/medialibrary/a36/df461agflfcnv4gk9vr651lioesjm4ta.png" height="477" title="Форма.png"><br>

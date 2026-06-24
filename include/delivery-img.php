@@ -1,1 +1,1 @@
-<p>Вставить картинку</p>
+<img width="630" src="/upload/medialibrary/61a/p9rhyeukaeabmxs45te2ky951b2wf5la.png" height="420" title="доставка" alt="доставка"><br>
