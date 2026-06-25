@@ -282,21 +282,6 @@
       "bitrix_news_detail_article-detail_scss.css"
     ]
   },
-  "local/templates/rise-bags/components/bitrix/news.detail/service-detail/_src/js/index.js": {
-    "file": "components/bitrix/news.detail/service-detail/script.1XX4G7Op.js",
-    "name": "bitrix_news_detail_service-detail_js",
-    "src": "local/templates/rise-bags/components/bitrix/news.detail/service-detail/_src/js/index.js",
-    "isEntry": true
-  },
-  "local/templates/rise-bags/components/bitrix/news.detail/service-detail/_src/scss/index.scss": {
-    "file": "components/bitrix/news.detail/service-detail/style.B-jafS9b.css",
-    "src": "local/templates/rise-bags/components/bitrix/news.detail/service-detail/_src/scss/index.scss",
-    "isEntry": true,
-    "name": "bitrix_news_detail_service-detail_scss",
-    "names": [
-      "bitrix_news_detail_service-detail_scss.css"
-    ]
-  },
   "local/templates/rise-bags/components/bitrix/news.list/_catalog-preview/_src/scss/index.scss": {
     "file": "components/bitrix/news.list/_catalog-preview/style.QBdXRqCk.css",
     "src": "local/templates/rise-bags/components/bitrix/news.list/_catalog-preview/_src/scss/index.scss",
@@ -316,13 +301,13 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/js/index.js": {
-    "file": "components/bitrix/news.list/examples-list/script.B7PHrWY9.js",
+    "file": "components/bitrix/news.list/examples-list/script.BLqPOHuq.js",
     "name": "bitrix_news_list_examples-list_js",
     "src": "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/js/index.js",
     "isEntry": true
   },
   "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/scss/index.scss": {
-    "file": "components/bitrix/news.list/examples-list/style.6eDLJVA3.css",
+    "file": "components/bitrix/news.list/examples-list/style.K7NhBAN5.css",
     "src": "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_news_list_examples-list_scss",
