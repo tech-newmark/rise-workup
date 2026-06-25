@@ -1,7 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Интернет-магазин \"Rise-bags\"");
-//test
 ?>
 <? $APPLICATION->IncludeComponent(
 	"bitrix:news.list",

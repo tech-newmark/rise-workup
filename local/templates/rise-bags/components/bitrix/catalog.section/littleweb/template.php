@@ -4,10 +4,12 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Catalog\ProductTable;
 
+// Передаю заголовок и описание раздела в section_horizontal.php
 $this->setFrameMode(true);
 
 $this->SetViewTarget("SECTION_HEADER");
 ?>
+
 <h1 class="title"><?= $arResult["NAME"] ?></h1>
 
 <? if ($arResult["UF_PREVIEW_DESCR"] && $arResult["UF_PREVIEW_DESCR"] !== ""): ?>
@@ -18,9 +20,147 @@ $this->SetViewTarget("SECTION_HEADER");
 
 
 <? $this->EndViewTarget();
+// Передаю теги раздела в section_horizontal.php
+$this->setFrameMode(true);
+$this->SetViewTarget("SECTION_TAGS");
+
+$tagSections = [];
+$currentSectionId = (int)(($arResult['ID'] ?? 0) ?: ($arParams['SECTION_ID'] ?? 0));
+$currentSectionDepth = (int)($arResult['DEPTH_LEVEL'] ?? 0);
+
+if ($currentSectionDepth === 1 && \Bitrix\Main\Loader::includeModule('iblock')) {
+	$getTagSections = static function ($parentSectionId) use ($arParams): array {
+		$filter = [
+			'IBLOCK_ID' => (int)$arParams['IBLOCK_ID'],
+			'ACTIVE' => 'Y',
+			'GLOBAL_ACTIVE' => 'Y',
+			'UF_IS_TAB' => 1,
+		];
+
+		$filter['SECTION_ID'] = $parentSectionId ? (int)$parentSectionId : false;
+
+		$result = [];
+		$sectionsIterator = CIBlockSection::GetList(
+			['SORT' => 'ASC', 'NAME' => 'ASC'],
+			$filter,
+			false,
+			['ID', 'IBLOCK_ID', 'IBLOCK_SECTION_ID', 'NAME', 'CODE', 'SECTION_PAGE_URL', 'UF_IS_TAB']
+		);
+
+		while ($section = $sectionsIterator->GetNext()) {
+			if (!empty($arParams['SECTION_URL'])) {
+				$codePath = [];
+				$navChainIterator = CIBlockSection::GetNavChain(
+					(int)$arParams['IBLOCK_ID'],
+					(int)$section['ID'],
+					['ID', 'CODE']
+				);
+
+				while ($navSection = $navChainIterator->GetNext()) {
+					$codePath[] = $navSection['CODE'];
+				}
+
+				$section['SECTION_PAGE_URL'] = CComponentEngine::MakePathFromTemplate(
+					$arParams['SECTION_URL'],
+					[
+						'SECTION_ID' => $section['ID'],
+						'SECTION_CODE' => $section['CODE'],
+						'SECTION_CODE_PATH' => implode('/', $codePath),
+					]
+				);
+			}
+
+			$result[] = $section;
+		}
+
+		return $result;
+	};
+
+	$tagSections = $getTagSections($currentSectionId);
+}
+?>
+
+<? if ($tagSections): ?>
+	<div class="catalog-tags">
+		<button class="swiper-button-prev catalog-tags__button catalog-tags__button--prev" type="button" aria-label="Предыдущий тег">
+			<svg width="13" height="13" viewBox="0 0 13 13" role="img" aria-hidden="true" focusable="false">
+				<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#arrow-sm"></use>
+			</svg>
+		</button>
+
+		<div class="swiper catalog-tags__slider">
+			<div class="swiper-wrapper">
+				<? foreach ($tagSections as $tagSection): ?>
+					<a class="swiper-slide main-btn outlined<?= (int)$tagSection['ID'] === $currentSectionId ? ' current' : '' ?>" href="<?= htmlspecialcharsbx($tagSection['SECTION_PAGE_URL']) ?>">
+						<?= $tagSection['NAME'] ?>
+					</a>
+				<? endforeach; ?>
+			</div>
+		</div>
+		<button class="swiper-button-next catalog-tags__button catalog-tags__button--next" type="button" aria-label="Следующий тег">
+			<svg width="13" height="13" viewBox="0 0 13 13" role="img" aria-hidden="true" focusable="false">
+				<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#arrow-sm"></use>
+			</svg>
+		</button>
+	</div>
+	<script>
+		(function() {
+			function initCatalogTagsFallback() {
+				if (window.initCatalogTagsSliders && window.initCatalogTagsSliders()) {
+					return true;
+				}
+
+				var sliders = document.querySelectorAll('.catalog-tags__slider');
+				if (!sliders.length || typeof window.Swiper === 'undefined') {
+					return false;
+				}
+
+				sliders.forEach(function(slider) {
+					if (slider.dataset.catalogTagsSliderInited) {
+						return;
+					}
+
+					slider.dataset.catalogTagsSliderInited = 'true';
+					var tagsBlock = slider.closest('.catalog-tags');
+					var btnPrev = tagsBlock ? tagsBlock.querySelector('.catalog-tags__button--prev') : null;
+					var btnNext = tagsBlock ? tagsBlock.querySelector('.catalog-tags__button--next') : null;
+
+					new window.Swiper(slider, {
+						slidesPerView: 'auto',
+						spaceBetween: 12,
+						watchOverflow: true,
+						navigation: {
+							prevEl: btnPrev,
+							nextEl: btnNext
+						}
+					});
+				});
+
+				return true;
+			}
+
+			if (initCatalogTagsFallback()) {
+				return;
+			}
+
+			var attempts = 0;
+			var interval = setInterval(function() {
+				attempts += 1;
+
+				if (initCatalogTagsFallback() || attempts >= 30) {
+					clearInterval(interval);
+				}
+			}, 100);
+		})();
+	</script>
+<? endif; ?>
+
+
+<? $this->EndViewTarget();
+
 
 if (!empty($arResult['NAV_RESULT'])) {
-	$navParams =  array(
+	$navParams = array(
 		'NavPageCount' => $arResult['NAV_RESULT']->NavPageCount,
 		'NavPageNomer' => $arResult['NAV_RESULT']->NavPageNomer,
 		'NavNum' => $arResult['NAV_RESULT']->NavNum
@@ -75,6 +215,7 @@ $containerName = 'container-' . $navParams['NavNum'];
 ?>
 
 <div class="catalog-section">
+
 	<!-- items-container -->
 	<? if (!empty($arResult['ITEMS'])):
 		$generalParams = [
@@ -135,7 +276,6 @@ $containerName = 'container-' . $navParams['NavNum'];
 				];
 			?>
 				<div class="catalog-section-grid-item" data-entity="items-row">
-
 					<?
 					$APPLICATION->IncludeComponent(
 						'bitrix:catalog.item',

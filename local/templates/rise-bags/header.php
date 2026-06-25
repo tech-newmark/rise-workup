@@ -261,8 +261,7 @@
             "SECTION_ID" => $_REQUEST["SECTION_ID"],
             "SECTION_URL" => "/catalog/#SECTION_CODE_PATH#/",
             "SECTION_USER_FIELDS" => [
-              0 => "",
-              1 => "",
+              0 => "UF_HIDE_IN_MENU",
             ],
             "SHOW_PARENT_NAME" => "Y",
             "TOP_DEPTH" => "4",

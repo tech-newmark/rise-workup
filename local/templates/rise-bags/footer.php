@@ -152,26 +152,27 @@
 
       <div class="grid__item grid__item--menu">
         <? $APPLICATION->IncludeComponent(
-          "bitrix:menu",
-          "bottom-menu",
-          [
-            "TITLE" => "Информация",
-            "COLUMN_VIEW" => "N",
-            "ALLOW_MULTI_SELECT" => "N",
-            "CHILD_MENU_TYPE" => "left",
-            "DELAY" => "N",
-            "MAX_LEVEL" => "4",
-            "MENU_CACHE_GET_VARS" => [],
-            "MENU_CACHE_TIME" => "3600",
-            "MENU_CACHE_TYPE" => "N",
-            "MENU_CACHE_USE_GROUPS" => "Y",
-            "MENU_THEME" => "site",
-            "ROOT_MENU_TYPE" => "bottom",
-            "USE_EXT" => "Y",
-            "COMPONENT_TEMPLATE" => "bottom-menu"
-          ],
-          false
-        ); ?>
+	"bitrix:menu", 
+	"bottom-menu", 
+	[
+		"TITLE" => "Информация",
+		"COLUMN_VIEW" => "N",
+		"ALLOW_MULTI_SELECT" => "N",
+		"CHILD_MENU_TYPE" => "left",
+		"DELAY" => "N",
+		"MAX_LEVEL" => "1",
+		"MENU_CACHE_GET_VARS" => [
+		],
+		"MENU_CACHE_TIME" => "3600",
+		"MENU_CACHE_TYPE" => "N",
+		"MENU_CACHE_USE_GROUPS" => "Y",
+		"MENU_THEME" => "site",
+		"ROOT_MENU_TYPE" => "bottom",
+		"USE_EXT" => "Y",
+		"COMPONENT_TEMPLATE" => "bottom-menu"
+	],
+	false
+); ?>
       </div>
 
       <div class="grid__item grid__item--contacts">
