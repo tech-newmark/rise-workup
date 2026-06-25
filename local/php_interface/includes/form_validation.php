@@ -1,8 +1,16 @@
 <?php
 
 use Bitrix\Main\Loader;
+use Bitrix\Main\Event;
+use Bitrix\Main\EventManager;
+use Bitrix\Main\EventResult;
+use Bitrix\Sale\ResultError;
 
 AddEventHandler('form', 'onBeforeResultAdd', 'riseValidateEmailFormFields');
+AddEventHandler('main', 'OnBeforeUserRegister', 'riseValidateUserEmailFields');
+AddEventHandler('main', 'OnBeforeUserAdd', 'riseValidateUserEmailFields');
+AddEventHandler('main', 'OnBeforeUserUpdate', 'riseValidateUserEmailFields');
+EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderBeforeSaved', 'riseValidateSaleOrderEmailFields');
 
 if (!function_exists('riseValidateEmailFormFields')) {
 	function riseValidateEmailFormFields($webFormId, &$arFields, &$arrValues)
@@ -72,6 +80,86 @@ if (!function_exists('riseGetEmailFormAnswers')) {
 		$cache[$webFormId] = $result;
 
 		return $result;
+	}
+}
+
+if (!function_exists('riseValidateUserEmailFields')) {
+	function riseValidateUserEmailFields(&$arFields)
+	{
+		$emailFields = ['EMAIL', 'USER_EMAIL', 'NEW_EMAIL'];
+
+		foreach ($emailFields as $emailField) {
+			$email = trim((string)($arFields[$emailField] ?? ''));
+
+			if ($email === '') {
+				continue;
+			}
+
+			if (!riseValidateEmailValue($email, $errorMessage)) {
+				global $APPLICATION;
+				$APPLICATION->ThrowException($errorMessage);
+				return false;
+			}
+		}
+
+		return true;
+	}
+}
+
+if (!function_exists('riseValidateSaleOrderEmailFields')) {
+	function riseValidateSaleOrderEmailFields(Event $event)
+	{
+		$order = $event->getParameter('ENTITY');
+
+		if (!$order || !method_exists($order, 'getPropertyCollection')) {
+			return new EventResult(EventResult::UNDEFINED);
+		}
+
+		$propertyCollection = $order->getPropertyCollection();
+
+		if (!$propertyCollection) {
+			return new EventResult(EventResult::UNDEFINED);
+		}
+
+		foreach ($propertyCollection as $property) {
+			$values = $property->getValue();
+			$values = is_array($values) ? $values : [$values];
+
+			foreach ($values as $value) {
+				$value = trim((string)$value);
+
+				if ($value === '' || !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+					continue;
+				}
+
+				if (riseIsBlockedComEmail($value)) {
+					return new EventResult(
+						EventResult::ERROR,
+						new ResultError('Почта в зоне .com не принимается', 'RISE_BLOCKED_EMAIL_DOMAIN'),
+						'sale'
+					);
+				}
+			}
+		}
+
+		return new EventResult(EventResult::UNDEFINED);
+	}
+}
+
+if (!function_exists('riseValidateEmailValue')) {
+	function riseValidateEmailValue(string $value, ?string &$errorMessage = null): bool
+	{
+		if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+			$errorMessage = 'Введите корректный email';
+			return false;
+		}
+
+		if (riseIsBlockedComEmail($value)) {
+			$errorMessage = 'Почта в зоне .com не принимается';
+			return false;
+		}
+
+		return true;
 	}
 }
 

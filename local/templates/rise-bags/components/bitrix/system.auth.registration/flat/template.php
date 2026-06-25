@@ -132,7 +132,7 @@ if ($arResult["SHOW_SMS_FIELD"] == true) {
 							<? if ($arResult["EMAIL_REQUIRED"]): ?><? endif ?>
 							<?= GetMessage("AUTH_EMAIL") ?><span class="bx-authform-starrequired">*</span>
 						</label>
-						<input class="main-input" type="text" id="bx-register-user-email" name="USER_EMAIL" maxlength="255" value="<?= $arResult["USER_EMAIL"] ?>" />
+						<input class="main-input" type="text" id="bx-register-user-email" name="USER_EMAIL" maxlength="255" value="<?= $arResult["USER_EMAIL"] ?>" autocomplete="email" />
 					</div>
 				<? endif ?>
 

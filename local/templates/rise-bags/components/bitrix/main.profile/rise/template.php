@@ -38,6 +38,12 @@ includeComponentAssets('main.profile/rise');
 							<small><?= Loc::getMessage('PROFILE_DATA_SAVED') ?></small>
 						</div>
 					<? endif; ?>
+
+					<? if ($arResult["strProfileError"]): ?>
+						<div class="alert alert-danger">
+							<small><?= $arResult["strProfileError"] ?></small>
+						</div>
+					<? endif; ?>
 				</div>
 
 				<div class="profile__body">
@@ -68,7 +74,7 @@ includeComponentAssets('main.profile/rise');
 
 							<div class="main-input-wrapper">
 								<label for="main-profile-email"><?= Loc::getMessage('EMAIL') ?></label>
-								<input class="main-input" type="text" name="EMAIL" maxlength="50" id="main-profile-email" value="<?= $arResult["arUser"]["EMAIL"] ?>" />
+								<input class="main-input" type="text" name="EMAIL" maxlength="50" id="main-profile-email" value="<?= $arResult["arUser"]["EMAIL"] ?>" autocomplete="email" />
 							</div>
 						</div>
 					</div>
@@ -90,11 +96,6 @@ includeComponentAssets('main.profile/rise');
 							</div>
 							<small>*<?= $arResult["GROUP_POLICY"]["PASSWORD_REQUIREMENTS"]; ?></small>
 
-							<? if ($arResult["strProfileError"]): ?>
-								<div class="alert alert-danger">
-									<small><?= $arResult["strProfileError"] ?></small>
-								</div>
-							<? endif; ?>
 						</div>
 					<? endif; ?>
 				</div>
