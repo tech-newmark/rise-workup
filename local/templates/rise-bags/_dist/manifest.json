@@ -364,13 +364,13 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/news.list/service-list/_src/js/index.js": {
-    "file": "components/bitrix/news.list/service-list/script.DZvBZK3C.js",
+    "file": "components/bitrix/news.list/service-list/script.B6pmzpWQ.js",
     "name": "bitrix_news_list_service-list_js",
     "src": "local/templates/rise-bags/components/bitrix/news.list/service-list/_src/js/index.js",
     "isEntry": true
   },
   "local/templates/rise-bags/components/bitrix/news.list/service-list/_src/scss/index.scss": {
-    "file": "components/bitrix/news.list/service-list/style.DAq3Fwbf.css",
+    "file": "components/bitrix/news.list/service-list/style.BvXPQAtv.css",
     "src": "local/templates/rise-bags/components/bitrix/news.list/service-list/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_news_list_service-list_scss",

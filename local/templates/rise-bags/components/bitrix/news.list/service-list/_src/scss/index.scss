@@ -10,8 +10,9 @@
 	border-radius: var(--base-br);
 
 	img {
-		width: 220px;
-		height: 220px;
+		width: 100%;
+		height: auto;
+		max-height: 280px;
 		margin: 0 auto;
 		object-fit: contain;
 	}
@@ -20,7 +21,7 @@
 		font-size: 18px;
 		line-height: 1.4;
 		margin: 0;
-		margin-top: auto;
+
 		color: var(--black);
 	}
 
@@ -29,6 +30,8 @@
 		color: var(--gray-900);
 	}
 	.main-btn {
+		margin-top: auto;
+
 		@media (min-width: 560px) {
 			width: fit-content;
 		}
