@@ -21,6 +21,10 @@
 			<? endif; ?>
 		</div>
 
+		<?/* if ($arResult["isFormErrors"] == "Y"): ?>
+			<?= $arResult["FORM_ERRORS_TEXT"] ?>
+		<? endif; */ ?>
+
 		<div class="oneclickbuy__grid">
 			<div class="oneclickbuy__grid-item oneclickbuy__grid-item--product">
 
@@ -55,6 +59,7 @@
 			<div class="oneclickbuy__grid-item">
 				<div class="popup-form__content">
 					<? foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion): ?>
+						<? $hasFieldError = !empty($arResult["FORM_ERRORS"][$FIELD_SID]) || riseFormQuestionHasBlockedEmailValue($arQuestion, $arResult["arrVALUES"] ?? []); ?>
 						<? if ($arQuestion['STRUCTURE'][0]['FIELD_TYPE'] == 'hidden'):
 							echo $arQuestion["HTML_CODE"];
 						else: ?>
@@ -66,7 +71,7 @@
 										name="<?= 'form_' . $arQuestion["STRUCTURE"][0]["FIELD_TYPE"] . "_" . $arQuestion["STRUCTURE"][0]["ID"] ?>"
 										value="<?= htmlspecialchars($arParams["PRODUCT_DATA"][$FIELD_SID]) ?>">
 								<? else: ?>
-									<div class="main-input-wrapper<?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? ' invalid-fld' : '') ?>">
+									<div class="main-input-wrapper<?= ($hasFieldError ? ' invalid-fld' : '') ?>">
 										<label>
 											<?= $arQuestion["HTML_CODE"] ?>
 										</label>
@@ -75,7 +80,7 @@
 							<? endif; ?>
 
 							<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] === "checkbox"): ?>
-								<div class="main-switcher-wrapper<?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? ' invalid-fld' : '') ?>">
+								<div class="main-switcher-wrapper<?= ($hasFieldError ? ' invalid-fld' : '') ?>">
 									<label for="<?= $arQuestion["STRUCTURE"][0]["ID"] ?>">
 										<span>
 											<?= $arQuestion["CAPTION"] ?>&nbsp;<span class="required-mark"><?= ($arQuestion["REQUIRED"] == "Y" ? '*' : '') ?></span>
@@ -99,7 +104,7 @@
 						<div class="captcha-block">
 							<input type="hidden" name="captcha_sid" value="<?= htmlspecialcharsbx($arResult["CAPTCHACode"]); ?>" />
 							<label>
-								<div class="captcha-block-wrapper<?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? ' invalid-fld' : '') ?>">
+								<div class="captcha-block-wrapper<?= (!empty($arResult["FORM_ERRORS"][$FIELD_SID]) ? ' invalid-fld' : '') ?>">
 									<img src="/bitrix/tools/captcha.php?captcha_sid=<?= htmlspecialcharsbx($arResult["CAPTCHACode"]); ?>" width="180" height="40" alt="Капча" />
 									<input placeholder="Текст с картинки" type="text" name="captcha_word" size="30" maxlength="50" value="" />
 								</div>
