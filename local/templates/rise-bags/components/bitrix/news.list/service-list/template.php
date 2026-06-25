@@ -18,7 +18,7 @@ $this->setFrameMode(true);
               <article class="service-card" id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
 
                 <? if ($arItem["PREVIEW_PICTURE"]["SRC"]): ?>
-                  <img src="<?= $arItem["PREVIEW_PICTURE"]["SRC"] ?>" alt="<?= $arItem["PREVIEW_PICTURE"]["DESCRIPTION"] ?: $arItem["NAME"] ?>" width="220" height="220">
+                  <img src="<?= $arItem["PREVIEW_PICTURE"]["SRC"] ?>" alt="<?= $arItem["PREVIEW_PICTURE"]["DESCRIPTION"] ?: $arItem["NAME"] ?>" width="<?= $arItem["PREVIEW_PICTURE"]["WIDTH"] ?>" height="<?= $arItem["PREVIEW_PICTURE"]["HEIGHT"] ?>">
                 <? endif; ?>
                 <h3 class="service-card__title"><?= $arItem["NAME"] ?></h3>
                 <? if ($arItem["PREVIEW_TEXT"]): ?>
