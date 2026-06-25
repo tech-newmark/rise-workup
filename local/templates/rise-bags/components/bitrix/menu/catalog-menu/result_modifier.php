@@ -9,6 +9,22 @@ if (!CModule::IncludeModule("iblock")) {
 
 $catalogBaseUrl = "/catalog/";
 
+$isHiddenInMenu = static function ($value): bool {
+  if (is_array($value)) {
+    foreach ($value as $item) {
+      if ($item !== null && $item !== '' && $item !== '0' && $item !== 0 && $item !== false) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  $value = strtoupper(trim((string)$value));
+
+  return $value !== '' && $value !== '0' && $value !== 'N' && $value !== 'FALSE';
+};
+
 // Catalog header menu must not depend on the current page's left menu files.
 $sectionsById = [];
 $rsSections = CIBlockSection::GetList(
@@ -20,10 +36,14 @@ $rsSections = CIBlockSection::GetList(
     "<=DEPTH_LEVEL" => 2,
   ],
   false,
-  ["ID", "NAME", "CODE", "IBLOCK_SECTION_ID", "DEPTH_LEVEL", "PICTURE", "DETAIL_PICTURE"]
+  ["ID", "NAME", "CODE", "IBLOCK_SECTION_ID", "DEPTH_LEVEL", "PICTURE", "DETAIL_PICTURE", "UF_*"]
 );
 
-while ($section = $rsSections->Fetch()) {
+while ($section = $rsSections->GetNext(false, false)) {
+  if ($isHiddenInMenu($section["UF_HIDE_IN_MENU"] ?? null)) {
+    continue;
+  }
+
   $imageId = (int)$section["PICTURE"] > 0 ? (int)$section["PICTURE"] : (int)$section["DETAIL_PICTURE"];
   $section["IMAGE_SRC"] = $imageId > 0 ? (string)CFile::GetPath($imageId) : "";
   $sectionsById[(int)$section["ID"]] = $section;

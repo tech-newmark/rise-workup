@@ -39,7 +39,7 @@ $arSectionDeleteParams = array("CONFIRM" => GetMessage('CT_BCSL_ELEMENT_DELETE_C
         $this->AddEditAction($arSection['ID'], $arSection['EDIT_LINK'], $strSectionEdit);
         $this->AddDeleteAction($arSection['ID'], $arSection['DELETE_LINK'], $strSectionDelete, $arSectionDeleteParams);
       ?>
-        <div class="accordeon-item" id="<?= $this->GetEditAreaId($arSection['ID']); ?>">
+        <div class="accordeon-item expanded" id="<?= $this->GetEditAreaId($arSection['ID']); ?>">
           <div class="accordeon-header">
             <span><?= $arSection["NAME"]; ?></span>
             <svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>

@@ -30,8 +30,6 @@
 
 			&--sidebar {
 				display: none;
-				position: sticky;
-				top: 40px;
 				height: fit-content;
 
 				@include container-up("catalog", 960px) {

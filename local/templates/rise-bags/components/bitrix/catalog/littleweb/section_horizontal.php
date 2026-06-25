@@ -39,6 +39,7 @@ $sectionListParams = array(
 	"COUNT_ELEMENTS" => $arParams["SECTION_COUNT_ELEMENTS"],
 	"TOP_DEPTH" => $arParams["SECTION_TOP_DEPTH"],
 	"SECTION_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["section"],
+	"SECTION_USER_FIELDS" => ["UF_HIDE_IN_MENU"],
 	"VIEW_MODE" => $arParams["SECTIONS_VIEW_MODE"],
 	"SHOW_PARENT_NAME" => $arParams["SECTIONS_SHOW_PARENT_NAME"],
 	"HIDE_SECTION_NAME" => (isset($arParams["SECTIONS_HIDE_SECTION_NAME"]) ? $arParams["SECTIONS_HIDE_SECTION_NAME"] : "N"),
