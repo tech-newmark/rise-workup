@@ -14,6 +14,11 @@ BX.ready(function () {
 			var formId = opener.getAttribute("data-form-id");
 			if (formId) {
 				var url = "/local/ajax/popup_form.php?form_id=" + formId;
+
+				var skuId = opener.getAttribute("data-product-sku");
+				if (skuId) {
+					url += "&sku_id=" + skuId;
+				}
 			}
 
 			// купить в 1 клик

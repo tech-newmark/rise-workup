@@ -3,6 +3,7 @@
 <div class="popup-form">
 	<?= $arResult["FORM_HEADER"] ?>
 
+
 	<? if ($arResult["FORM_NOTE"]): ?>
 		<div class="popup-form__header">
 			<h2>Заявка отправлена успешно!</h2>
@@ -17,12 +18,22 @@
 
 		<? foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion): ?>
 			<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "text"): ?>
-				<div class="main-input-wrapper <?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? 'invalid-fld' : '') ?>">
-					<label>
-						<?= $arQuestion["HTML_CODE"] ?>
-					</label>
-				</div>
+
+				<? if ($arQuestion["STRUCTURE"][0]["FIELD_PARAM"] == 'data-field-name="sku"'): ?>
+					<div class="main-input-wrapper disabled<?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? ' invalid-fld' : '') ?>">
+						<label>
+							<input type="text" name="form_text_19" value="<?= $arParams["SKU_ID_FIELD_VALUE"] ?>">
+						</label>
+					</div>
+				<? else: ?>
+					<div class="main-input-wrapper <?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? 'invalid-fld' : '') ?>">
+						<label>
+							<?= $arQuestion["HTML_CODE"] ?>
+						</label>
+					</div>
+				<? endif; ?>
 			<? endif; ?>
+
 			<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "checkbox"): ?>
 				<div class="main-checkbox-wrapper <?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? 'invalid-fld' : '') ?>">
 					<input type="checkbox" id="<?= $arQuestion["STRUCTURE"][0]["ID"] . ($arParams["IS_MODAL"] ? '_modal' : null) ?>" name="form_checkbox_<?= $FIELD_SID ?>[]" value="<?= $arQuestion["STRUCTURE"][0]["ID"] ?>">

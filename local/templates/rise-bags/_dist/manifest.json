@@ -28,13 +28,13 @@
     "src": "local/templates/rise-bags/_src/fonts/SegoeUI-Regular.woff2"
   },
   "local/templates/rise-bags/_src/js/index.js": {
-    "file": "template_scripts.B4H-wOTG.js",
+    "file": "template_scripts.cHo__RmL.js",
     "name": "script",
     "src": "local/templates/rise-bags/_src/js/index.js",
     "isEntry": true
   },
   "local/templates/rise-bags/_src/scss/template.scss": {
-    "file": "template_styles.BePWrZKA.css",
+    "file": "template_styles.DGfr1L6s.css",
     "src": "local/templates/rise-bags/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",

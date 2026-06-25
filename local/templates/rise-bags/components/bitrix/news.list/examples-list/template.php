@@ -19,7 +19,7 @@ $this->setFrameMode(true);
 							<div class="examples-item">
 								<p class="examples-item__name"><?= $arItem["NAME"] ?></p>
 								<img class="examples-item__img" data-fancybox="gallery-slider" src="<?= $arItem["PREVIEW_PICTURE"]["SRC"] ?>" alt="<?= (($arItem["PREVIEW_PICTURE"]["DESCRIPTION"]) ? ($arItem["PREVIEW_PICTURE"]["DESCRIPTION"]) : $arItem["NAME"]) ?>" width="<?= $arItem["PREVIEW_PICTURE"]["WIDTH"] ?>?>" height="<?= $arItem["PREVIEW_PICTURE"]["HEIGHT"] ?>">
-								<button class="main-btn" type="button" data-form-id="4">Заказать</button>
+								<button class="main-btn" type="button" data-form-id="4" data-product-sku="<?= $arItem["NAME"] ?>">Заказать</button>
 							</div>
 						</div>
 					<? endforeach; ?>
