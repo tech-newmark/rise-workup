@@ -1,10 +1,11 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Интернет-магазин \"Rise-bags\"");
+//test
 ?>
 <? $APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"top-banner", 
+	"bitrix:news.list",
+	"top-banner",
 	[
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
