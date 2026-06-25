@@ -31,6 +31,13 @@
 					</label>
 				</div>
 			<? endif; ?>
+			<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "textarea"): ?>
+				<div class="main-textarea-wrapper  <?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? 'invalid-fld' : '') ?>">
+					<label>
+						<?= $arQuestion["HTML_CODE"] ?>
+					</label>
+				</div>
+			<? endif; ?>
 			<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "hidden"): ?>
 				<?= $arQuestion["HTML_CODE"] ?>
 			<? endif; ?>
