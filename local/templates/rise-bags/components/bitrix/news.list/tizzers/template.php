@@ -1,16 +1,15 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 $this->setFrameMode(true);
 $i = 1;
-$title = trim((string)($arParams["CUSTOM_TITLE"] ?? ''));
 
 if ($arResult["ITEMS"]): ?>
   <section class="section">
     <div class="container">
-      <? if (($arParams["SHOW_TITLE"] ?? '') == "Y" || $title !== ''): ?>
-        <h2><?= !empty($title) ? $title : $arResult["NAME"] ?></h2>
-      <? endif; ?>
+      <h2 class="<?= (($arParams["SHOW_TITLE"] ?? '') === "Y") ? "" : "visually-hidden" ?>">
+        <?= ($arParams["CUSTOM_TITLE"] ?? '') ?: $arResult["NAME"] ?>
+      </h2>
       <div class="tizzers-container">
-        <div class="tizzers <?= ($arParams["BIG_TIZZERS"] ?? '') == "Y" ? "tizzers--big" : "" ?>">
+        <div class="tizzers <?= $arParams["BIG_TIZZERS"] == "Y" ? "tizzers--big" : "" ?>">
 
           <? foreach ($arResult["ITEMS"] as $arItem):
             $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
