@@ -5,8 +5,8 @@ $APPLICATION->SetTitle("Новости");
 
 <?
 $APPLICATION->IncludeComponent(
-	"bitrix:news",
-	"articles",
+	"bitrix:news", 
+	"articles", 
 	[
 		"ADD_ELEMENT_CHAIN" => "Y",
 		"ADD_SECTIONS_CHAIN" => "N",
@@ -49,7 +49,7 @@ $APPLICATION->IncludeComponent(
 		"DISPLAY_PREVIEW_TEXT" => "N",
 		"DISPLAY_TOP_PAGER" => "N",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "11",
+		"IBLOCK_ID" => "10",
 		"IBLOCK_TYPE" => "site_content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"LIST_ACTIVE_DATE_FORMAT" => "j F Y",

@@ -290,11 +290,6 @@ $APPLICATION->SetTitle("Каталог");
 		],
 		"LIST_PROPERTY_CODE_MOBILE" => "",
 		"DETAIL_MAIN_BLOCK_PROPERTY_CODE" => [
-			0 => "PROP_3",
-			1 => "PROP_4",
-			2 => "PROP_5",
-			3 => "PROP_6",
-			4 => "PROP_7",
 		],
 		"DETAIL_MAIN_BLOCK_OFFERS_PROPERTY_CODE" => [
 			0 => "ARTNUMBER",

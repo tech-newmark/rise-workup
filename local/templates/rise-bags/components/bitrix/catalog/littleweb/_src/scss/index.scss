@@ -8,16 +8,26 @@
 	&__header {
 		margin-bottom: 32px;
 	}
+
+	&__filter-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		min-width: 0;
+	}
+
 	.grid {
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: var(--base-gap);
 
 		@include container-up("catalog", 960px) {
-			grid-template-columns: 320px auto;
+			grid-template-columns: 320px minmax(0, 1fr);
 		}
 
 		&-item {
+			min-width: 0;
+
 			&--sidebar {
 				display: none;
 				position: sticky;
