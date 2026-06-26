@@ -396,7 +396,7 @@ $this->setFrameMode(true);
 	<!-- Сотрудничество -->
 	<?
 	$linkedCooperationIds = array_filter(
-		(array)($arResult['PROPERTIES']['LINKED_COOPERATIONS']['VALUE'] ?? [])
+		(array)($arResult['PROPERTIES']['LINKED_COOPERATION']['VALUE'] ?? [])
 	);
 	?>
 	<? if ($linkedCooperationIds): ?>
@@ -405,7 +405,6 @@ $this->setFrameMode(true);
 			"bitrix:news.list",
 			"tizzers",
 			array(
-
 				"CUSTOM_TITLE" => "Сотрудничество",
 				"ACTIVE_DATE_FORMAT" => "d.m.Y",
 				"ADD_SECTIONS_CHAIN" => "N",
@@ -414,7 +413,7 @@ $this->setFrameMode(true);
 				"AJAX_OPTION_HISTORY" => "N",
 				"AJAX_OPTION_JUMP" => "N",
 				"AJAX_OPTION_STYLE" => "Y",
-				"BIG_TIZZERS" => "Y",
+				"CUSTOM_GRID" => "GRID-2",
 				"CACHE_FILTER" => "Y",
 				"CACHE_GROUPS" => "Y",
 				"CACHE_TIME" => "36000000",
