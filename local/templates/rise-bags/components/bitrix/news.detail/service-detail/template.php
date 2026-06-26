@@ -16,12 +16,12 @@ $this->setFrameMode(true);
 
 	<!-- Верхний баннер -->
 	<?
-	$linkedMainBannerIds = array_filter(
-		(array)($arResult['PROPERTIES']['LINKED_MAIN_BANNERS']['VALUE'] ?? [])
+	$linkedTopBannerIds = array_filter(
+		(array)($arResult['PROPERTIES']['LINKED_TOP_BANNERS']['VALUE'] ?? [])
 	);
 	?>
-	<? if ($linkedMainBannerIds): ?>
-		<? $GLOBALS['arLinkedMainBannersFilter'] = array('ID' => $linkedMainBannerIds);
+	<? if ($linkedTopBannerIds): ?>
+		<? $GLOBALS['arLinkedTopBannersFilter'] = array('ID' => $linkedTopBannerIds);
 		$APPLICATION->IncludeComponent(
 			"bitrix:news.list",
 			"top-banner",
@@ -47,7 +47,7 @@ $this->setFrameMode(true);
 				"DISPLAY_PREVIEW_TEXT" => "Y",
 				"DISPLAY_TOP_PAGER" => "N",
 				"FIELD_CODE" => [0 => "", 1 => "",],
-				"FILTER_NAME" => "arLinkedMainBannersFilter",
+				"FILTER_NAME" => "arLinkedTopBannersFilter",
 				"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 				"IBLOCK_ID" => "7",
 				"IBLOCK_TYPE" => "site_content",
@@ -81,7 +81,7 @@ $this->setFrameMode(true);
 			),
 			$component
 		);
-		unset($GLOBALS['arLinkedMainBannersFilter']); ?>
+		unset($GLOBALS['arLinkedTopBannersFilter']); ?>
 	<? endif; ?>
 	<!-- Верхний баннер -->
 
