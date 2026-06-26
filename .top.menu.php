@@ -1,45 +1,53 @@
 <?
-$aMenuLinks = array(
-	array(
-		"О компании",
-		"/company/",
-		array(),
-		array(),
-		""
+$aMenuLinks = Array(
+	Array(
+		"О компании", 
+		"/company/", 
+		Array(), 
+		Array(), 
+		"" 
 	),
-	array(
-		"Пошив и производство на заказ",
-		"/services/poshiv-i-proizvodstvo-na-zakaz/",
-		array(),
-		array(),
-		""
+	Array(
+		"Пошив и производство на заказ", 
+		"/services/poshiv-i-proizvodstvo-na-zakaz/", 
+		Array(), 
+		Array(), 
+		"" 
 	),
-	array(
-		"Оптовым клиентам",
-		"/services/optovym-klientam/",
-		array(),
-		array(),
-		""
+	Array(
+		"Оптовым клиентам", 
+		"/services/optovym-klientam/", 
+		Array(), 
+		Array(), 
+		"" 
 	),
-	array(
-		"Акции",
-		"/sales/",
-		array(),
-		array(),
-		""
+	Array(
+		"Акции", 
+		"/sales/", 
+		Array(), 
+		Array(), 
+		"" 
 	),
-	array(
-		"Статьи",
-		"/articles/",
-		array(),
-		array(),
-		""
+	Array(
+		"Статьи", 
+		"/articles/", 
+		Array(), 
+		Array(), 
+		"" 
 	),
-	array(
-		"Контакты",
-		"/contacts/",
-		array(),
-		array(),
-		""
+	Array(
+		"Контакты", 
+		"/contacts/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Карта цветов", 
+		"/color-chart/", 
+		Array(), 
+		Array(), 
+		"" 
 	)
 );
+?>
