@@ -3,13 +3,13 @@ $this->setFrameMode(true);
 $i = 1;
 
 if ($arResult["ITEMS"]): ?>
-  <section class="section">
+  <section class="section tizzers">
     <div class="container">
       <h2 class="<?= (($arParams["SHOW_TITLE"] ?? '') === "Y") ? "" : "visually-hidden" ?>">
         <?= ($arParams["CUSTOM_TITLE"] ?? '') ?: $arResult["NAME"] ?>
       </h2>
       <div class="tizzers-container">
-        <div class="tizzers <?= $arParams["BIG_TIZZERS"] == "Y" ? "tizzers--big" : "" ?>">
+        <div class="grid <?= $arParams["CUSTOM_GRID"] == "GRID-2" ? "grid--2-col" : "" ?>">
 
           <? foreach ($arResult["ITEMS"] as $arItem):
             $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
