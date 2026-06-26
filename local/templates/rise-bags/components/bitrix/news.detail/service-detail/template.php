@@ -192,7 +192,7 @@ $this->setFrameMode(true);
 			"tizzers",
 			array(
 				"SHOW_TITLE" => "Y",
-				"CUSTOM_TITLE" => $arResult["PROPERTIES"]["TIZZERS_TITLE"]["VALUE"],
+				"CUSTOM_TITLE" => ($arResult["PROPERTIES"]["TIZZERS_TITLE"]["VALUE"] ?? '') ?: "Кому подходят поставки RISE",
 				"COLUMN_VIEW" => "Y",
 				"ACTIVE_DATE_FORMAT" => "d.m.Y",
 				"ADD_SECTIONS_CHAIN" => "N",
@@ -263,7 +263,7 @@ $this->setFrameMode(true);
 			"tizzers",
 			array(
 				"SHOW_TITLE" => "Y",
-				"CUSTOM_TITLE" => $arResult["PROPERTIES"]["ADVANTAGES_TITLE"]["VALUE"],
+				"CUSTOM_TITLE" => ($arResult["PROPERTIES"]["ADVANTAGES_TITLE"]["VALUE"] ?? '') ?: "Наши преимущества",
 				"ACTIVE_DATE_FORMAT" => "d.m.Y",
 				"ADD_SECTIONS_CHAIN" => "N",
 				"AJAX_MODE" => "N",
@@ -334,7 +334,7 @@ $this->setFrameMode(true);
 			array(
 				"CLEAR_BG" => "Y",
 				"SHOW_TITLE" => "Y",
-				"CUSTOM_TITLE" => $arResult["PROPERTIES"]["STAGES_TITLE"]["VALUE"],
+				"CUSTOM_TITLE" => ($arResult["PROPERTIES"]["STAGES_TITLE"]["VALUE"] ?? '') ?: "Как заказать",
 				"COLUMN_VIEW" => "Y",
 				"SHOW_ITEM_NUMBER" => "Y",
 				"ACTIVE_DATE_FORMAT" => "d.m.Y",
@@ -405,7 +405,6 @@ $this->setFrameMode(true);
 			"bitrix:news.list",
 			"tizzers",
 			array(
-				"CUSTOM_TITLE" => "Сотрудничество",
 				"ACTIVE_DATE_FORMAT" => "d.m.Y",
 				"ADD_SECTIONS_CHAIN" => "N",
 				"AJAX_MODE" => "N",

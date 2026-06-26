@@ -87,6 +87,7 @@
 
 		&--column {
 			flex-direction: column;
+			justify-content: flex-start;
 			gap: 10px;
 
 			.tizzers__item-content-wrapper {
