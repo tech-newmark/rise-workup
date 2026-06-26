@@ -48,6 +48,8 @@ if ($sectionId > 0) {
 			"UF_ADVANTAGES_TITLE",
 			"UF_STAGES_TITLE",
 			"UF_COOPERATION",
+			"UF_SECTION_TITLE",
+			"UF_SECTION_DESC",
 		]
 	);
 

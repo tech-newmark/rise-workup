@@ -5,8 +5,8 @@ $this->setFrameMode(true);
 <? if ($arResult["ITEMS"]): ?>
   <section class="section service-list">
     <div class="container">
-      <h2>Выберите продукцию для оптовой закупки</h2>
-      <p class="base-text">Перейдите в нужный раздел, чтобы ознакомиться с ассортиментом и оставить заявку на получение условий поставки.</p>
+      <h2><?= ($arParams["CUSTOM_TITLE"] ?? '') ?: "Выберите продукцию" ?></h2>
+      <p class="base-text"><?= ($arParams["CUSTOM_DECS"] ?? '') ?: " Перейдите в нужный раздел, чтобы ознакомиться с ассортиментом." ?></p>
       <div class="swiper service-slider">
         <div class="swiper-wrapper">
           <? foreach ($arResult["ITEMS"] as $arItem): ?>
