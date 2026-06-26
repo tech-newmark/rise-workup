@@ -11,6 +11,10 @@ if (!defined('RB_OFFER_IBLOCK_ID')) {
   define('RB_OFFER_IBLOCK_ID', 3);
 }
 
+if (!defined('RB_OFFER_COLOR_PROPERTY_ID')) {
+  define('RB_OFFER_COLOR_PROPERTY_ID', 21);
+}
+
 if (!function_exists('rbLowercaseColorName')) {
   /**
    * Приводит название цвета к нижнему регистру с поддержкой кириллицы.
@@ -50,9 +54,58 @@ if (!function_exists('rbGetAdditionalColorPropertyId')) {
   /**
    * Возвращает ID свойства дополнительного цвета для текущего окружения.
    */
-  function rbGetAdditionalColorPropertyId(): int
+  function rbGetAdditionalColorPropertyId(int $offerIblockId = 0): int
   {
-    return rbIsLocalhostServer() ? 57 : 71;
+    $propertyIds = rbGetAdditionalColorPropertyIds($offerIblockId);
+
+    return (int)reset($propertyIds);
+  }
+}
+
+if (!function_exists('rbGetAdditionalColorPropertyIds')) {
+  /**
+   * Возвращает возможные ID свойства дополнительного цвета.
+   */
+  function rbGetAdditionalColorPropertyIds(int $offerIblockId = 0): array
+  {
+    static $cache = [];
+
+    $cacheKey = $offerIblockId > 0 ? $offerIblockId : 0;
+    if (array_key_exists($cacheKey, $cache)) {
+      return $cache[$cacheKey];
+    }
+
+    $propertyIds = rbIsLocalhostServer() ? [57, 71] : [71, 57];
+
+    if ($offerIblockId > 0 && Loader::includeModule('iblock')) {
+      $properties = CIBlockProperty::GetList(
+        ['SORT' => 'ASC', 'ID' => 'ASC'],
+        ['IBLOCK_ID' => $offerIblockId, 'ACTIVE' => 'Y']
+      );
+
+      while ($property = $properties->Fetch()) {
+        $propertyId = (int)($property['ID'] ?? 0);
+        $propertyCode = rbLowercaseColorName((string)($property['CODE'] ?? ''));
+        $propertyName = rbLowercaseColorName((string)($property['NAME'] ?? ''));
+        $propertyText = $propertyCode . ' ' . $propertyName;
+
+        $isAdditionalColor = (
+          strpos($propertyText, 'доп') !== false
+          && strpos($propertyText, 'цвет') !== false
+        ) || (
+          strpos($propertyText, 'additional') !== false
+          && strpos($propertyText, 'color') !== false
+        );
+
+        if ($propertyId > 0 && $isAdditionalColor && !in_array($propertyId, $propertyIds, true)) {
+          array_unshift($propertyIds, $propertyId);
+        }
+      }
+    }
+
+    $cache[$cacheKey] = array_values(array_unique(array_map('intval', $propertyIds)));
+
+    return $cache[$cacheKey];
   }
 }
 
@@ -119,6 +172,24 @@ if (!function_exists('rbGetOfferPropertyDirectoryName')) {
   }
 }
 
+if (!function_exists('rbGetOfferPropertyDirectoryNameByIds')) {
+  /**
+   * Получает первое заполненное значение справочного свойства из списка ID.
+   */
+  function rbGetOfferPropertyDirectoryNameByIds(int $offerId, int $offerIblockId, array $propertyIds): string
+  {
+    foreach ($propertyIds as $propertyId) {
+      $propertyName = rbGetOfferPropertyDirectoryName($offerId, $offerIblockId, (int)$propertyId);
+
+      if ($propertyName !== '') {
+        return $propertyName;
+      }
+    }
+
+    return '';
+  }
+}
+
 if (!function_exists('rbGetOfferParentProductId')) {
   /**
    * Возвращает ID родительского товара для торгового предложения.
@@ -182,9 +253,9 @@ if (!function_exists('rbBuildTradeOfferName')) {
     )->Fetch();
 
     $productName = trim((string)($product['NAME'] ?? ''));
-    $color = rbLowercaseColorName(rbGetOfferPropertyDirectoryName($offerId, $offerIblockId, 21));
+    $color = rbLowercaseColorName(rbGetOfferPropertyDirectoryName($offerId, $offerIblockId, RB_OFFER_COLOR_PROPERTY_ID));
     $additionalColor = rbLowercaseColorName(
-      rbGetOfferPropertyDirectoryName($offerId, $offerIblockId, rbGetAdditionalColorPropertyId())
+      rbGetOfferPropertyDirectoryNameByIds($offerId, $offerIblockId, rbGetAdditionalColorPropertyIds($offerIblockId))
     );
 
     if ($productName === '') {
@@ -201,6 +272,158 @@ if (!function_exists('rbBuildTradeOfferName')) {
 
     return $productName . ' цвет ' . implode('/', $colors);
   }
+}
+
+if (!function_exists('rbIsTradeOfferIblock')) {
+  /**
+   * Проверяет, что инфоблок является инфоблоком торговых предложений.
+   */
+  function rbIsTradeOfferIblock(int $iblockId): bool
+  {
+    if ($iblockId <= 0 || !Loader::includeModule('catalog')) {
+      return false;
+    }
+
+    if ($iblockId === RB_OFFER_IBLOCK_ID) {
+      return true;
+    }
+
+    $skuInfo = CCatalogSKU::GetInfoByOfferIBlock($iblockId);
+
+    return !empty($skuInfo['PRODUCT_IBLOCK_ID']);
+  }
+}
+
+if (!function_exists('rbIsProductIblock')) {
+  /**
+   * Проверяет, что инфоблок является инфоблоком товаров.
+   */
+  function rbIsProductIblock(int $iblockId): bool
+  {
+    return $iblockId > 0 && $iblockId === RB_PRODUCT_IBLOCK_ID;
+  }
+}
+
+if (!function_exists('rbRewriteTradeOfferNameOnEvent')) {
+  /**
+   * Перезаписывает название ТП из обработчиков событий без рекурсивных обновлений.
+   */
+  function rbRewriteTradeOfferNameOnEvent(int $offerId): void
+  {
+    static $processing = [];
+
+    if ($offerId <= 0 || isset($processing[$offerId])) {
+      return;
+    }
+
+    $processing[$offerId] = true;
+    rbRewriteTradeOfferName($offerId, false);
+    unset($processing[$offerId]);
+  }
+}
+
+if (!function_exists('rbRewriteProductTradeOfferNames')) {
+  /**
+   * Перезаписывает названия всех ТП родительского товара.
+   */
+  function rbRewriteProductTradeOfferNames(int $productId): void
+  {
+    if ($productId <= 0 || !Loader::includeModule('catalog')) {
+      return;
+    }
+
+    $offers = CCatalogSKU::getOffersList(
+      [$productId],
+      RB_PRODUCT_IBLOCK_ID,
+      [],
+      ['ID'],
+      []
+    );
+
+    foreach (($offers[$productId] ?? []) as $offer) {
+      rbRewriteTradeOfferNameOnEvent((int)($offer['ID'] ?? 0));
+    }
+  }
+}
+
+if (!function_exists('rbHandleTradeOfferElementSave')) {
+  /**
+   * Обновляет название после добавления/обновления элемента.
+   */
+  function rbHandleTradeOfferElementSave(&$fields): void
+  {
+    if (!is_array($fields) || (($fields['RESULT'] ?? true) === false)) {
+      return;
+    }
+
+    $elementId = (int)($fields['ID'] ?? 0);
+    $iblockId = (int)($fields['IBLOCK_ID'] ?? 0);
+
+    if (rbIsTradeOfferIblock($iblockId)) {
+      rbRewriteTradeOfferNameOnEvent($elementId);
+      return;
+    }
+
+    if (rbIsProductIblock($iblockId)) {
+      rbRewriteProductTradeOfferNames($elementId);
+    }
+  }
+}
+
+if (!function_exists('rbIsOfferNamePropertyChange')) {
+  /**
+   * Проверяет, затронуты ли свойства, влияющие на название ТП.
+   */
+  function rbIsOfferNamePropertyChange($propertyValues, $propertyCode, int $offerIblockId = 0): bool
+  {
+    $propertyIds = [
+      RB_OFFER_COLOR_PROPERTY_ID,
+    ];
+    $propertyIds = array_merge($propertyIds, rbGetAdditionalColorPropertyIds($offerIblockId));
+    $propertyIds = array_values(array_unique(array_map('intval', $propertyIds)));
+
+    if ($propertyCode === null || $propertyCode === '' || $propertyCode === false) {
+      return true;
+    }
+
+    if (is_numeric($propertyCode) && in_array((int)$propertyCode, $propertyIds, true)) {
+      return true;
+    }
+
+    if (is_array($propertyValues)) {
+      foreach ($propertyIds as $propertyId) {
+        if (array_key_exists($propertyId, $propertyValues) || array_key_exists((string)$propertyId, $propertyValues)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+}
+
+if (!function_exists('rbHandleTradeOfferPropertySave')) {
+  /**
+   * Обновляет название после записи свойств цвета/дополнительного цвета.
+   */
+  function rbHandleTradeOfferPropertySave($elementId, $iblockId, $propertyValues = [], $propertyCode = null): void
+  {
+    $elementId = (int)$elementId;
+    $iblockId = (int)$iblockId;
+
+    if (!rbIsTradeOfferIblock($iblockId) || !rbIsOfferNamePropertyChange($propertyValues, $propertyCode, $iblockId)) {
+      return;
+    }
+
+    rbRewriteTradeOfferNameOnEvent($elementId);
+  }
+}
+
+if (function_exists('AddEventHandler')) {
+  AddEventHandler('iblock', 'OnAfterIBlockElementAdd', 'rbHandleTradeOfferElementSave');
+  AddEventHandler('iblock', 'OnAfterIBlockElementUpdate', 'rbHandleTradeOfferElementSave');
+  AddEventHandler('iblock', 'OnAfterIBlockElementSetPropertyValues', 'rbHandleTradeOfferPropertySave');
+  AddEventHandler('iblock', 'OnAfterIBlockElementSetPropertyValuesEx', 'rbHandleTradeOfferPropertySave');
 }
 
 if (!function_exists('rbGetTradeOfferNameBuildError')) {
