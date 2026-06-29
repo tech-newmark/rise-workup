@@ -19,6 +19,15 @@
 
 		.main-checkbox-wrapper {
 			margin: 12px 0;
+			align-items: flex-start;
+
+			@media (max-width: 500px) {
+				gap: 20px;
+			}
+
+			&::before {
+				border: 1px solid var(--white);
+			}
 		}
 
 		form {
@@ -27,7 +36,7 @@
 			position: relative;
 
 			align-items: center;
-			text-align: center;
+
 			gap: 16px;
 			width: 100%;
 			padding: clamp(24px, 4vw, 60px);
@@ -59,12 +68,6 @@
 			* {
 				margin: 0;
 				color: var(--white);
-			}
-		}
-
-		.main-checkbox-wrapper label {
-			@media (max-width: 500px) {
-				gap: 20px;
 			}
 		}
 

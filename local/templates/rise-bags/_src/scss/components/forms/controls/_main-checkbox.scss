@@ -1,4 +1,4 @@
-.main-checkbox {
+.main-checkbox-wrapper {
 	input[type="checkbox"] {
 		display: none;
 	}
@@ -11,8 +11,8 @@
 
 	&::before {
 		position: relative;
-		width: 20px;
-		height: 20px;
+		min-width: 20px;
+		min-height: 20px;
 		content: "";
 		border: 1px solid var(--primary);
 		border-radius: 3px;

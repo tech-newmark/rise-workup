@@ -14,6 +14,7 @@ $APPLICATION->IncludeComponent(
   "bitrix:form.result.new",
   "ajax-popup",
   array(
+    "IS_MODAL" => "Y",
     "AJAX_MODE" => "Y", // включаем AJAX-режим
     "AJAX_OPTION_JUMP" => "N",
     "AJAX_OPTION_STYLE" => "Y",
