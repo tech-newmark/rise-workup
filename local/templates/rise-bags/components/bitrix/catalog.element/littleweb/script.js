@@ -296,6 +296,20 @@
 				}
 			}
 
+			if (
+				this.offers &&
+				this.offers.length > 0 &&
+				parseInt(this.offers[0].ID, 10) === parseInt(offerId, 10)
+			) {
+				newUrl =
+					path +
+					(filteredParams.length ? "?" + filteredParams.join("&") : "") +
+					hash;
+				window.history.replaceState(window.history.state, document.title, newUrl);
+
+				return;
+			}
+
 			filteredParams.push("offer=" + encodeURIComponent(offerId));
 			newUrl = path + "?" + filteredParams.join("&") + hash;
 
