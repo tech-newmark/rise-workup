@@ -383,12 +383,15 @@
 				console.log("КОД ОШИБКИ:", this.errorCode);
 			}
 
-			this.blockNodes.name = this.obProduct.querySelector('[data-entity="name"]');
+			this.blockNodes.name = this.obProduct.querySelector(
+				'[data-entity="name"]',
+			);
 			this.blockNodes.nameLink = this.obProduct.querySelector(
 				'[data-entity="name-link"]',
 			);
-			this.blockNodes.detailLinks =
-				this.obProduct.querySelectorAll('[data-detail-link="Y"]');
+			this.blockNodes.detailLinks = this.obProduct.querySelectorAll(
+				'[data-detail-link="Y"]',
+			);
 
 			if (!this.obPictSlider) {
 				this.errorCode = -4;
@@ -737,14 +740,25 @@
 				}
 			}
 
+			if (
+				this.offers &&
+				this.offers.length > 0 &&
+				parseInt(this.offers[0].ID, 10) === parseInt(offerId, 10)
+			) {
+				return (
+					path +
+					(filteredParams.length ? "?" + filteredParams.join("&") : "") +
+					hash
+				);
+			}
+
 			filteredParams.push("offer=" + encodeURIComponent(offerId));
 
 			return path + "?" + filteredParams.join("&") + hash;
 		},
 
 		updateDetailLinks: function (offerId) {
-			var i,
-				detailUrl;
+			var i, detailUrl;
 
 			if (!this.blockNodes.detailLinks || !this.blockNodes.detailLinks.length) {
 				return;
@@ -1566,7 +1580,10 @@
 
 				this.offerNum = index;
 				this.updateFavoriteButton(this.offers[index].ID);
-				this.updateCompareButton(this.offers[index].ID, this.offers[index].COMPARED);
+				this.updateCompareButton(
+					this.offers[index].ID,
+					this.offers[index].COMPARED,
+				);
 			}
 		},
 
@@ -2086,11 +2103,11 @@
 
 		removeFavoriteAfterBasketAdd: function () {
 			if (window.RiseBagsRemoveFavoriteProduct) {
-				window.RiseBagsRemoveFavoriteProduct(this.getBasketProductId()).catch(
-					function (error) {
+				window
+					.RiseBagsRemoveFavoriteProduct(this.getBasketProductId())
+					.catch(function (error) {
 						console.error(error);
-					},
-				);
+					});
 			}
 		},
 
