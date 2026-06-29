@@ -20,6 +20,13 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
+	),
+	Array(
+		"Карта цветов", 
+		"/color-chart/", 
+		Array(), 
+		Array(), 
+		"" 
 	)
 );
 ?>
