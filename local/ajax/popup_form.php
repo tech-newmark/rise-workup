@@ -29,7 +29,8 @@ $APPLICATION->IncludeComponent(
     "SUCCESS_URL" => "",
     "USE_EXTENDED_ERRORS" => "Y",
     "VARIABLE_ALIASES" => array("RESULT_ID" => "RESULT_ID", "WEB_FORM_ID" => "WEB_FORM_ID"),
-    "WEB_FORM_ID" => $formId
+    "WEB_FORM_ID" => $formId,
+    "SKU_ID_FIELD_VALUE" => $_GET['sku_id'] ?? null
   )
 );
 
