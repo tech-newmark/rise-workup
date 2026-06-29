@@ -25,6 +25,7 @@ create-project.js
 .vscode/*
 !.vscode/extensions.json
 .idea
+.htaccess
 .DS_Store
 *.suo
 *.ntvs*
