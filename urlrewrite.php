@@ -64,7 +64,7 @@ $arUrlRewrite=array (
     'PATH' => '/personal/index.php',
     'SORT' => 100,
   ),
-  31 => 
+  36 => 
   array (
     'CONDITION' => '#^/articles/#',
     'RULE' => '',
@@ -72,7 +72,7 @@ $arUrlRewrite=array (
     'PATH' => '/articles/index.php',
     'SORT' => 100,
   ),
-  32 => 
+  38 => 
   array (
     'CONDITION' => '#^/services/#',
     'RULE' => '',
@@ -80,7 +80,7 @@ $arUrlRewrite=array (
     'PATH' => '/services/index.php',
     'SORT' => 100,
   ),
-  24 => 
+  35 => 
   array (
     'CONDITION' => '#^/catalog/#',
     'RULE' => '',
@@ -96,7 +96,7 @@ $arUrlRewrite=array (
     'PATH' => '/store/index.php',
     'SORT' => 100,
   ),
-  23 => 
+  37 => 
   array (
     'CONDITION' => '#^/sales/#',
     'RULE' => '',

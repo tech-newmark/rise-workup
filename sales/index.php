@@ -1,12 +1,14 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Новости");
+$APPLICATION->SetPageProperty("description", "Акции и специальные предложения RISE на сумки, рюкзаки, шопперы и аксессуары. Актуальная информация о выгодных условиях для розничных, оптовых и корпоративных клиентов.");
+$APPLICATION->SetPageProperty("title", "Акции и специальные предложения | RISE");
+$APPLICATION->SetTitle("Акции");
 ?>
 
 <?
 $APPLICATION->IncludeComponent(
-	"bitrix:news",
-	"articles",
+	"bitrix:news", 
+	"articles", 
 	[
 		"ADD_ELEMENT_CHAIN" => "Y",
 		"ADD_SECTIONS_CHAIN" => "N",
@@ -49,7 +51,7 @@ $APPLICATION->IncludeComponent(
 		"DISPLAY_PREVIEW_TEXT" => "N",
 		"DISPLAY_TOP_PAGER" => "N",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "11",
+		"IBLOCK_ID" => "10",
 		"IBLOCK_TYPE" => "site_content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"LIST_ACTIVE_DATE_FORMAT" => "j F Y",

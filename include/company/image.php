@@ -1,1 +1,1 @@
-<img src="/local/templates/rise-bags/_src/images/bags.png" alt="">
+<img width="540" alt="о компании" src="/upload/medialibrary/2a6/80l7tdtc770l7100tsp1qej719s3v0k3.png" height="372" title="о компании"><br>

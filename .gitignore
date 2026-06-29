@@ -14,6 +14,8 @@ lerna-debug.log*
 /node_modules/
 /.vscode/
 .access.php
+create-project.js
+/local/php_interface/import/*
 
 /workup.php
 
@@ -30,3 +32,4 @@ lerna-debug.log*
 *.sln
 *.sw?
 *.tgz
+

@@ -1,5 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Информация о компании RISE: производство и поставка сумок, рюкзаков, шопперов и аксессуаров для розничных, оптовых и корпоративных клиентов.");
+$APPLICATION->SetPageProperty("title", "О компании RISE | Производство и продажа сумок и рюкзаков");
 $APPLICATION->SetTitle("О компании");
 ?><section class="section content-page">
 	<div class="container">

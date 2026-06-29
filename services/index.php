@@ -1,5 +1,7 @@
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle(" Пошив и производство на заказ");
+$APPLICATION->SetPageProperty("description", "Услуги RISE: пошив сумок, рюкзаков и папок на заказ, оптовые поставки сумок, рюкзаков и шопперов, брендирование и работа с корпоративными клиентами.");
+$APPLICATION->SetPageProperty("title", "Услуги RISE | Пошив и оптовые поставки сумок и рюкзаков");
+$APPLICATION->SetTitle("Услуги");
 ?><? $APPLICATION->IncludeComponent(
 	"bitrix:news", 
 	"services", 
@@ -28,14 +30,19 @@ $APPLICATION->SetTitle(" Пошив и производство на заказ"
 		"DETAIL_PAGER_TEMPLATE" => "",
 		"DETAIL_PAGER_TITLE" => "Страница",
 		"DETAIL_PROPERTY_CODE" => [
-			0 => "LINKED_MAIN_BANNERS",
-			1 => "LINKED_FAQ",
-			2 => "LINKED_ADVANTAGES",
-			3 => "SEO_BLOCK",
-			4 => "LINKED_TIZZERS",
-			5 => "LINKED_STAGES",
-			6 => "GALLERY",
-			7 => "",
+			0 => "LINKED_FAQ",
+			1 => "LINKED_MAIN_BANNERS",
+			2 => "ADVANTAGES_TITLE",
+			3 => "COOPERATION_TITLE",
+			4 => "TIZZERS_TITLE",
+			5 => "STAGES_TITLE",
+			6 => "LINKED_ADVANTAGES",
+			7 => "LINKED_IMAGES",
+			8 => "SEO_BLOCK",
+			9 => "LINKED_COOPERATION",
+			10 => "LINKED_TIZZERS",
+			11 => "LINKED_STAGES",
+			12 => "",
 		],
 		"DETAIL_SET_CANONICAL_URL" => "N",
 		"DISPLAY_BOTTOM_PAGER" => "Y",
@@ -45,7 +52,7 @@ $APPLICATION->SetTitle(" Пошив и производство на заказ"
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "20",
+		"IBLOCK_ID" => "13",
 		"IBLOCK_TYPE" => "site_content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",

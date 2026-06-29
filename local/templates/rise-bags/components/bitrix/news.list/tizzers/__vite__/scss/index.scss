@@ -1,0 +1,52 @@
+@use "@scss/base/container-queries" as *;
+
+.tizzers {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--base-gap);
+
+	&-container {
+		container: tizzers/ inline-size;
+	}
+
+	@include container-up("tizzers", 620px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@include container-up("tizzers", 1140px) {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	&__item {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 20px;
+
+		padding: clamp(20px, 3vw, 30px);
+		border-radius: var(--base-br);
+		background-color: var(--gray-500);
+
+		img {
+			width: auto;
+			height: 40px;
+			object-fit: contain;
+		}
+
+		&-title {
+			font-size: 18px;
+			font-weight: 600;
+		}
+
+		&-text {
+			font-size: 16px;
+			color: var(--gray-900);
+		}
+
+		&-content-wrapper {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+	}
+}

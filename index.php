@@ -3,8 +3,8 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Интернет-магазин \"Rise-bags\"");
 ?>
 <? $APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"top-banner", 
+	"bitrix:news.list",
+	"top-banner",
 	[
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
@@ -522,8 +522,8 @@ $trendFilter = array('PROPERTY_TREND' => '4');
 
 
 <? $APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"faq-preview",
+	"bitrix:news.list", 
+	"faq-preview", 
 	[
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
@@ -557,7 +557,7 @@ $trendFilter = array('PROPERTY_TREND' => '4');
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "N",
 		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
+		"NEWS_COUNT" => "70",
 		"PAGER_BASE_LINK_ENABLE" => "N",
 		"PAGER_DESC_NUMBERING" => "N",
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",

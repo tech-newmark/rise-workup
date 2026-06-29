@@ -1,5 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Сертификаты и документы RISE, подтверждающие качество продукции, информацию о компании и соответствие требованиям для клиентов, партнеров и оптовых покупателей.");
+$APPLICATION->SetPageProperty("title", "Сертификаты и документы | RISE");
 $APPLICATION->SetTitle("Сертификаты");
 ?>
 

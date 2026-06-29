@@ -1,5 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Условия оплаты заказов в RISE для розничных и оптовых клиентов. Информация о порядке оформления платежей, подтверждении заказа и работе с юридическими лицами.");
+$APPLICATION->SetPageProperty("title", "Условия оплаты заказов | RISE");
 $APPLICATION->SetTitle("Оплата");
 ?>
 <section class="section content-page">

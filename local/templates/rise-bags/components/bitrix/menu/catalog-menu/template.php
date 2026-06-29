@@ -1,15 +1,15 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 
-<? if (!empty($arResult)): ?>
-	<div class="catalog-menu">
+<div class="catalog-menu">
 
-		<a href="/catalog/" class="main-btn catalog-menu-opener">
-			<svg width="24" height="24" role="img" aria-hidden="true" focusable="false">
-				<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#catalog-icon"></use>
-			</svg>
-			<span>Каталог</span>
-		</a>
+	<a href="/catalog/" class="main-btn catalog-menu-opener">
+		<svg width="24" height="24" role="img" aria-hidden="true" focusable="false">
+			<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#catalog-icon"></use>
+		</svg>
+		<span>Каталог</span>
+	</a>
 
+	<? if (!empty($arResult)): ?>
 		<div class="catalog-menu-wrapper">
 
 			<ul class="catalog-menu-sidelist">
@@ -40,5 +40,5 @@
 			</div>
 
 		</div>
-	</div>
-<? endif ?>
+	<? endif ?>
+</div>

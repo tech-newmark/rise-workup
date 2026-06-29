@@ -1,5 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Условия сотрудничества с RISE: порядок оформления заказов, оптовые поставки, документы, оплата, доставка и взаимодействие с клиентами и партнерами.");
+$APPLICATION->SetPageProperty("title", "Условия сотрудничества с компанией RISE");
 $APPLICATION->SetTitle("Условия сотрудничества");
 ?>
 <section class="section company">

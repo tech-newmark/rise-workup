@@ -1,4 +1,6 @@
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Контакты компании RISE: адрес, телефоны, email, режим работы и способы связи для клиентов, партнеров, оптовых покупателей и поставщиков.");
+$APPLICATION->SetPageProperty("title", "Контакты компании | RISE");
 $APPLICATION->SetTitle("Контакты");
 ?>
 

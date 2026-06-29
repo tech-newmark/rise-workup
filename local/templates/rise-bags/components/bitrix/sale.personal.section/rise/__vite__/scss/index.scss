@@ -1,0 +1,31 @@
+.personal {
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 16px;
+		padding: 16px 0;
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		padding: var(--base-gap);
+		border: 2px solid var(--gray-500);
+		border-radius: var(--base-br);
+
+		svg {
+			width: 40px;
+			height: 40px;
+			fill: var(--primary);
+		}
+
+		span {
+			font-size: 18px;
+			font-weight: 700;
+		}
+	}
+}

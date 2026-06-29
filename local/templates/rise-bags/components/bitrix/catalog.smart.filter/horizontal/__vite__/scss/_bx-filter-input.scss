@@ -1,0 +1,45 @@
+:root {
+	--bx-filter-input-label-color: var(--dark);
+	--bx-filter-input-container-gap: 8px;
+	--bx-filter-input-color: rgba(122, 122, 122, 1);
+	--bx-filter-input-border-radius: 10px;
+	--bx-filter-input-inner-offset: 12px 16px;
+	--bx-filter-input-placeholder-color: rgba(145, 145, 145, 1);
+	--bx-filter-input-text-size: 16px;
+	--bx-filter-input-text-color: rgba(122, 122, 122, 1);
+	--bx-filter-input-border-color: rgba(122, 122, 122, 1);
+	--bx-filter-input-min-height: 48px;
+}
+
+.bx-filter-input {
+	&-group {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--base-gap);
+	}
+
+	&-container {
+		display: flex;
+		flex-direction: column;
+		gap: var(--bx-filter-input-container-gap);
+
+		span {
+			font-size: 16px;
+			color: var(--bx-filter-input-label-color);
+		}
+
+		input {
+			min-height: var(--bx-filter-input-min-height);
+			font-size: var(--bx-filter-input-text-size);
+			color: var(--bx-filter-input-text-color);
+			border: 1px solid var(--bx-filter-input-border-color);
+			border-radius: var(--bx-filter-input-border-radius);
+			padding: var(--bx-filter-input-inner-offset);
+
+			&::placeholder {
+				font-size: var(--bx-filter-input-text-size);
+				color: var(--bx-filter-input-placeholder-color);
+			}
+		}
+	}
+}

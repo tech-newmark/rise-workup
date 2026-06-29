@@ -1,5 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Реквизиты компании RISE: юридическая информация, данные организации, контакты и сведения для оформления документов, оплаты и сотрудничества.");
+$APPLICATION->SetPageProperty("title", "Реквизиты компании | RISE");
 $APPLICATION->SetTitle("Реквизиты");
 ?>
 <section class="section">

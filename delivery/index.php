@@ -1,5 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Условия доставки продукции RISE по Санкт-Петербургу и регионам России. Информация о способах получения заказов, отправке транспортными компаниями и порядке передачи товара.");
+$APPLICATION->SetPageProperty("title", "Условия доставки нашей продукции | RISE");
 $APPLICATION->SetTitle("Доставка и оплата");
 ?>
 <section class="section content-page">
