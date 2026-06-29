@@ -1,13 +1,13 @@
 <?
 $aMenuLinks = array(
 
-	array(
-		"Отзывы",
-		"/company/reviews/",
-		array(),
-		array(),
-		""
-	),
+	// array(
+	// 	"Отзывы",
+	// 	"/company/reviews/",
+	// 	array(),
+	// 	array(),
+	// 	""
+	// ),
 	array(
 		"Реквизиты",
 		"/company/details/",

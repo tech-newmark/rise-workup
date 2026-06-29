@@ -66,7 +66,7 @@ endif;
 <?php
 $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
-	"",
+	"service-list",
 	[
 		"FILTER_NAME" => "arrFilter",
 		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
