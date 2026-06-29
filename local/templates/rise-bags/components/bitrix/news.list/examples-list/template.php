@@ -6,7 +6,11 @@ $this->setFrameMode(true);
 ?>
 
 <? if ($arResult["ITEMS"]): ?>
+<<<<<<< HEAD
 	<section class="section examples">
+=======
+	<div class="section examples">
+>>>>>>> a8de64f7c90adcd904b92fb079520230e32768f0
 		<div class="container">
 			<h2>Примеры наших работ</h2>
 			<div class="swiper examples-slider">
@@ -27,5 +31,5 @@ $this->setFrameMode(true);
 				<div class="swiper-pagination"></div>
 			</div>
 		</div>
-	</section>
+	</div>
 <? endif; ?>

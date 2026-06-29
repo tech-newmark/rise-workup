@@ -1,0 +1,2 @@
+const e=document.querySelector(".service-slider");console.log(e);if(e){const n=e.querySelector(".swiper-pagination"),t=e.querySelector(".swiper-button-next"),i=e.querySelector(".swiper-button-prev");new window.Swiper(e,{slidesPerView:"auto",spaceBetween:20,breakpoints:{1240:{slidesPerView:3}},navigation:{nextEl:t||null,prevEl:i||null},pagination:{el:n||null,clickable:!0}})}
+//# sourceMappingURL=script.B6pmzpWQ.js.map

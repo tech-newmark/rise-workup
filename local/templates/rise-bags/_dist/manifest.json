@@ -28,13 +28,13 @@
     "src": "local/templates/rise-bags/_src/fonts/SegoeUI-Regular.woff2"
   },
   "local/templates/rise-bags/_src/js/index.js": {
-    "file": "template_scripts.B4H-wOTG.js",
+    "file": "template_scripts.BSRMpWtK.js",
     "name": "script",
     "src": "local/templates/rise-bags/_src/js/index.js",
     "isEntry": true
   },
   "local/templates/rise-bags/_src/scss/template.scss": {
-    "file": "template_styles.BePWrZKA.css",
+    "file": "template_styles.BXtXaaCW.css",
     "src": "local/templates/rise-bags/_src/scss/template.scss",
     "isEntry": true,
     "name": "template",
@@ -138,8 +138,14 @@
       "bitrix_news_articles_scss.css"
     ]
   },
+  "local/templates/rise-bags/components/bitrix/catalog.section/littleweb/_src/js/index.js": {
+    "file": "components/bitrix/catalog.section/littleweb/script.jY9HYBgW.js",
+    "name": "bitrix_catalog_section_littleweb_js",
+    "src": "local/templates/rise-bags/components/bitrix/catalog.section/littleweb/_src/js/index.js",
+    "isEntry": true
+  },
   "local/templates/rise-bags/components/bitrix/catalog.section/littleweb/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog.section/littleweb/style.D7znhc_s.css",
+    "file": "components/bitrix/catalog.section/littleweb/style.D9NneFOq.css",
     "src": "local/templates/rise-bags/components/bitrix/catalog.section/littleweb/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_section_littleweb_scss",
@@ -172,7 +178,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/components/bitrix/catalog/littleweb/_src/scss/index.scss": {
-    "file": "components/bitrix/catalog/littleweb/style.CiEthAZD.css",
+    "file": "components/bitrix/catalog/littleweb/style.Dvm5r18P.css",
     "src": "local/templates/rise-bags/components/bitrix/catalog/littleweb/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_catalog_littleweb_scss",
@@ -282,21 +288,6 @@
       "bitrix_news_detail_article-detail_scss.css"
     ]
   },
-  "local/templates/rise-bags/components/bitrix/news.detail/service-detail/_src/js/index.js": {
-    "file": "components/bitrix/news.detail/service-detail/script.1XX4G7Op.js",
-    "name": "bitrix_news_detail_service-detail_js",
-    "src": "local/templates/rise-bags/components/bitrix/news.detail/service-detail/_src/js/index.js",
-    "isEntry": true
-  },
-  "local/templates/rise-bags/components/bitrix/news.detail/service-detail/_src/scss/index.scss": {
-    "file": "components/bitrix/news.detail/service-detail/style.B-jafS9b.css",
-    "src": "local/templates/rise-bags/components/bitrix/news.detail/service-detail/_src/scss/index.scss",
-    "isEntry": true,
-    "name": "bitrix_news_detail_service-detail_scss",
-    "names": [
-      "bitrix_news_detail_service-detail_scss.css"
-    ]
-  },
   "local/templates/rise-bags/components/bitrix/news.list/_catalog-preview/_src/scss/index.scss": {
     "file": "components/bitrix/news.list/_catalog-preview/style.QBdXRqCk.css",
     "src": "local/templates/rise-bags/components/bitrix/news.list/_catalog-preview/_src/scss/index.scss",
@@ -316,13 +307,13 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/js/index.js": {
-    "file": "components/bitrix/news.list/examples-list/script.B7PHrWY9.js",
+    "file": "components/bitrix/news.list/examples-list/script.BLqPOHuq.js",
     "name": "bitrix_news_list_examples-list_js",
     "src": "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/js/index.js",
     "isEntry": true
   },
   "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/scss/index.scss": {
-    "file": "components/bitrix/news.list/examples-list/style.6eDLJVA3.css",
+    "file": "components/bitrix/news.list/examples-list/style.D55hBYKc.css",
     "src": "local/templates/rise-bags/components/bitrix/news.list/examples-list/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_news_list_examples-list_scss",
@@ -337,6 +328,21 @@
     "name": "bitrix_news_list_faq-preview_scss",
     "names": [
       "bitrix_news_list_faq-preview_scss.css"
+    ]
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/gallery-slider/_src/js/index.js": {
+    "file": "components/bitrix/news.list/gallery-slider/script.D55Qc5-Y.js",
+    "name": "bitrix_news_list_gallery-slider_js",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/gallery-slider/_src/js/index.js",
+    "isEntry": true
+  },
+  "local/templates/rise-bags/components/bitrix/news.list/gallery-slider/_src/scss/index.scss": {
+    "file": "components/bitrix/news.list/gallery-slider/style.B8IE4lZi.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/gallery-slider/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_list_gallery-slider_scss",
+    "names": [
+      "bitrix_news_list_gallery-slider_scss.css"
     ]
   },
   "local/templates/rise-bags/components/bitrix/news.list/linked-articles/_src/scss/index.scss": {
@@ -364,13 +370,13 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/news.list/service-list/_src/js/index.js": {
-    "file": "components/bitrix/news.list/service-list/script.DZvBZK3C.js",
+    "file": "components/bitrix/news.list/service-list/script.B6pmzpWQ.js",
     "name": "bitrix_news_list_service-list_js",
     "src": "local/templates/rise-bags/components/bitrix/news.list/service-list/_src/js/index.js",
     "isEntry": true
   },
   "local/templates/rise-bags/components/bitrix/news.list/service-list/_src/scss/index.scss": {
-    "file": "components/bitrix/news.list/service-list/style.DAq3Fwbf.css",
+    "file": "components/bitrix/news.list/service-list/style.BvXPQAtv.css",
     "src": "local/templates/rise-bags/components/bitrix/news.list/service-list/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_news_list_service-list_scss",
@@ -388,7 +394,7 @@
     ]
   },
   "local/templates/rise-bags/components/bitrix/news.list/tizzers/_src/scss/index.scss": {
-    "file": "components/bitrix/news.list/tizzers/style.B9xT_5cG.css",
+    "file": "components/bitrix/news.list/tizzers/style.CKbPaTOU.css",
     "src": "local/templates/rise-bags/components/bitrix/news.list/tizzers/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_news_list_tizzers_scss",

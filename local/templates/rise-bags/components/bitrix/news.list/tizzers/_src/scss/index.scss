@@ -1,25 +1,27 @@
 @use "@scss/base/container-queries" as *;
 
 .tizzers {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: var(--base-gap);
-
 	&-container {
 		container: tizzers/ inline-size;
 	}
 
-	&:not(.tizzers--big) {
-		@include container-up("tizzers", 620px) {
-			grid-template-columns: repeat(2, 1fr);
-		}
+	.grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--base-gap);
 
-		@include container-up("tizzers", 1140px) {
-			grid-template-columns: repeat(4, 1fr);
+		&:not(.grid--2-col) {
+			@include container-up("tizzers", 620px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+
+			@include container-up("tizzers", 1140px) {
+				grid-template-columns: repeat(4, 1fr);
+			}
 		}
 	}
 
-	&--big {
+	.grid--2-col {
 		.tizzers__item {
 			&-content-wrapper {
 				gap: clamp(10px, 2.4vw, 24px);
@@ -85,6 +87,7 @@
 
 		&--column {
 			flex-direction: column;
+			justify-content: flex-start;
 			gap: 10px;
 
 			.tizzers__item-content-wrapper {

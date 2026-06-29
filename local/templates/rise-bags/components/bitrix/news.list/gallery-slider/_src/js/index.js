@@ -1,4 +1,4 @@
-const slider = document.querySelector(".examples-slider");
+const slider = document.querySelector(".gallery-slider");
 
 if (slider) {
 	const pagination = slider.querySelector(".swiper-pagination");

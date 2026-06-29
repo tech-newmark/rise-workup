@@ -16,7 +16,12 @@
 			<p><?= $arResult["FORM_DESCRIPTION"] ?></p>
 		</div>
 
+		<?/* if ($arResult["isFormErrors"] == "Y"): ?>
+			<?= $arResult["FORM_ERRORS_TEXT"] ?>
+		<? endif; */ ?>
+
 		<? foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion): ?>
+			<? $hasFieldError = !empty($arResult["FORM_ERRORS"][$FIELD_SID]) || riseFormQuestionHasBlockedEmailValue($arQuestion, $arResult["arrVALUES"] ?? []); ?>
 			<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "text"): ?>
 
 				<? if ($arQuestion["STRUCTURE"][0]["FIELD_PARAM"] == 'data-field-name="sku"'): ?>
@@ -35,7 +40,7 @@
 			<? endif; ?>
 
 			<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "checkbox"): ?>
-				<div class="main-checkbox-wrapper <?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? 'invalid-fld' : '') ?>">
+				<div class="main-checkbox-wrapper <?= ($hasFieldError ? 'invalid-fld' : '') ?>">
 					<input type="checkbox" id="<?= $arQuestion["STRUCTURE"][0]["ID"] . ($arParams["IS_MODAL"] ? '_modal' : null) ?>" name="form_checkbox_<?= $FIELD_SID ?>[]" value="<?= $arQuestion["STRUCTURE"][0]["ID"] ?>">
 					<label class="main-checkbox" for="<?= $arQuestion["STRUCTURE"][0]["ID"] . ($arParams["IS_MODAL"] ? '_modal' : null) ?>">
 						<span><?= $arQuestion["CAPTION"] ?><?= ($arQuestion["REQUIRED"] == "Y" ? '*' : '') ?></span>
@@ -55,7 +60,7 @@
 		<? endforeach; ?>
 
 		<? if ($arResult["isUseCaptcha"] == "Y"): ?>
-			<div class="captcha-block <?= ($arResult["FORM_ERRORS"][0] ? 'invalid-fld' : '') ?>">
+			<div class="captcha-block <?= (!empty($arResult["FORM_ERRORS"][0]) ? 'invalid-fld' : '') ?>">
 				<input type="hidden" name="captcha_sid" value="<?= htmlspecialcharsbx($arResult["CAPTCHACode"]); ?>" />
 				<div class="main-input-wrapper">
 					<input type="text" placeholder="Введите символы с картинки" name="captcha_word" size="30" maxlength="50" value="" class="inputtext" />

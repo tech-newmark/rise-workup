@@ -1,0 +1,34 @@
+.gallery {
+	.swiper {
+		&-slide {
+			width: fit-content;
+			max-width: 80%;
+			height: auto;
+
+			img {
+				width: 100%;
+				height: auto;
+				max-height: 300px;
+				object-fit: contain;
+			}
+		}
+
+		&-pagination {
+			position: static;
+			padding: 20px 0;
+
+			&-bullet-active {
+				background-color: var(--primary);
+			}
+		}
+	}
+
+	&-item {
+		padding: 20px;
+		background-color: var(--gray-800);
+		border-radius: var(--base-br);
+		height: 100%;
+		display: flex;
+		align-items: center;
+	}
+}
