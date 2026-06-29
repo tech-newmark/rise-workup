@@ -1,6 +1,22 @@
 Options -Indexes 
 ErrorDocument 404 /404.php
 
+php_value default_socket_timeout 60
+
+RewriteCond %{THE_REQUEST} //
+ # Проверяем, повторяется ли слеш (//) более двух раз.
+RewriteRule .* /$0 [R=301,L]
+# Исключаем все лишние слеши.
+RewriteCond %{REQUEST_METHOD} =GET
+# Выявляем GET запрос в URL (не POST).
+RewriteCond %{REQUEST_URI} ^(.*)/index\.php$
+# URL cодержит index.php в конце.
+RewriteRule ^(.*)$ %1/ [R=301,L]
+# Удалить index.php из URL.
+
+# Перенаправляет все запросы с www на без www
+RewriteCond %{HTTP_HOST} ^www\.(.*)$
+RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
 
 <IfModule mod_rewrite.c>
 	Options +FollowSymLinks
@@ -22,3 +38,39 @@ ErrorDocument 404 /404.php
 	ExpiresByType image/jpeg "access plus 3 day"
 	ExpiresByType image/gif "access plus 3 day"
 </IfModule>
+
+Redirect 301 /sumki-optom/dorozhnie_sumki/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /sumki-optom/sumki_dlya_noutbukov/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /sumki-optom/sportivnie_sumki/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /sumki-optom/sumki_zhenskie/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /sumki-optom/muzhskie_sumki/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /sumki-optom/sumki_iz_ekokozhi/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /sumki-optom/sumki_cherez_plecho/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /sumki-optom/molodezhnie_sumki/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /sumki-optom/tsvetnie_sumki/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /sumki-optom/sumki_iz_tekstilya/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /sumki-optom/letnie_sumki/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /sumki-optom/barsetki/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /sumki-optom/studencheskie/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /sumki-optom/ /services/optovym-klientam/sumki-optom/
+Redirect 301 /o_kompanii/stati/sumki-dlya-mam-s-detmi-kak-vybrat/ /articles/sumki-dlya-mam-s-detmi-kak-vybrat/
+Redirect 301 /o_kompanii/stati/kak-upakovat-ryukzak-v-ruchnuyu-klad/ /articles/kak-upakovat-ryukzak-v-ruchnuyu-klad/
+Redirect 301 /o_kompanii/stati/sumka-shopper-ili-tout-v-chem-raznica-i-chto-vybrat/ /articles/sumka-shopper-ili-tout-v-chem-raznica-i-chto-vybrat/
+Redirect 301 /o_kompanii/stati/kak-pravilno-hranit-sumki-idei-organizacii-i-lajfhaki/ /articles/kak-pravilno-hranit-sumki-idei-organizacii-i-lajfhaki/
+Redirect 301 /o_kompanii/stati/kak-pravilno-nosit-sumku-cherez-plecho/ /articles/kak-pravilno-nosit-sumku-cherez-plecho/
+Redirect 301 /o_kompanii/stati/poyasnie_shopperi_ili_ryukzaki_kakie_formati_berut_pod_roznitsu/ /articles/pochemu-vygodno-pokupat-sumki-i-ryukzaki-optom-u-lokalnogo-proizvoditelya-rise/
+Redirect 301 /o_kompanii/stati/kak_pravilno_sformirovat_vitrinu_s_sumkami_vizualniy_merchendayzing/ /articles/kak-pravilno-sformirovat-vitrinu-s-sumkami-vizualnyy-merchendayzing/
+Redirect 301 /o_kompanii/stati/muzhskie-sumki-chto-vybiraet-sovremennyj-muzhchina/ /articles/muzhskie-sumki-chto-vybiraet-sovremennyj-muzhchina/
+Redirect 301 /o_kompanii/stati/s_chem_nosit_krasnuyu_sumku/ /articles/s-chem-nosit-krasnuyu-sumku/
+Redirect 301 /o_kompanii/stati/sumka_ili_ryukzak_chto_udobnee_dlya_noutbuka/ /articles/sumka-ili-ryukzak-chto-udobnee-dlya-noutbuka/
+Redirect 301 /o_kompanii/stati/brendirovannye-sumki-i-ryukzaki-kak-aksessuary-s-logotipom-usilivayut-korporativnyj-stil/ /articles/brendirovannye-sumki-i-ryukzaki-kak-aksessuary-s-logotipom-usilivayut-korporativnyj-stil/
+Redirect 301 /o_kompanii/stati/pochemu-vygodno-pokupat-sumki-i-ryukzaki-optom-u-lokalnogo-proizvoditelya-rise/ /articles/pochemu-vygodno-pokupat-sumki-i-ryukzaki-optom-u-lokalnogo-proizvoditelya-rise/
+Redirect 301 /o_kompanii/stati/sumki-2025-kak-vybrat-idealnyj-aksessuar-pod-vash-stil-i-ne-progadat-s-trendami/ /articles/sumki-2025-kak-vybrat-idealnyj-aksessuar-pod-vash-stil-i-ne-progadat-s-trendami/
+Redirect 301 /o_kompanii/stati/sumki_dlya_otdiha_komfort_i_udobstvo/ /articles/sumki-dlya-otdykha-komfort-i-udobstvo/
+Redirect 301 /o_kompanii/stati/modnie_sumki_2022_trendi_i_aktualnie_tendentsii_2/ /articles/modnye-sumki-2022-trendy-i-aktualnye-tendentsii/
+Redirect 301 /o_kompanii/stati/kakie_poyasnie_sumki_modnie_v_2020_godu/ /articles/kakie-poyasnye-sumki-modnye-v-2020-godu/
+Redirect 301 /o_kompanii/stati/entsiklopediya_vkusa_kakaya_sumka_podoydet_k_sportivnomu_stilyu/ /articles/entsiklopediya-vkusa-kakaya-sumka-podoydet-k-sportivnomu-stilyu/
+Redirect 301 /o_kompanii/stati/kak_vibrat_gorodskoy_ryukzak/ /articles/kak-vybrat-gorodskoy-ryukzak/
+Redirect 301 /o_kompanii/stati/kak_vibrat_zhenskiy_ryukzak/ /articles/kak-vybrat-zhenskiy-ryukzak/
+Redirect 301 /o_kompanii/stati/kak_stirat_shkolniy_ryukzak/ /articles/kak-stirat-shkolnyy-ryukzak/
+Redirect 301 /o_kompanii/stati/kak_pravilno_vibrat_ryukzak_pervoklasniku/ /articles/kak-pravilno-vybrat-ryukzak-pervoklassniku/

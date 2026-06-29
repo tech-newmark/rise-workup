@@ -36,6 +36,13 @@
     array()
   ); ?>
 
+  <div class="header-underline" style="border-bottom:1px solid var(--light);display:flex;align-items:center;justify-content:center;padding:12px;">
+    <noindex>
+      <a href="https://rise-bags-old.workup.spb.ru/" style="color: var(--primary);font-weight:500;" rel="nofollow noopener noreferrer" target="_blank">
+        Перейти на старую версию сайта
+      </a>
+    </noindex>
+  </div>
   <header class="header">
     <div class="container">
       <div class="header__top">
