@@ -1,6 +1,7 @@
 Options -Indexes 
 ErrorDocument 404 /404.php
 
+php_value default_socket_timeout 60
 
 RewriteCond %{THE_REQUEST} //
  # Проверяем, повторяется ли слеш (//) более двух раз.
