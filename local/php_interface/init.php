@@ -18,5 +18,6 @@ require_once $includesPath . 'debug.php';
 require_once $includesPath . 'offer_names.php';
 require_once $includesPath . 'favorites.php';
 require_once $includesPath . 'compare.php';
+require_once $includesPath . 'form_validation.php';
 
 
