@@ -3,7 +3,7 @@
 <? if (!empty($arResult)): ?>
 	<div class="multilevel-menu <?= $arParams["COLUMN_VIEW"] === "Y" ? 'column-view' : '' ?>">
 		<? if ($arParams["TITLE"]): ?>
-			<a href="/catalog/" class="multilevel-menu__title"><?= $arParams["TITLE"] ?></a>
+			<span class="multilevel-menu__title"><?= $arParams["TITLE"] ?></span>
 		<? endif; ?>
 
 		<ul>
