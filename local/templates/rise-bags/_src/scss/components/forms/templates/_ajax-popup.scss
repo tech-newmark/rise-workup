@@ -46,9 +46,13 @@
 		}
 	}
 
-	.main-checkbox-wrapper label {
+	.main-checkbox-wrapper {
 		@media (max-width: 500px) {
 			gap: 20px;
 		}
+	}
+
+	.main-checkbox-wrapper a {
+		color: var(--primary);
 	}
 }
