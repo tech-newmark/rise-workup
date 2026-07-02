@@ -1,6 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Интернет-магазин \"Rise-bags\"");
+$APPLICATION->SetPageProperty("description", "RISE производит и продает сумки, рюкзаки, шопперы и аксессуары. Розничный каталог, оптовые условия для бизнеса, изготовление продукции на заказ и доставка по России.");
+$APPLICATION->SetPageProperty("title", "Производитель сумок и рюкзаков в СПб | Розница, опт и пошив на заказ RISE");
+$APPLICATION->SetTitle("Интернет-магазин \"RISE\"");
 ?>
 <? $APPLICATION->IncludeComponent(
 	"bitrix:news.list",

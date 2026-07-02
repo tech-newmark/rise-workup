@@ -18,7 +18,7 @@ create-project.js
 /local/php_interface/import/*
 /tmp_images/
 /tmp_images2/
-
+/sitemap*.xml
 /workup.php
 
 # *.local
