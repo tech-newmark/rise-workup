@@ -14,10 +14,7 @@ $this->setFrameMode(true); ?>
 
 <section class="service-section">
 
-
 	<!-- Верхний баннер -->
-
-
 	<?
 	$linkedTopBannerIds = array_filter(
 		(array)($arResult["CURRENT_SECTION"]["UF_BANNERS"] ?? [])
@@ -361,6 +358,18 @@ $this->setFrameMode(true); ?>
 	<? endif; ?>
 	<!-- Этапы -->
 
+	<!-- Сео-блок -->
+	<? if (!empty($arResult["CURRENT_SECTION"]["DESCRIPTION"])): ?>
+		<section class="section service-section__seo">
+			<div class="container">
+				<div class="content">
+					<?= $arResult["CURRENT_SECTION"]["DESCRIPTION"] ?>
+				</div>
+			</div>
+		</section>
+	<? endif; ?>
+	<!-- Сео-блок  -->
+
 	<!-- Сотрудничество -->
 	<?
 	$linkedCooperationIds = array_filter(
@@ -431,18 +440,6 @@ $this->setFrameMode(true); ?>
 		unset($GLOBALS["arServicesCooperationFilter"]); ?>
 	<? endif; ?>
 	<!-- Сотрудничество -->
-
-	<!-- Сео-блок -->
-	<? if (!empty($arResult["CURRENT_SECTION"]["DESCRIPTION"])): ?>
-		<section class="section service-section__seo">
-			<div class="container">
-				<div class="content">
-					<?= $arResult["CURRENT_SECTION"]["DESCRIPTION"] ?>
-				</div>
-			</div>
-		</section>
-	<? endif; ?>
-	<!-- Сео-блок  -->
 
 	<!-- "FAQ" -->
 	<?
