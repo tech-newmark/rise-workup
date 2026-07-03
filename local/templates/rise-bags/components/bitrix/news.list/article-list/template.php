@@ -3,16 +3,16 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 $this->setFrameMode(true);
 ?>
 
-<? if ($arResult["ITEMS"]): ?>
-	<section class="section articles">
-		<div class="container">
-			<div class="articles__header">
-				<h1><?= $arResult['NAME'] ?></h1>
-				<? if ($arResult['DESCRIPTION']): ?>
-					<p><?= $arResult['DESCRIPTION'] ?></p>
-				<? endif; ?>
-			</div>
 
+<section class="section articles">
+	<div class="container">
+		<div class="articles__header">
+			<h1><?= $arResult['NAME'] ?></h1>
+			<? if ($arResult['DESCRIPTION']): ?>
+				<p><?= $arResult['DESCRIPTION'] ?></p>
+			<? endif; ?>
+		</div>
+		<? if ($arResult["ITEMS"]): ?>
 			<div class="articles__list">
 				<? foreach ($arResult["ITEMS"] as $index => $arItemParams): ?>
 					<?
@@ -37,6 +37,6 @@ $this->setFrameMode(true);
 			<? if ($arParams["DISPLAY_BOTTOM_PAGER"]): ?>
 				<?= $arResult["NAV_STRING"] ?>
 			<? endif; ?>
-		</div>
-	</section>
+	</div>
+</section>
 <? endif; ?>

@@ -79,7 +79,7 @@ $config = \Bitrix\Main\Web\Json::encode($arResult['CONFIG']);
 
 	<div class="main-user-consent-cookie-text">
 		Мы используем cookies, чтобы сайт работал корректно, а также для аналитики и улучшения сервиса.
-		Продолжая пользоваться сайтом, вы соглашаетесь с <a href="/privacy/" target="_blank">политикой конфиденциальности</a>.
+		Продолжая пользоваться сайтом, вы соглашаетесь с <a href="/politic/" target="_blank">политикой конфиденциальности</a>.
 	</div>
 
 	<button type="button" class="main-user-consent-button" data-cookie-consent-accept>
