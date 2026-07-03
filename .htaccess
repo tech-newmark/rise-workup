@@ -3,6 +3,8 @@ ErrorDocument 404 /404.php
 
 php_value default_socket_timeout 60
 
+RewriteEngine On
+
 RewriteCond %{THE_REQUEST} //
  # Проверяем, повторяется ли слеш (//) более двух раз.
 RewriteRule .* /$0 [R=301,L]
@@ -26,41 +28,21 @@ RewriteRule ^(.*[^\/])$ /$1/ [R=301,L]
 RewriteCond %{HTTP_HOST} ^www\.(.*)$
 RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
 
-<IfModule mod_rewrite.c>
-	Options +FollowSymLinks
-	RewriteEngine On
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-l
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteCond %{REQUEST_FILENAME} !/bitrix/urlrewrite.php$
-	RewriteRule ^(.*)$ /bitrix/urlrewrite.php [L]
-	RewriteRule .* - [E=REMOTE_USER:%{HTTP:Authorization}]
-</IfModule>
+RewriteRule ^sumki-optom/dorozhnie_sumki/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/sumki_dlya_noutbukov/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/sportivnie_sumki/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/sumki_zhenskie/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/muzhskie_sumki/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/sumki_iz_ekokozhi/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/sumki_cherez_plecho/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/molodezhnie_sumki/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/tsvetnie_sumki/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/sumki_iz_tekstilya/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/letnie_sumki/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/barsetki/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/studencheskie/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
 
-<IfModule mod_dir.c>
-	DirectoryIndex index.php index.html
-</IfModule>
-
-<IfModule mod_expires.c>
-	ExpiresActive on
-	ExpiresByType image/jpeg "access plus 3 day"
-	ExpiresByType image/gif "access plus 3 day"
-</IfModule>
-
-Redirect 301 /sumki-optom/dorozhnie_sumki/ /services/optovym-klientam/sumki-optom/
-Redirect 301 /sumki-optom/sumki_dlya_noutbukov/ /services/optovym-klientam/sumki-optom/
-Redirect 301 /sumki-optom/sportivnie_sumki/ /services/optovym-klientam/sumki-optom/
-Redirect 301 /sumki-optom/sumki_zhenskie/ /services/optovym-klientam/sumki-optom/
-Redirect 301 /sumki-optom/muzhskie_sumki/ /services/optovym-klientam/sumki-optom/
-Redirect 301 /sumki-optom/sumki_iz_ekokozhi/ /services/optovym-klientam/sumki-optom/
-Redirect 301 /sumki-optom/sumki_cherez_plecho/ /services/optovym-klientam/sumki-optom/
-Redirect 301 /sumki-optom/molodezhnie_sumki/ /services/optovym-klientam/sumki-optom/
-Redirect 301 /sumki-optom/tsvetnie_sumki/ /services/optovym-klientam/sumki-optom/
-Redirect 301 /sumki-optom/sumki_iz_tekstilya/ /services/optovym-klientam/sumki-optom/
-Redirect 301 /sumki-optom/letnie_sumki/ /services/optovym-klientam/sumki-optom/
-Redirect 301 /sumki-optom/barsetki/ /services/optovym-klientam/sumki-optom/
-Redirect 301 /sumki-optom/studencheskie/ /services/optovym-klientam/sumki-optom/
-Redirect 301 /sumki-optom/ /services/optovym-klientam/sumki-optom/
 Redirect 301 /o_kompanii/stati/sumki-dlya-mam-s-detmi-kak-vybrat/ /articles/sumki-dlya-mam-s-detmi-kak-vybrat/
 Redirect 301 /o_kompanii/stati/kak-upakovat-ryukzak-v-ruchnuyu-klad/ /articles/kak-upakovat-ryukzak-v-ruchnuyu-klad/
 Redirect 301 /o_kompanii/stati/sumka-shopper-ili-tout-v-chem-raznica-i-chto-vybrat/ /articles/sumka-shopper-ili-tout-v-chem-raznica-i-chto-vybrat/
@@ -82,3 +64,24 @@ Redirect 301 /o_kompanii/stati/kak_vibrat_gorodskoy_ryukzak/ /articles/kak-vybra
 Redirect 301 /o_kompanii/stati/kak_vibrat_zhenskiy_ryukzak/ /articles/kak-vybrat-zhenskiy-ryukzak/
 Redirect 301 /o_kompanii/stati/kak_stirat_shkolniy_ryukzak/ /articles/kak-stirat-shkolnyy-ryukzak/
 Redirect 301 /o_kompanii/stati/kak_pravilno_vibrat_ryukzak_pervoklasniku/ /articles/kak-pravilno-vybrat-ryukzak-pervoklassniku/
+
+<IfModule mod_rewrite.c>
+	Options +FollowSymLinks
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-l
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !/bitrix/urlrewrite.php$
+	RewriteRule ^(.*)$ /bitrix/urlrewrite.php [L]
+	RewriteRule .* - [E=REMOTE_USER:%{HTTP:Authorization}]
+</IfModule>
+
+<IfModule mod_dir.c>
+	DirectoryIndex index.php index.html
+</IfModule>
+
+<IfModule mod_expires.c>
+	ExpiresActive on
+	ExpiresByType image/jpeg "access plus 3 day"
+	ExpiresByType image/gif "access plus 3 day"
+</IfModule>
+
