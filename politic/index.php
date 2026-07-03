@@ -1,5 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Пользовательское соглашение об обработке персональных данных в соответствии с 152-ФЗ");
+$APPLICATION->SetPageProperty("title", "Политика конфиденциальности RISE");
 $APPLICATION->SetTitle("Политика конфиденциальности");
 ?>
 <section>
