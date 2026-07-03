@@ -6,13 +6,6 @@ if ($arResult["SECTIONS"]): ?>
 	<section class="section catalog-section-list">
 		<div class="section-header">
 			<h2>Каталог нашей продукции</h2>
-			<?
-			$APPLICATION->IncludeFile(
-				SITE_DIR . 'include/front-catalog-preview-text.php',
-				array(),
-				array('MODE' => 'html', 'NAME' => 'текст', 'SHOW_BORDER' => true)
-			);
-			?>
 		</div>
 		<ul>
 			<? $intCurrentDepth = 1;
