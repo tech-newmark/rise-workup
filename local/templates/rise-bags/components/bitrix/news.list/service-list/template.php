@@ -2,11 +2,15 @@
 $this->setFrameMode(true);
 ?>
 
-<? if ($arResult["ITEMS"]): ?>
-  <section class="section service-list">
-    <div class="container">
-      <h2><?= ($arParams["CUSTOM_TITLE"] ?? '') ?: "Выберите продукцию" ?></h2>
-      <p class="base-text"><?= ($arParams["CUSTOM_DESC"] ?? '') ?: " Перейдите в нужный раздел, чтобы ознакомиться с ассортиментом." ?></p>
+
+<section class="section service-list">
+  <div class="container">
+    <? if ($arParams["PAGE_TYPE"] === "HUB"): ?>
+      <h1><?= $arResult["NAME"] ?></h1>
+    <? endif; ?>
+    <h2><?= ($arParams["CUSTOM_TITLE"] ?? '') ?: "Выберите продукцию" ?></h2>
+    <p class="base-text"><?= ($arParams["CUSTOM_DESC"] ?? '') ?: " Перейдите в нужный раздел, чтобы ознакомиться с ассортиментом." ?></p>
+    <? if ($arResult["ITEMS"]): ?>
       <div class="swiper service-slider">
         <div class="swiper-wrapper">
           <? foreach ($arResult["ITEMS"] as $arItem): ?>
@@ -31,6 +35,6 @@ $this->setFrameMode(true);
         </div>
         <div class="swiper-pagination"></div>
       </div>
-    </div>
-  </section>
-<? endif; ?>
+    <? endif; ?>
+  </div>
+</section>

@@ -68,6 +68,7 @@ $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"service-list",
 	[
+		"PAGE_TYPE" => "HUB",
 		"FILTER_NAME" => "arrFilter",
 		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
