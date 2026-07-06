@@ -26,6 +26,7 @@ $this->setFrameMode(true);
 			"bitrix:news.list",
 			"top-banner",
 			array(
+				"BANNER_SIZE" => "SMALL",
 				"ACTIVE_DATE_FORMAT" => "d.m.Y",
 				"ADD_SECTIONS_CHAIN" => "N",
 				"AJAX_MODE" => "N",

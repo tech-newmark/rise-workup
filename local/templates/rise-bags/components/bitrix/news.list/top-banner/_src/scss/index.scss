@@ -1,46 +1,66 @@
 @use "@scss/base/container-queries" as *;
 
 .banners {
-	&-slider {
+	&-container {
+		container: banners / inline-size;
+	}
+
+	.swiper {
 		position: relative;
 
-		.swiper-slide {
+		&-slide {
 			height: auto;
 		}
 
-		.swiper-pagination-bullet {
-			background-color: var(--white);
+		&-pagination {
+			&-bullet {
+				background-color: var(--white);
+			}
+		}
+
+		&-horizontal > .swiper-pagination-bullets {
+			bottom: 0;
 		}
 	}
 }
 
 .banner {
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	padding: clamp(24px, 3.6vw, 40px);
 
-	&-container {
-		container: banner / inline-size;
-	}
-
-	display: grid;
-	grid-template-columns: 1fr;
-	align-items: center;
-	height: 420px;
-	padding: clamp(20px, 3.6vw, 40px);
-	color: var(--white);
-	background-image: url("../images/banner-bg.jpg");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-color: var(--primary);
 	border-radius: var(--base-br);
+
 	overflow: hidden;
 
-	@include container-up(banner, 420px) {
-		height: 450px;
+	&--default-font {
+		color: var(--white);
+
+		.banner__title {
+			color: var(--white);
+		}
 	}
 
-	@include container-up(banner, 900px) {
-		padding-bottom: clamp(20px, 3.6vw, 40px);
+	&--dark-font {
+		color: revert;
+
+		.banner__title {
+			color: var(--primary);
+		}
+	}
+
+	&--default-size {
+		min-height: 420px;
+
+		@include container-up(banners, 650px) {
+			min-height: 450px;
+		}
 	}
 
 	&__content {
@@ -49,14 +69,25 @@
 		gap: 20px;
 		width: 100%;
 
-		@include container-up(banner, 640px) {
+		@include container-up(banners, 640px) {
 			max-width: 60%;
+		}
+	}
+
+	.content {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 5;
+		overflow: hidden;
+
+		* {
+			margin: 0;
 		}
 	}
 
 	.banner__title {
 		margin: 0;
-		color: var(--white);
+
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 4;
@@ -64,46 +95,36 @@
 		text-transform: none;
 	}
 
-	.content {
-		color: var(--white);
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 5;
-		overflow: hidden;
-	}
-
 	&__buttons {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 8px 20px;
+	}
 
-		.main-btn {
-			width: 100%;
-		}
+	.main-btn {
+		width: 100%;
 
-		@include container-up(banner, 480px) {
-			.main-btn {
-				width: fit-content;
-			}
+		@include container-up(banners, 480px) {
+			width: fit-content;
 		}
 	}
 
 	&__img {
 		display: none;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: calc(60% + 20px);
+		width: 560px;
+		height: 100%;
+		object-fit: contain;
+		object-position: center;
 
-		@include container-up(banner, 640px) {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 65%;
+		@include container-up(banners, 640px) {
 			display: block;
-			width: 560px;
-			height: 100%;
-			object-fit: contain;
-			object-position: center;
 		}
 
-		@include container-up(banner, 1200px) {
+		@include container-up(banners, 1200px) {
 			left: 60%;
 			width: 40%;
 		}
