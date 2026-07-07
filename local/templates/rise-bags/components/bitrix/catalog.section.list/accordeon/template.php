@@ -15,9 +15,23 @@ $this->setFrameMode(true);
 $strSectionEdit = CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "SECTION_EDIT");
 $strSectionDelete = CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "SECTION_DELETE");
 $arSectionDeleteParams = array("CONFIRM" => GetMessage('CT_BCSL_ELEMENT_DELETE_CONFIRM'));
+
+// $normalizeUrlPath = static function ($url) {
+//   $path = parse_url((string)$url, PHP_URL_PATH);
+//   if ($path === false || $path === null) {
+//     $path = (string)$url;
+//   }
+
+//   $path = '/' . ltrim($path, '/');
+
+//   return rtrim($path, '/') ?: '/';
+// };
+// $currentPageUrl = $normalizeUrlPath($APPLICATION->GetCurPage(false));
 ?>
 
 <? if ($arResult["SECTIONS_COUNT"] > 0): ?>
+  <? debug($currentPageUrl) ?>
+
   <div class="catalog-section-list catalog-section-list--accordeon-view">
     <!-- <span class="catalog-section-list__title">Каталог</span> -->
     <nav class="accordeon">
@@ -38,10 +52,12 @@ $arSectionDeleteParams = array("CONFIRM" => GetMessage('CT_BCSL_ELEMENT_DELETE_C
       foreach ($arFirstLevelSections as &$arSection):
         $this->AddEditAction($arSection['ID'], $arSection['EDIT_LINK'], $strSectionEdit);
         $this->AddDeleteAction($arSection['ID'], $arSection['DELETE_LINK'], $strSectionDelete, $arSectionDeleteParams);
+        $isCurrentSection = $arSection["SECTION_PAGE_URL"] === $APPLICATION->GetCurPage(false);
       ?>
         <div class="accordeon-item expanded" id="<?= $this->GetEditAreaId($arSection['ID']); ?>">
           <div class="accordeon-header">
-            <span><?= $arSection["NAME"]; ?></span>
+
+            <a href="<?= $arSection["SECTION_PAGE_URL"] ?>" <? if ($isCurrentSection): ?> style="color:var(--primary);" <? endif; ?>><?= $arSection["NAME"]; ?></a>
             <svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
               <use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#chevron'></use>
             </svg>
@@ -54,8 +70,9 @@ $arSectionDeleteParams = array("CONFIRM" => GetMessage('CT_BCSL_ELEMENT_DELETE_C
                 if ($arSubSection['IBLOCK_SECTION_ID'] == $arSection['ID']):
                   $this->AddEditAction($arSubSection['ID'], $arSubSection['EDIT_LINK'], $strSectionEdit);
                   $this->AddDeleteAction($arSubSection['ID'], $arSubSection['DELETE_LINK'], $strSectionDelete, $arSectionDeleteParams);
+                  $isCurrentSection = $arSubSection["SECTION_PAGE_URL"] === $APPLICATION->GetCurPage(false);
               ?>
-                  <a href="<?= $arSubSection["SECTION_PAGE_URL"]; ?>">
+                  <a href="<?= $arSubSection["SECTION_PAGE_URL"]; ?>" <? if ($isCurrentSection): ?> style="color:var(--primary);" <? endif; ?>>
                     <?= $arSubSection["NAME"]; ?>
                     <? if ($arParams["COUNT_ELEMENTS"] && $arSubSection['ELEMENT_CNT'] !== null && $arSubSection['ELEMENT_CNT'] > 0): ?>
                       <span>(<?= $arSubSection["ELEMENT_CNT"]; ?>)</span>
