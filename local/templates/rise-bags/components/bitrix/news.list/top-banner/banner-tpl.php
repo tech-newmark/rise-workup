@@ -1,12 +1,20 @@
+<?
+$bannerStyle = '';
+
+if (!empty($arItem["PROPERTIES"]["BACKGROUND_COLOR"]["VALUE_XML_ID"])) {
+  $bannerStyle = 'background-color: ' . $arItem["PROPERTIES"]["BACKGROUND_COLOR"]["VALUE_XML_ID"] . ';';
+} elseif (!empty($arItem["DETAIL_PICTURE"]["SRC"])) {
+  $bannerStyle = 'background-image: url(' . $arItem["DETAIL_PICTURE"]["SRC"] . ');';
+} else {
+  $bannerStyle = 'background-image: url(' . $templateFolder . '/_src/images/banner-bg.jpg);';
+}
+?>
+
 <article id="<?= $this->GetEditAreaId($arItem['ID']); ?>"
-  class="banner 
-  <?= $arItem["PROPERTIES"]["DARK_FONT_COLOR"]["VALUE"] === "Y" ? "banner--dark-font" : "banner--default-font" ?>
-  <?= $arParams["BANNER_SIZE"] === "SMALL" ? "banner--small" : "banner--default-size" ?>"
-  style="<?= !empty($arItem["PROPERTIES"]["BACKGROUND_COLOR"]["VALUE"])
-            ? 'background-color: ' . $arItem["PROPERTIES"]["BACKGROUND_COLOR"]["VALUE_XML_ID"] . ';'
-            : (!empty($arItem["DETAIL_PICTURE"]["SRC"])
-              ? 'background-image: url(' . $arItem["DETAIL_PICTURE"]["SRC"] . ')'
-              : 'background-image: url(' . $templateFolder . '/_src/images/banner-bg.jpg);') ?>">
+  class="banner
+  <?= $arParams["BANNER_SIZE"] === "AUTO" ? " banner--auto-height" : "" ?>
+  <?= $arItem["PROPERTIES"]["DARK_TEXT"]["VALUE"] === "Y" ? " banner--dark" : " banner--light" ?>"
+  style="<?= $bannerStyle ?>">
   <div class="banner__content">
     <? if ($arItem["PROPERTIES"]["H1_TITLE"]["VALUE"] == "Y") : ?>
       <h1 class="heading heading--xl banner__title"><?= $arItem["~NAME"] ?></h1>
@@ -41,7 +49,7 @@
 
   <? if ($arItem["PREVIEW_PICTURE"]["SRC"]): ?>
     <img class="banner__img"
-      src="<?= ($arItem["PREVIEW_PICTURE"]["SRC"] ? $arItem["PREVIEW_PICTURE"]["SRC"] : '/img/tooth-banner-bg-paddings.png') ?>"
+      src="<?= $arItem["PREVIEW_PICTURE"]["SRC"] ?>"
       alt="<?= $arItem["NAME"] ?>" width="450" height="450">
   <? endif; ?>
 

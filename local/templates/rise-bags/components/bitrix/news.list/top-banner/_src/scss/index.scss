@@ -25,12 +25,16 @@
 }
 
 .banner {
+	--content-width: 60%;
+	--image-offset: 20px;
+
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	height: 100%;
 	padding: clamp(24px, 3.6vw, 40px);
+	min-height: 420px;
 
 	background-position: center;
 	background-repeat: no-repeat;
@@ -39,7 +43,15 @@
 
 	overflow: hidden;
 
-	&--default-font {
+	@include container-up(banners, 650px) {
+		min-height: 450px;
+	}
+
+	&--auto-height {
+		min-height: auto;
+	}
+
+	&--light {
 		color: var(--white);
 
 		.banner__title {
@@ -47,19 +59,11 @@
 		}
 	}
 
-	&--dark-font {
-		color: revert;
+	&--dark {
+		color: var(--dark);
 
 		.banner__title {
 			color: var(--primary);
-		}
-	}
-
-	&--default-size {
-		min-height: 420px;
-
-		@include container-up(banners, 650px) {
-			min-height: 450px;
 		}
 	}
 
@@ -70,7 +74,34 @@
 		width: 100%;
 
 		@include container-up(banners, 640px) {
-			max-width: 60%;
+			max-width: var(--content-width);
+		}
+	}
+
+	&__buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px 20px;
+	}
+
+	&__img {
+		display: none;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: calc(var(--content-width) + var(--image-offset));
+		width: 560px;
+		height: 100%;
+		object-fit: contain;
+		object-position: center;
+
+		@include container-up(banners, 640px) {
+			display: block;
+		}
+
+		@include container-up(banners, 1200px) {
+			left: var(--content-width);
+			width: calc(100% - var(--content-width));
 		}
 	}
 
@@ -95,38 +126,11 @@
 		text-transform: none;
 	}
 
-	&__buttons {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px 20px;
-	}
-
 	.main-btn {
 		width: 100%;
 
 		@include container-up(banners, 480px) {
 			width: fit-content;
-		}
-	}
-
-	&__img {
-		display: none;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: calc(60% + 20px);
-		width: 560px;
-		height: 100%;
-		object-fit: contain;
-		object-position: center;
-
-		@include container-up(banners, 640px) {
-			display: block;
-		}
-
-		@include container-up(banners, 1200px) {
-			left: 60%;
-			width: 40%;
 		}
 	}
 }
