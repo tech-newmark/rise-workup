@@ -35,7 +35,8 @@ for ($index = 0; $index < $itemSize; $index++) {
 	} else {
 		$strReturn .= '
 			<li class="breadcrumbs__list-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-				<span itemprop="item" itemprop="name">' . $title . '</span>
+				<link href="' . $APPLICATION->GetCurPage() . '" itemprop="item">
+				<span itemprop="name">' . $title . '</span>
 				<meta itemprop="position" content="' . $itemSize . '" />
 			</li>';
 	}

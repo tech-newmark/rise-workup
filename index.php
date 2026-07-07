@@ -5,8 +5,8 @@ $APPLICATION->SetPageProperty("title", "Производитель сумок и
 $APPLICATION->SetTitle("Интернет-магазин \"RISE\"");
 ?>
 <? $APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"top-banner",
+	"bitrix:news.list", 
+	"top-banner", 
 	[
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
@@ -29,7 +29,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"RISE\"");
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
 		"FIELD_CODE" => [
-			0 => "",
+			0 => "DETAIL_PICTURE",
 			1 => "",
 		],
 		"FILTER_NAME" => "",
@@ -54,8 +54,10 @@ $APPLICATION->SetTitle("Интернет-магазин \"RISE\"");
 			0 => "LINK_URL",
 			1 => "H1_TITLE",
 			2 => "SHOW_ON_INDEX_PAGE",
-			3 => "BUTTON",
-			4 => "",
+			3 => "LINK",
+			4 => "BACKGROUND_COLOR",
+			5 => "BUTTON",
+			6 => "",
 		],
 		"SET_BROWSER_TITLE" => "N",
 		"SET_LAST_MODIFIED" => "N",
