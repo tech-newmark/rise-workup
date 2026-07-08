@@ -14,7 +14,7 @@ $this->setFrameMode(true); ?>
 
 <section class="service-section">
 
-	<!-- Верхний баннер -->
+	<!-- Главный баннер -->
 	<?
 	$linkedTopBannerIds = array_filter(
 		(array)($arResult["CURRENT_SECTION"]["UF_BANNERS"] ?? [])
@@ -83,7 +83,7 @@ $this->setFrameMode(true); ?>
 		);
 		unset($GLOBALS["arServicesTopBannersFilter"]); ?>
 	<? endif; ?>
-	<!-- Верхний баннер -->
+	<!-- Главный баннер -->
 
 	<!-- Список элементов -->
 	<? $APPLICATION->IncludeComponent(
@@ -217,6 +217,77 @@ $this->setFrameMode(true); ?>
 	<? endif; ?>
 	<!-- Тизеры -->
 
+	<!-- Верхний контентный баннер  -->
+	<?
+	$linkedTopContentBannerIds = array_filter(
+		(array)($arResult["CURRENT_SECTION"]['UF_TOP_CONTENT_BANNER'] ?? [])
+	); ?>
+	<? if ($linkedTopContentBannerIds): ?>
+		<? $GLOBALS['arLinkedTopContentBannersFilter'] = ['ID' => $linkedTopContentBannerIds];
+		$APPLICATION->IncludeComponent(
+			"bitrix:news.list",
+			"top-banner",
+			array(
+				"BANNER_SIZE" => "AUTO",
+				"ACTIVE_DATE_FORMAT" => "d.m.Y",
+				"ADD_SECTIONS_CHAIN" => "N",
+				"AJAX_MODE" => "N",
+				"AJAX_OPTION_ADDITIONAL" => "",
+				"AJAX_OPTION_HISTORY" => "N",
+				"AJAX_OPTION_JUMP" => "N",
+				"AJAX_OPTION_STYLE" => "Y",
+				"CACHE_FILTER" => "Y",
+				"CACHE_GROUPS" => "Y",
+				"CACHE_TIME" => "36000000",
+				"CACHE_TYPE" => "A",
+				"CHECK_DATES" => "Y",
+				"COMPONENT_TEMPLATE" => "top-banner",
+				"DETAIL_URL" => "",
+				"DISPLAY_BOTTOM_PAGER" => "Y",
+				"DISPLAY_DATE" => "Y",
+				"DISPLAY_NAME" => "Y",
+				"DISPLAY_PICTURE" => "Y",
+				"DISPLAY_PREVIEW_TEXT" => "Y",
+				"DISPLAY_TOP_PAGER" => "N",
+				"FIELD_CODE" => [0 => "", 1 => "",],
+				"FILTER_NAME" => "arLinkedTopContentBannersFilter",
+				"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+				"IBLOCK_ID" => "7",
+				"IBLOCK_TYPE" => "site_content",
+				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+				"INCLUDE_SUBSECTIONS" => "N",
+				"MESSAGE_404" => "",
+				"NEWS_COUNT" => "20",
+				"PAGER_BASE_LINK_ENABLE" => "N",
+				"PAGER_DESC_NUMBERING" => "N",
+				"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+				"PAGER_SHOW_ALL" => "N",
+				"PAGER_SHOW_ALWAYS" => "N",
+				"PAGER_TEMPLATE" => ".default",
+				"PAGER_TITLE" => "Новости",
+				"PARENT_SECTION" => "",
+				"PARENT_SECTION_CODE" => "",
+				"PREVIEW_TRUNCATE_LEN" => "",
+				"PROPERTY_CODE" => [0 => "FORM_BUTTON", 1 => "LINK", 2 => "BACKGROUND_COLOR", 3 => "DARK_COLOR", 4 => ""],
+				"SET_BROWSER_TITLE" => "N",
+				"SET_LAST_MODIFIED" => "N",
+				"SET_META_DESCRIPTION" => "N",
+				"SET_META_KEYWORDS" => "N",
+				"SET_STATUS_404" => "N",
+				"SET_TITLE" => "N",
+				"SHOW_404" => "N",
+				"SORT_BY1" => "ACTIVE_FROM",
+				"SORT_BY2" => "SORT",
+				"SORT_ORDER1" => "DESC",
+				"SORT_ORDER2" => "ASC",
+				"STRICT_SECTION_CHECK" => "N"
+			),
+			$component
+		);
+		unset($GLOBALS['arLinkedTopContentBannersFilter']); ?>
+	<? endif; ?>
+	<!-- Верхний контентный баннер -->
+
 	<!-- Преимущества -->
 	<?
 	$linkedAdvantageIds = array_filter(
@@ -286,7 +357,7 @@ $this->setFrameMode(true); ?>
 	<? endif; ?>
 	<!-- Преимущества -->
 
-	<!-- "Этапы" -->
+	<!-- Этапы -->
 	<?
 	$linkedStageIds = array_filter(
 		(array)($arResult["CURRENT_SECTION"]["UF_STAGES"] ?? [])
@@ -370,6 +441,77 @@ $this->setFrameMode(true); ?>
 	<? endif; ?>
 	<!-- Сео-блок  -->
 
+	<!-- Нижний контентный баннер  -->
+	<?
+	$linkedBottomContentBannerIds = array_filter(
+		(array)($arResult["CURRENT_SECTION"]['UF_BOTTOM_CONTENT_BANNER'] ?? [])
+	); ?>
+	<? if ($linkedBottomContentBannerIds): ?>
+		<? $GLOBALS['arLinkedBottomContentBannersFilter'] = ['ID' => $linkedBottomContentBannerIds];
+		$APPLICATION->IncludeComponent(
+			"bitrix:news.list",
+			"top-banner",
+			array(
+				"BANNER_SIZE" => "AUTO",
+				"ACTIVE_DATE_FORMAT" => "d.m.Y",
+				"ADD_SECTIONS_CHAIN" => "N",
+				"AJAX_MODE" => "N",
+				"AJAX_OPTION_ADDITIONAL" => "",
+				"AJAX_OPTION_HISTORY" => "N",
+				"AJAX_OPTION_JUMP" => "N",
+				"AJAX_OPTION_STYLE" => "Y",
+				"CACHE_FILTER" => "Y",
+				"CACHE_GROUPS" => "Y",
+				"CACHE_TIME" => "36000000",
+				"CACHE_TYPE" => "A",
+				"CHECK_DATES" => "Y",
+				"COMPONENT_TEMPLATE" => "top-banner",
+				"DETAIL_URL" => "",
+				"DISPLAY_BOTTOM_PAGER" => "Y",
+				"DISPLAY_DATE" => "Y",
+				"DISPLAY_NAME" => "Y",
+				"DISPLAY_PICTURE" => "Y",
+				"DISPLAY_PREVIEW_TEXT" => "Y",
+				"DISPLAY_TOP_PAGER" => "N",
+				"FIELD_CODE" => [0 => "", 1 => "",],
+				"FILTER_NAME" => "arLinkedBottomContentBannersFilter",
+				"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+				"IBLOCK_ID" => "7",
+				"IBLOCK_TYPE" => "site_content",
+				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+				"INCLUDE_SUBSECTIONS" => "N",
+				"MESSAGE_404" => "",
+				"NEWS_COUNT" => "20",
+				"PAGER_BASE_LINK_ENABLE" => "N",
+				"PAGER_DESC_NUMBERING" => "N",
+				"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+				"PAGER_SHOW_ALL" => "N",
+				"PAGER_SHOW_ALWAYS" => "N",
+				"PAGER_TEMPLATE" => ".default",
+				"PAGER_TITLE" => "Новости",
+				"PARENT_SECTION" => "",
+				"PARENT_SECTION_CODE" => "",
+				"PREVIEW_TRUNCATE_LEN" => "",
+				"PROPERTY_CODE" => [0 => "FORM_BUTTON", 1 => "LINK", 2 => "BACKGROUND_COLOR", 3 => "DARK_COLOR", 4 => ""],
+				"SET_BROWSER_TITLE" => "N",
+				"SET_LAST_MODIFIED" => "N",
+				"SET_META_DESCRIPTION" => "N",
+				"SET_META_KEYWORDS" => "N",
+				"SET_STATUS_404" => "N",
+				"SET_TITLE" => "N",
+				"SHOW_404" => "N",
+				"SORT_BY1" => "ACTIVE_FROM",
+				"SORT_BY2" => "SORT",
+				"SORT_ORDER1" => "DESC",
+				"SORT_ORDER2" => "ASC",
+				"STRICT_SECTION_CHECK" => "N"
+			),
+			$component
+		);
+		unset($GLOBALS['arLinkedBottomContentBannersFilter']); ?>
+	<? endif; ?>
+	<!-- Нижний контентный баннер -->
+
 	<!-- Сотрудничество -->
 	<?
 	$linkedCooperationIds = array_filter(
@@ -441,68 +583,71 @@ $this->setFrameMode(true); ?>
 	<? endif; ?>
 	<!-- Сотрудничество -->
 
-	<!-- "FAQ" -->
+	<!-- FAQ -->
 	<?
-	$GLOBALS["faqFilter"] = [
-		"ID" => ($arResult["CURRENT_SECTION"]["UF_FAQ"] ?? null) ?: 0,
-	];
-	$APPLICATION->IncludeComponent(
-		"bitrix:news.list",
-		"faq-preview",
-		array(
-			"SHOW_ITEM_NUMBER" => "Y",
-			"ACTIVE_DATE_FORMAT" => "d.m.Y",
-			"ADD_SECTIONS_CHAIN" => "N",
-			"AJAX_MODE" => "N",
-			"AJAX_OPTION_ADDITIONAL" => "",
-			"AJAX_OPTION_HISTORY" => "N",
-			"AJAX_OPTION_JUMP" => "N",
-			"AJAX_OPTION_STYLE" => "Y",
-			"CACHE_FILTER" => "Y",
-			"CACHE_GROUPS" => "Y",
-			"CACHE_TIME" => "36000000",
-			"CACHE_TYPE" => "A",
-			"CHECK_DATES" => "Y",
-			"COMPONENT_TEMPLATE" => "faq-preview",
-			"DETAIL_URL" => "",
-			"DISPLAY_BOTTOM_PAGER" => "Y",
-			"DISPLAY_TOP_PAGER" => "N",
-			"FIELD_CODE" => [0 => "", 1 => "",],
-			"FILTER_NAME" => "faqFilter",
-			"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-			"IBLOCK_ID" => "6",
-			"IBLOCK_TYPE" => "site_content",
-			"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-			"INCLUDE_SUBSECTIONS" => "Y",
-			"MESSAGE_404" => "",
-			"NEWS_COUNT" => "20",
-			"PAGER_BASE_LINK_ENABLE" => "N",
-			"PAGER_DESC_NUMBERING" => "N",
-			"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-			"PAGER_SHOW_ALL" => "N",
-			"PAGER_SHOW_ALWAYS" => "N",
-			"PAGER_TEMPLATE" => ".default",
-			"PAGER_TITLE" => "Новости",
-			"PARENT_SECTION" => "",
-			"PARENT_SECTION_CODE" => "",
-			"PREVIEW_TRUNCATE_LEN" => "",
-			"PROPERTY_CODE" => [0 => "", 1 => "ICON",],
-			"SET_BROWSER_TITLE" => "N",
-			"SET_LAST_MODIFIED" => "N",
-			"SET_META_DESCRIPTION" => "N",
-			"SET_META_KEYWORDS" => "N",
-			"SET_STATUS_404" => "N",
-			"SET_TITLE" => "N",
-			"SHOW_404" => "N",
-			"SORT_BY1" => "ACTIVE_FROM",
-			"SORT_BY2" => "SORT",
-			"SORT_ORDER1" => "DESC",
-			"SORT_ORDER2" => "ASC",
-			"STRICT_SECTION_CHECK" => "N"
-		),
-		$component
-	);
-	unset($GLOBALS["faqFilter"]); ?>
+	$linkedFaqIds = array_filter(
+		(array)($arResult["CURRENT_SECTION"]["UF_FAQ"] ?? [])
+	); ?>
+	<? if ($linkedFaqIds) : ?>
+		<? $GLOBALS["faqFilter"] = ["ID" => $linkedFaqIds];
+		$APPLICATION->IncludeComponent(
+			"bitrix:news.list",
+			"faq-preview",
+			array(
+				"SHOW_ITEM_NUMBER" => "Y",
+				"ACTIVE_DATE_FORMAT" => "d.m.Y",
+				"ADD_SECTIONS_CHAIN" => "N",
+				"AJAX_MODE" => "N",
+				"AJAX_OPTION_ADDITIONAL" => "",
+				"AJAX_OPTION_HISTORY" => "N",
+				"AJAX_OPTION_JUMP" => "N",
+				"AJAX_OPTION_STYLE" => "Y",
+				"CACHE_FILTER" => "Y",
+				"CACHE_GROUPS" => "Y",
+				"CACHE_TIME" => "36000000",
+				"CACHE_TYPE" => "A",
+				"CHECK_DATES" => "Y",
+				"COMPONENT_TEMPLATE" => "faq-preview",
+				"DETAIL_URL" => "",
+				"DISPLAY_BOTTOM_PAGER" => "Y",
+				"DISPLAY_TOP_PAGER" => "N",
+				"FIELD_CODE" => [0 => "", 1 => "",],
+				"FILTER_NAME" => "faqFilter",
+				"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+				"IBLOCK_ID" => "6",
+				"IBLOCK_TYPE" => "site_content",
+				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+				"INCLUDE_SUBSECTIONS" => "Y",
+				"MESSAGE_404" => "",
+				"NEWS_COUNT" => "20",
+				"PAGER_BASE_LINK_ENABLE" => "N",
+				"PAGER_DESC_NUMBERING" => "N",
+				"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+				"PAGER_SHOW_ALL" => "N",
+				"PAGER_SHOW_ALWAYS" => "N",
+				"PAGER_TEMPLATE" => ".default",
+				"PAGER_TITLE" => "Новости",
+				"PARENT_SECTION" => "",
+				"PARENT_SECTION_CODE" => "",
+				"PREVIEW_TRUNCATE_LEN" => "",
+				"PROPERTY_CODE" => [0 => "", 1 => "ICON",],
+				"SET_BROWSER_TITLE" => "N",
+				"SET_LAST_MODIFIED" => "N",
+				"SET_META_DESCRIPTION" => "N",
+				"SET_META_KEYWORDS" => "N",
+				"SET_STATUS_404" => "N",
+				"SET_TITLE" => "N",
+				"SHOW_404" => "N",
+				"SORT_BY1" => "ACTIVE_FROM",
+				"SORT_BY2" => "SORT",
+				"SORT_ORDER1" => "DESC",
+				"SORT_ORDER2" => "ASC",
+				"STRICT_SECTION_CHECK" => "N"
+			),
+			$component
+		);
+		unset($GLOBALS["faqFilter"]); ?>
+	<? endif; ?>
 	<!-- FAQ -->
 
 	<!-- Форма -->
@@ -527,4 +672,5 @@ $this->setFrameMode(true); ?>
 		$component
 	); ?>
 	<!-- Форма -->
+
 </section>

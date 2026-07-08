@@ -21,7 +21,7 @@ $this->setFrameMode(true);
 	);
 	?>
 	<? if ($linkedTopBannerIds): ?>
-		<? $GLOBALS['arLinkedTopBannersFilter'] = array('ID' => $linkedTopBannerIds);
+		<? $GLOBALS['arLinkedTopBannersFilter'] = ['ID' => $linkedTopBannerIds];
 		$APPLICATION->IncludeComponent(
 			"bitrix:news.list",
 			"top-banner",
@@ -65,7 +65,7 @@ $this->setFrameMode(true);
 				"PARENT_SECTION" => "",
 				"PARENT_SECTION_CODE" => "",
 				"PREVIEW_TRUNCATE_LEN" => "",
-				"PROPERTY_CODE" => [0 => "FORM_BUTTON", 1 => "LINK", 2 => "",],
+				"PROPERTY_CODE" => [0 => "FORM_BUTTON", 1 => "LINK", 2 => "BACKGROUND_COLOR", 3 => "DARK_COLOR", 4 => ""],
 				"SET_BROWSER_TITLE" => "N",
 				"SET_LAST_MODIFIED" => "N",
 				"SET_META_DESCRIPTION" => "N",
@@ -89,8 +89,11 @@ $this->setFrameMode(true);
 	<? if ($arResult["DETAIL_TEXT"]): ?>
 		<section class="section">
 			<div class="container">
-				<div class="content">
-					<?= $arResult["DETAIL_TEXT"] ?>
+				<div class="collapsed-section">
+					<div class="content">
+						<?= $arResult["DETAIL_TEXT"] ?>
+					</div>
+					<button class="clear-btn" type="button">Развернуть</button>
 				</div>
 			</div>
 		</section>
@@ -105,7 +108,7 @@ $this->setFrameMode(true);
 	?>
 	<? if ($linkedAdvantagesIds): ?>
 		<?
-		$GLOBALS['arLinkedAdvantagesFilter'] = array('ID' => $linkedAdvantagesIds);
+		$GLOBALS['arLinkedAdvantagesFilter'] = ['ID' => $linkedAdvantagesIds];
 		$APPLICATION->IncludeComponent(
 			"bitrix:news.list",
 			"tizzers",
@@ -167,16 +170,14 @@ $this->setFrameMode(true);
 	<? endif; ?>
 	<!-- Преимущества -->
 
-	<? debug($arResult['PROPERTIES']['ADDITIONAL_BANNER_1']["VALUE"]); ?>
-
-	<!-- Баннер на странице услуг 1 -->
+	<!-- Верхний контентный баннер -->
 	<?
-	$linkedInnerBannerTopIds = array_filter(
-		(array)($arResult['PROPERTIES']['ADDITIONAL_BANNER_1']['VALUE'] ?? [])
+	$linkedTopContentBannersIds = array_filter(
+		(array)($arResult['PROPERTIES']['TOP_CONTENT_BANNER']['VALUE'] ?? [])
 	);
 	?>
-	<? if ($linkedInnerBannerTopIds): ?>
-		<? $GLOBALS['arLinkedInnerTopBannersFilter'] = array('ID' => $linkedInnerBannerTopIds);
+	<? if ($linkedTopContentBannersIds): ?>
+		<? $GLOBALS['arLinkedTopContentBannersFilter'] = ['ID' => $linkedTopContentBannersIds];
 		$APPLICATION->IncludeComponent(
 			"bitrix:news.list",
 			"top-banner",
@@ -203,7 +204,7 @@ $this->setFrameMode(true);
 				"DISPLAY_PREVIEW_TEXT" => "Y",
 				"DISPLAY_TOP_PAGER" => "N",
 				"FIELD_CODE" => [0 => "", 1 => "",],
-				"FILTER_NAME" => "arLinkedInnerTopBannersFilter",
+				"FILTER_NAME" => "arLinkedTopContentBannersFilter",
 				"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 				"IBLOCK_ID" => "7",
 				"IBLOCK_TYPE" => "site_content",
@@ -221,7 +222,7 @@ $this->setFrameMode(true);
 				"PARENT_SECTION" => "",
 				"PARENT_SECTION_CODE" => "",
 				"PREVIEW_TRUNCATE_LEN" => "",
-				"PROPERTY_CODE" => [0 => "FORM_BUTTON", 1 => "LINK", 2 => "",],
+				"PROPERTY_CODE" => [0 => "FORM_BUTTON", 1 => "LINK", 2 => "BACKGROUND_COLOR", 3 => "DARK_COLOR", 4 => ""],
 				"SET_BROWSER_TITLE" => "N",
 				"SET_LAST_MODIFIED" => "N",
 				"SET_META_DESCRIPTION" => "N",
@@ -237,9 +238,9 @@ $this->setFrameMode(true);
 			),
 			$component
 		);
-		unset($GLOBALS['arLinkedInnerTopBannersFilter']); ?>
+		unset($GLOBALS['arLinkedTopContentBannersFilter']); ?>
 	<? endif; ?>
-	<!-- Баннер на странице услуг 1 -->
+	<!-- Верхний контентный баннер -->
 
 	<!-- Примеры наших работ -->
 	<?
@@ -248,7 +249,7 @@ $this->setFrameMode(true);
 	);
 	?>
 	<? if ($linkedImagesIds): ?>
-		<? $GLOBALS['arLinkedImagesFilter'] = array('ID' => $linkedImagesIds);
+		<? $GLOBALS['arLinkedImagesFilter'] = ['ID' => $linkedImagesIds];
 		$APPLICATION->IncludeComponent(
 			"bitrix:news.list",
 			"examples-list",
@@ -319,7 +320,7 @@ $this->setFrameMode(true);
 	?>
 	<? if ($linkedStagesIds): ?>
 		<?
-		$GLOBALS['arLinkedStagesFilter'] = array('ID' => $linkedStagesIds);
+		$GLOBALS['arLinkedStagesFilter'] = ['ID' => $linkedStagesIds];
 		$APPLICATION->IncludeComponent(
 			"bitrix:news.list",
 			"tizzers",
@@ -384,14 +385,14 @@ $this->setFrameMode(true);
 	<? endif; ?>
 	<!-- Этапы -->
 
-	<!-- Баннер на странице услуг 2 -->
+	<!-- Нижний контентный баннер -->
 	<?
-	$linkedAdditionalBanner2Ids = array_filter(
-		(array)($arResult['PROPERTIES']['ADDTITONAL_BANNER_1']['VALUE'] ?? [])
+	$linkedBottomContentBannersIds = array_filter(
+		(array)($arResult['PROPERTIES']['BOTTOM_CONTENT_BANNER']['VALUE'] ?? [])
 	);
 	?>
-	<? if ($linkedAdditionalBanner2Ids): ?>
-		<? $GLOBALS['arLinkedAdditionalBannersFilter2'] = array('ID' => $linkedAdditionalBanner2Ids);
+	<? if ($linkedBottomContentBannersIds): ?>
+		<? $GLOBALS['arLinkedBottomContentBannersFilter'] = ['ID' => $linkedBottomContentBannersIds];
 		$APPLICATION->IncludeComponent(
 			"bitrix:news.list",
 			"top-banner",
@@ -418,7 +419,7 @@ $this->setFrameMode(true);
 				"DISPLAY_PREVIEW_TEXT" => "Y",
 				"DISPLAY_TOP_PAGER" => "N",
 				"FIELD_CODE" => [0 => "", 1 => "",],
-				"FILTER_NAME" => "arLinkedAdditionalBannersFilter2",
+				"FILTER_NAME" => "arLinkedBottomContentBannersFilter",
 				"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 				"IBLOCK_ID" => "7",
 				"IBLOCK_TYPE" => "site_content",
@@ -454,7 +455,7 @@ $this->setFrameMode(true);
 		);
 		unset($GLOBALS['$linkedAdditionalBanner2Ids']); ?>
 	<? endif; ?>
-	<!-- Баннер на странице услуг 2 -->
+	<!-- Нижний контентный баннер -->
 
 	<!-- Сео-блок -->
 	<? if (!empty($arResult["PROPERTIES"]["SEO_BLOCK"]["~VALUE"]["TEXT"])): ?>
@@ -475,7 +476,7 @@ $this->setFrameMode(true);
 	);
 	?>
 	<? if ($linkedTizzersIds): ?>
-		<? $GLOBALS['arLinkedTizzersFilter'] = array('ID' => $linkedTizzersIds);
+		<? $GLOBALS['arLinkedTizzersFilter'] = ['ID' => $linkedTizzersIds];
 		$APPLICATION->IncludeComponent(
 			"bitrix:news.list",
 			"tizzers",
@@ -545,7 +546,7 @@ $this->setFrameMode(true);
 	);
 	?>
 	<? if ($linkedCooperationIds): ?>
-	<? $GLOBALS['arLinkedCooperationItemsFilter'] = array('ID' => $linkedCooperationIds);
+	<? $GLOBALS['arLinkedCooperationItemsFilter'] = ['ID' => $linkedCooperationIds];
 		$APPLICATION->IncludeComponent(
 			"bitrix:news.list",
 			"tizzers",
@@ -617,7 +618,7 @@ $this->setFrameMode(true);
 	?>
 	<? if ($linkedFaqIds): ?>
 		<?
-		$GLOBALS['arLinkedFaqFilter'] = array('ID' => $linkedFaqIds);
+		$GLOBALS['arLinkedFaqFilter'] = ['ID' => $linkedFaqIds];
 		$APPLICATION->IncludeComponent(
 			"bitrix:news.list",
 			"faq-preview",

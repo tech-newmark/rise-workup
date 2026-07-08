@@ -9,14 +9,13 @@ if (!empty($arItem["PROPERTIES"]["BACKGROUND_COLOR"]["VALUE_XML_ID"])) {
   $bannerStyle = 'background-image: url(' . $templateFolder . '/_src/images/banner-bg.jpg);';
 }
 ?>
-
 <article id="<?= $this->GetEditAreaId($arItem['ID']); ?>"
   class="banner
   <?= $arParams["BANNER_SIZE"] === "AUTO" ? " banner--auto-height" : "" ?>
-  <?= $arItem["PROPERTIES"]["DARK_TEXT"]["VALUE"] === "Y" ? " banner--dark" : " banner--light" ?>"
-  style="<?= $bannerStyle ?>">
+ <?= ($arItem["PROPERTIES"]["DARK_COLOR"]["VALUE"] ?? "") === "Y" ? " banner--dark" : " banner--light" ?>"
+  style=" <?= $bannerStyle ?>">
   <div class="banner__content">
-    <? if ($arItem["PROPERTIES"]["H1_TITLE"]["VALUE"] == "Y") : ?>
+    <? if (($arItem["PROPERTIES"]["H1_TITLE"]["VALUE"] ?? "") == "Y") : ?>
       <h1 class="heading heading--xl banner__title"><?= $arItem["~NAME"] ?></h1>
     <? else: ?>
       <h2 class="heading heading--xl banner__title"><?= $arItem["~NAME"] ?></h2>

@@ -1,0 +1,27 @@
+.collapsed-section {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+
+	.content {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 5;
+		overflow: hidden;
+
+		&.expanded {
+			display: block;
+			-webkit-box-orient: initial;
+			-webkit-line-clamp: unset;
+			overflow: visible;
+		}
+	}
+
+	.clear-btn {
+		text-transform: none;
+
+		&.hidden {
+			display: none;
+		}
+	}
+}
