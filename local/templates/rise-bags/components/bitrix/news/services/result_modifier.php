@@ -50,6 +50,8 @@ if ($sectionId > 0) {
 			"UF_COOPERATION",
 			"UF_SECTION_TITLE",
 			"UF_SECTION_DESC",
+			"UF_TOP_CONTENT_BANNER",
+			"UF_BOTTOM_CONTENT_BANNER",
 		]
 	);
 
