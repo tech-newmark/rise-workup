@@ -1,12 +1,12 @@
-.collapsed-section {
+.collapsible-section {
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
 
-	.content {
+	&__text {
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 5;
+		-webkit-line-clamp: 20;
 		overflow: hidden;
 
 		&.expanded {
@@ -17,7 +17,8 @@
 		}
 	}
 
-	.clear-btn {
+	& &__btn {
+		position: relative;
 		text-transform: none;
 
 		&.hidden {

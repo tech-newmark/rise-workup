@@ -88,13 +88,12 @@ $this->setFrameMode(true);
 	<!-- Сео-блок -->
 	<? if ($arResult["DETAIL_TEXT"]): ?>
 		<section class="section">
-			<div class="container">
-				<div class="collapsed-section">
-					<div class="content">
-						<?= $arResult["DETAIL_TEXT"] ?>
-					</div>
-					<button class="clear-btn" type="button">Развернуть</button>
+			<div class="container collapsible-section">
+				<div class="content collapsible-section__text">
+					<?= $arResult["DETAIL_TEXT"] ?>
 				</div>
+				<button class="clear-btn collapsible-section__btn hidden" type="button">Развернуть
+				</button>
 			</div>
 		</section>
 	<? endif; ?>
@@ -460,10 +459,12 @@ $this->setFrameMode(true);
 	<!-- Сео-блок -->
 	<? if (!empty($arResult["PROPERTIES"]["SEO_BLOCK"]["~VALUE"]["TEXT"])): ?>
 		<section class="section">
-			<div class="container">
-				<div class="content">
+			<div class="container collapsible-section">
+				<div class="content collapsible-section__text">
 					<?= $arResult["PROPERTIES"]["SEO_BLOCK"]["~VALUE"]["TEXT"] ?>
 				</div>
+				<button class="clear-btn collapsible-section__btn hidden" type="button">Развернуть
+				</button>
 			</div>
 		</section>
 	<? endif; ?>
