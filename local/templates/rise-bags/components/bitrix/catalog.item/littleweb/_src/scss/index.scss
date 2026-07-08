@@ -30,7 +30,7 @@
 		border: 1px solid var(--gray-500);
 
 		& > * {
-			z-index: 9;
+			z-index: 2;
 		}
 
 		.swiper-pagination {
@@ -65,7 +65,7 @@
 		width: 100%;
 		height: fit-content;
 		background-color: white;
-		z-index: 12;
+		z-index: 13;
 		padding-bottom: 16px;
 
 		&:has(*) {
