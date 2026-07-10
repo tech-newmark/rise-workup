@@ -4,9 +4,13 @@ $APPLICATION->SetPageProperty("description", "RISE производит и пр�
 $APPLICATION->SetPageProperty("title", "Производитель сумок и рюкзаков в СПб | Розница, опт и пошив на заказ RISE");
 $APPLICATION->SetTitle("Интернет-магазин \"RISE\"");
 ?>
-<? $APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"top-banner", 
+<?
+$arIndexTopBannerFilter = [
+	"PROPERTY_SHOW_ON_INDEX_PAGE_VALUE" => "Y"
+];
+$APPLICATION->IncludeComponent(
+	"bitrix:news.list",
+	"top-banner",
 	[
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
@@ -15,7 +19,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"RISE\"");
 		"AJAX_OPTION_HISTORY" => "N",
 		"AJAX_OPTION_JUMP" => "N",
 		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
+		"CACHE_FILTER" => "Y",
 		"CACHE_GROUPS" => "Y",
 		"CACHE_TIME" => "36000000",
 		"CACHE_TYPE" => "A",
@@ -32,7 +36,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"RISE\"");
 			0 => "DETAIL_PICTURE",
 			1 => "",
 		],
-		"FILTER_NAME" => "",
+		"FILTER_NAME" => "arIndexTopBannerFilter",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "7",
 		"IBLOCK_TYPE" => "site_content",
@@ -73,7 +77,8 @@ $APPLICATION->SetTitle("Интернет-магазин \"RISE\"");
 		"STRICT_SECTION_CHECK" => "N"
 	],
 	$component
-); ?>
+);
+unset($arIndexTopBannerFilter); ?>
 
 <? $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
@@ -525,9 +530,13 @@ $trendFilter = array('PROPERTY_TREND' => '4');
 </div>
 
 
-<? $APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"faq-preview", 
+<?
+$arIndexFaqFilter = [
+	"PROPERTY_SHOW_ON_INDEX_PAGE_VALUE" => "Y"
+];
+$APPLICATION->IncludeComponent(
+	"bitrix:news.list",
+	"faq-preview",
 	[
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
@@ -536,7 +545,7 @@ $trendFilter = array('PROPERTY_TREND' => '4');
 		"AJAX_OPTION_HISTORY" => "N",
 		"AJAX_OPTION_JUMP" => "N",
 		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
+		"CACHE_FILTER" => "Y",
 		"CACHE_GROUPS" => "Y",
 		"CACHE_TIME" => "36000000",
 		"CACHE_TYPE" => "A",
@@ -554,7 +563,7 @@ $trendFilter = array('PROPERTY_TREND' => '4');
 			1 => "PREVIEW_TEXT",
 			2 => "",
 		],
-		"FILTER_NAME" => "",
+		"FILTER_NAME" => "arIndexFaqFilter",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "6",
 		"IBLOCK_TYPE" => "site_content",
@@ -590,6 +599,7 @@ $trendFilter = array('PROPERTY_TREND' => '4');
 		"STRICT_SECTION_CHECK" => "N"
 	],
 	false
-); ?>
+);
+unset($arIndexFaqFilter); ?>
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
