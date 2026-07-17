@@ -217,6 +217,19 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 					url: this.ajaxUrl,
 					data: this.getData(eventArgs.action, eventArgs.actionData),
 					onsuccess: BX.delegate(function (result) {
+						if (!result || !result.order) {
+							if (window.console && console.warn) {
+								console.warn(
+									"sale.order.ajax: invalid ajax response",
+									eventArgs.action,
+									eventArgs.actionData,
+									result,
+								);
+							}
+							this.endLoader();
+							return;
+						}
+
 						if (result.redirect && result.redirect.length)
 							document.location.href = result.redirect;
 
@@ -4918,18 +4931,18 @@ BX.namespace("BX.Sale.OrderAjaxComponent");
 			);
 
 			// --- Исключаю выбор типа Физ лицо для группы Оптовые покупатели
-			var userGroups = window.USER_GROUPS || [];
+			// var userGroups = window.USER_GROUPS || [];
 
-			if (userGroups.includes(9)) {
-				// 9 - ID группы оптовых покупателей
-				var filteredPersonTypes = this.result.PERSON_TYPE.filter(
-					function (personType) {
-						return personType.ID !== "1"; // или return personType.ID != 1;
-					},
-				);
-				// Присваиваем отфильтрованный массив обратно
-				this.result.PERSON_TYPE = filteredPersonTypes;
-			}
+			// if (userGroups.includes(9)) {
+			// 	// 9 - ID группы оптовых покупателей
+			// 	var filteredPersonTypes = this.result.PERSON_TYPE.filter(
+			// 		function (personType) {
+			// 			return personType.ID !== "1"; // или return personType.ID != 1;
+			// 		},
+			// 	);
+			// 	// Присваиваем отфильтрованный массив обратно
+			// 	this.result.PERSON_TYPE = filteredPersonTypes;
+			// }
 			// --- Исключаю выбор типа Физ лицо для группы Оптовые покупатели
 
 			var personTypesCount = this.result.PERSON_TYPE.length,
