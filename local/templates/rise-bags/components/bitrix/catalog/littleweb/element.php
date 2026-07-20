@@ -172,7 +172,8 @@ $isSidebar = ($arParams['SIDEBAR_DETAIL_SHOW'] == 'Y' && !empty($arParams['SIDEB
 
 
 		);
-
+		// debug($arParams['OFFERS_SORT_FIELD']);
+		// debug($arParams['OFFERS_SORT_ORDER']);
 		if (isset($arParams['USER_CONSENT'])) {
 			$componentElementParams['USER_CONSENT'] = $arParams['USER_CONSENT'];
 		}

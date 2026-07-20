@@ -194,8 +194,7 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 					aria-label="<?= $isFavorite ? 'Удалить товар из избранного' : 'Добавить товар в избранное' ?>"
 					aria-pressed="<?= $isFavorite ? 'true' : 'false' ?>"
 					data-favorite-toggle
-					data-product-id="<?= $favoriteProductId ?>"
-				>
+					data-product-id="<?= $favoriteProductId ?>">
 					<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
 						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-heart'></use>
 					</svg>
@@ -248,7 +247,6 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 
 				<?/*НАБОРЫ / НЕ ВЕРСТАЛИСЬ*/ ?>
 				<? if ($haveOffers): ?>
-					<? debug($arResult['OFFER_GROUP']) ?>
 					<? if ($arResult['OFFER_GROUP']): ?>
 						<? foreach ($arResult['OFFER_GROUP_VALUES'] as $offerId): ?>
 							<span id="<?= $itemIds['OFFER_GROUP'] . $offerId ?>" style="display: none;">
