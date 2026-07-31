@@ -305,7 +305,11 @@
 					path +
 					(filteredParams.length ? "?" + filteredParams.join("&") : "") +
 					hash;
-				window.history.replaceState(window.history.state, document.title, newUrl);
+				window.history.replaceState(
+					window.history.state,
+					document.title,
+					newUrl,
+				);
 
 				return;
 			}
@@ -1017,6 +1021,29 @@
 									}
 
 									catalogElement.swiperInstance.slideToLoop(slideIndex, 0);
+								},
+								click: function (event) {
+									if (!catalogElement.swiperInstance) {
+										return;
+									}
+
+									event.preventDefault();
+									event.stopPropagation();
+
+									var swiper = catalogElement.swiperInstance;
+									var activeSlide = swiperContainer.querySelector(
+										".swiper-slide-active",
+									);
+
+									if (!activeSlide) {
+										return;
+									}
+
+									var image = activeSlide.querySelector("img[data-fancybox]");
+
+									if (image) {
+										image.click();
+									}
 								},
 							},
 						}),
@@ -2103,6 +2130,9 @@
 
 			for (i = 0; i < images.length; i++) {
 				img = BX.create("IMG", {
+					attrs: {
+						"data-fancybox": "bx-catalog-element-gallery",
+					},
 					props: {
 						src: images[i].SRC,
 						alt: this.config.alt,
@@ -2780,11 +2810,11 @@
 
 		removeFavoriteAfterBasketAdd: function () {
 			if (window.RiseBagsRemoveFavoriteProduct) {
-				window.RiseBagsRemoveFavoriteProduct(this.getBasketProductId()).catch(
-					function (error) {
+				window
+					.RiseBagsRemoveFavoriteProduct(this.getBasketProductId())
+					.catch(function (error) {
 						console.error(error);
-					},
-				);
+					});
 			}
 		},
 
