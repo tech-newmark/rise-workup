@@ -275,4 +275,16 @@
 	// 		max-width: fit-content;
 	// 	}
 	// }
+
+	&-popup-content {
+		div {
+			display: flex;
+			gap: 10px;
+
+			p {
+				flex-grow: 1;
+				text-align: center;
+			}
+		}
+	}
 }
