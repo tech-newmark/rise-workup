@@ -6,7 +6,7 @@
 	var BasketButton = function (params) {
 		BasketButton.superclass.constructor.apply(this, arguments);
 		this.buttonNode = BX.create("SPAN", {
-			props: { className: "btn btn-default btn-buy btn-sm", id: this.id },
+			props: { className: "main-btn", id: this.id },
 			style: typeof params.style === "object" ? params.style : {},
 			text: params.text,
 			events: this.contextEvents,
@@ -2982,6 +2982,12 @@
 						: "",
 				},
 			);
+
+			const content = document.getElementById(
+				"popup-window-content-CatalogElementBasket_" + this.visual.ID,
+			);
+
+			content?.classList.add("bx-catalog-element-popup-content");
 		},
 
 		incViewedCounter: function () {
