@@ -75,10 +75,27 @@ $this->setFrameMode(true);
 					$component
 				); ?>
 				<!-- Галерея -->
-				<p class="heading--lg">Ваш отзыв -
-					наша лучшая рекомендация</p>
-				<p>Если вы получили свой заказ, поделитесь впечатлениями о работе с нами.
-					Ваш честный отзыв поможет нам становиться лучше и поможет другим клиентам сделать правильный выбор.</p>
+				<p class="heading--lg">
+					<? $APPLICATION->IncludeFile(
+						SITE_DIR . "include/reviews-slogan.php",
+						array(),
+						array(
+							"MODE" => "html",
+							"NAME" => "Слоган",
+							"TEMPLATE" => "include_area.php",
+						)
+					); ?>
+				</p>
+				<p>
+					<? $APPLICATION->IncludeFile(
+						SITE_DIR . "include/reviews-desc.php",
+						array(),
+						array(
+							"MODE" => "html",
+							"NAME" => "Текст",
+							"TEMPLATE" => "include_area.php",
+						)
+					); ?></p>
 				<button class="main-btn" data-form-id="1">Оставить отзыв</button>
 			</div>
 		</div>
