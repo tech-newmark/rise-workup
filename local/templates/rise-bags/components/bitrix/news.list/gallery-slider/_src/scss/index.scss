@@ -2,15 +2,7 @@
 	.swiper {
 		&-slide {
 			width: fit-content;
-			max-width: 80%;
 			height: auto;
-
-			img {
-				width: 100%;
-				height: auto;
-				max-height: 300px;
-				object-fit: contain;
-			}
 		}
 
 		&-pagination {
@@ -24,11 +16,65 @@
 	}
 
 	&-item {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 10px;
 		padding: 20px;
 		background-color: var(--gray-800);
 		border-radius: var(--base-br);
 		height: 100%;
-		display: flex;
-		align-items: center;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 24px;
+			right: 24px;
+			width: 30px;
+			height: 30px;
+			background-image: url("/local/templates/rise-bags/_dist/images/loupe.png");
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: contain;
+			transition: opacity var(--main-transition);
+		}
+
+		&:hover::before,
+		&:focus::before {
+			opacity: 0.6;
+		}
+
+		&:active::before {
+			opacity: 0.4;
+		}
+
+		&__footer {
+			margin-top: auto;
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+
+			span:first-child {
+				font-weight: 700;
+			}
+
+			span:last-child {
+				color: var(--gray-900);
+			}
+		}
+
+		&__icon {
+			position: absolute;
+			top: 24px;
+			right: 24px;
+		}
+
+		&__img {
+			width: 100%;
+			height: auto;
+			max-height: 300px;
+			object-fit: contain;
+		}
 	}
 }

@@ -1,33 +1,35 @@
-const slider = document.querySelector(".gallery-slider");
+const sliders = document.querySelectorAll(".gallery-slider");
 
-if (slider) {
-	const pagination = slider.querySelector(".swiper-pagination");
-	const btnNext = slider.querySelector(".swiper-button-next");
-	const btnPrev = slider.querySelector(".swiper-button-prev");
+if (sliders.length) {
+	sliders.forEach((slider) => {
+		const pagination = slider.querySelector(".swiper-pagination");
+		const btnNext = slider.querySelector(".swiper-button-next");
+		const btnPrev = slider.querySelector(".swiper-button-prev");
 
-	new window.Swiper(slider, {
-		slidesPerView: "auto",
-		spaceBetween: 20,
-		watchOverflow: true,
+		new window.Swiper(slider, {
+			slidesPerView: "auto",
+			spaceBetween: 20,
+			watchOverflow: true,
 
-		breakpoints: {
-			768: {
-				spaceBetween: 30,
+			breakpoints: {
+				768: {
+					spaceBetween: slider.classList.contains("thanks") ? 20 : 30,
+				},
+
+				1040: {
+					spaceBetween: slider.classList.contains("thanks") ? 20 : 40,
+				},
 			},
 
-			1040: {
-				spaceBetween: 40,
+			navigation: {
+				nextEl: btnNext ? btnNext : null,
+				prevEl: btnPrev ? btnPrev : null,
 			},
-		},
 
-		navigation: {
-			nextEl: btnNext ? btnNext : null,
-			prevEl: btnPrev ? btnPrev : null,
-		},
-
-		pagination: {
-			el: pagination ? pagination : null,
-			clickable: true,
-		},
+			pagination: {
+				el: pagination ? pagination : null,
+				clickable: true,
+			},
+		});
 	});
 }
