@@ -24,6 +24,7 @@ $APPLICATION->SetTitle("Карта цветов");
 			"bitrix:news.list",
 			"gallery-slider",
 			array(
+				"USE_FANCY" => "Y",
 				"ACTIVE_DATE_FORMAT" => "d.m.Y",
 				"ADD_SECTIONS_CHAIN" => "N",
 				"AJAX_MODE" => "N",
