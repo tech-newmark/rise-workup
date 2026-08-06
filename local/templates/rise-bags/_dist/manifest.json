@@ -349,6 +349,15 @@
       "bitrix_news_list_linked-articles_scss.css"
     ]
   },
+  "local/templates/rise-bags/components/bitrix/news.list/rating-list/_src/scss/index.scss": {
+    "file": "components/bitrix/news.list/rating-list/style.splTFJr6.css",
+    "src": "local/templates/rise-bags/components/bitrix/news.list/rating-list/_src/scss/index.scss",
+    "isEntry": true,
+    "name": "bitrix_news_list_rating-list_scss",
+    "names": [
+      "bitrix_news_list_rating-list_scss.css"
+    ]
+  },
   "local/templates/rise-bags/components/bitrix/news.list/reviews-list/_src/js/index.js": {
     "file": "components/bitrix/news.list/reviews-list/script.w9NizQ38.js",
     "name": "bitrix_news_list_reviews-list_js",
@@ -356,7 +365,7 @@
     "isEntry": true
   },
   "local/templates/rise-bags/components/bitrix/news.list/reviews-list/_src/scss/index.scss": {
-    "file": "components/bitrix/news.list/reviews-list/style.C_M-WHRh.css",
+    "file": "components/bitrix/news.list/reviews-list/style.D3R-VTig.css",
     "src": "local/templates/rise-bags/components/bitrix/news.list/reviews-list/_src/scss/index.scss",
     "isEntry": true,
     "name": "bitrix_news_list_reviews-list_scss",
@@ -560,15 +569,6 @@
     "name": "custom_cards_article-card_scss",
     "names": [
       "custom_cards_article-card_scss.css"
-    ]
-  },
-  "local/templates/rise-bags/components/custom/cards/review-card/_src/scss/index.scss": {
-    "file": "components/custom/cards/review-card/style.F2xIA1Wp.css",
-    "src": "local/templates/rise-bags/components/custom/cards/review-card/_src/scss/index.scss",
-    "isEntry": true,
-    "name": "custom_cards_review-card_scss",
-    "names": [
-      "custom_cards_review-card_scss.css"
     ]
   }
 }
