@@ -14,8 +14,8 @@ $this->setFrameMode(true);
 				<article class="review-card">
 					<? if ($arItem["PROPERTIES"]["RATING"]["VALUE"]): ?>
 						<div class="review-card__rating">
-							<? for ($i = 0; $i < 5; $i++) : ?>
-								<svg class="<?= ($i < $arItem["PROPERTIES"]["RATING"]["VALUE"]) ? "active" : "" ?>" width="20" height="20" viewBox="0 0 20 20" role="img" aria-hidden="true" focusable="false">
+							<? for ($i = 1; $i <= 5; $i++) : ?>
+								<svg class="<?= ($i <= $arItem["PROPERTIES"]["RATING"]["VALUE"]) ? "active" : "" ?>" width="20" height="20" viewBox="0 0 20 20" role="img" aria-hidden="true" focusable="false">
 									<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-star"></use>
 								</svg>
 							<? endfor; ?>
