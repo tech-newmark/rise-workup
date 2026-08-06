@@ -1,0 +1,2 @@
+function i(){document.querySelectorAll(".rate").forEach(c=>{const t=c.querySelectorAll('input[type="radio"]'),n=e=>{t.forEach((a,d)=>{a.parentNode.classList.toggle("filled",d<=e)})};t.forEach((e,a)=>{e.dataset.ratingInitialized||(e.dataset.ratingInitialized="true",e.addEventListener("change",()=>n(a)))});const r=Array.from(t).findIndex(e=>e.checked);r>=0&&n(r)})}BX.ready(i);BX.addCustomEvent("onAjaxSuccess",i);
+//# sourceMappingURL=script.Bxq-vxt4.js.map
