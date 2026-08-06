@@ -52,10 +52,25 @@
 					</label>
 				</div>
 			<? endif; ?>
+			<? if ($arQuestion['STRUCTURE'][0]["FIELD_TYPE"] == 'radio'): ?>
+				<div class="rate <?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? 'invalid-fld' : '') ?>">
+					<? foreach ($arQuestion['STRUCTURE'] as $arRadio): ?>
+						<label>
+							<input type="radio" name="form_radio_<?= $FIELD_SID ?>" value="<?= $arRadio["ID"] ?>">
+							<svg width="40" height="38" role="img" aria-hidden="true" focusable="false">
+								<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-star"></use>
+							</svg>
+						</label>
+					<? endforeach; ?>
+				</div>
+			<? endif; ?>
+
 			<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "hidden"): ?>
 				<?= $arQuestion["HTML_CODE"] ?>
 			<? endif; ?>
 		<? endforeach; ?>
+
+
 
 		<? if ($arResult["isUseCaptcha"] == "Y"): ?>
 			<div class="captcha-block <?= (!empty($arResult["FORM_ERRORS"][0]) ? 'invalid-fld' : '') ?>">

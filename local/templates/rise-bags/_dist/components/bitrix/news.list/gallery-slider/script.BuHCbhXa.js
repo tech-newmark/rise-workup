@@ -1,0 +1,2 @@
+const o=document.querySelectorAll(".gallery-slider");o.length&&o.forEach(e=>{const t=e.querySelector(".swiper-pagination"),n=e.querySelector(".swiper-button-next"),a=e.querySelector(".swiper-button-prev");new window.Swiper(e,{slidesPerView:"auto",spaceBetween:20,watchOverflow:!0,breakpoints:{768:{spaceBetween:e.classList.contains("thanks")?20:30},1040:{spaceBetween:e.classList.contains("thanks")?20:40}},navigation:{nextEl:n||null,prevEl:a||null},pagination:{el:t||null,clickable:!0}})});
+//# sourceMappingURL=script.BuHCbhXa.js.map

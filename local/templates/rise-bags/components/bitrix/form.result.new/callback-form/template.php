@@ -1,92 +1,117 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 
-<section class="section callback">
+<section class="section callback <?= ($arParams["FULL_WIDTH"] === "Y") ? "callback--fullwidth" : "" ?> <?= (($arParams["CUSTOM_BG"] ?? "") === "JEANS") ? "callback--jeans-bg" : "" ?>">
 	<div class="container">
 
-		<div class="callback-form">
+		<div class="callback-form ">
 			<?= $arResult["FORM_HEADER"] ?>
 
 			<? if ($arResult["FORM_NOTE"]): ?>
-				<div class="callback-form__header">
-					<h2>Заявка отправлена успешно!</h2>
-					<p>Спасибо, мы скоро свяжемся с Вами!</p>
-				</div>
-
-			<? else: ?>
-				<div class="callback-form__header">
-					<h2><?= $arResult["FORM_TITLE"] ?></h2>
-					<p><?= $arResult["FORM_DESCRIPTION"] ?></p>
-				</div>
-				<?/* if ($arResult["isFormErrors"] == "Y"): ?>
-					<?= $arResult["FORM_ERRORS_TEXT"] ?>
-				<? endif; */ ?>
-				<? foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion): ?>
-					<? $hasFieldError = !empty($arResult["FORM_ERRORS"][$FIELD_SID]) || riseFormQuestionHasBlockedEmailValue($arQuestion, $arResult["arrVALUES"] ?? []); ?>
-					<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "text"): ?>
-						<div class="main-input-wrapper <?= ($hasFieldError ? 'invalid-fld' : '') ?>">
-							<label>
-								<?= $arQuestion["HTML_CODE"] ?>
-							</label>
-						</div>
-					<? endif; ?>
-					<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "textarea"): ?>
-						<div class="main-textarea-wrapper  <?= ($hasFieldError ? 'invalid-fld' : '') ?>">
-							<label>
-								<?= $arQuestion["HTML_CODE"] ?>
-							</label>
-						</div>
-					<? endif; ?>
-					<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "checkbox"): ?>
-						<label class="main-checkbox-wrapper <?= ($hasFieldError ? 'invalid-fld' : '') ?>">
-							<input type="checkbox" id="<?= $arQuestion["STRUCTURE"][0]["ID"] . ($arParams["IS_MODAL"] ? '_modal' : null) ?>" name="form_checkbox_<?= $FIELD_SID ?>[]" value="<?= $arQuestion["STRUCTURE"][0]["ID"] ?>">
-							<span><?= $arQuestion["CAPTION"] ?><?= ($arQuestion["REQUIRED"] == "Y" ? '*' : '') ?></span>
-						</label>
-					<? endif; ?>
-					<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "hidden"): ?>
-						<?= $arQuestion["HTML_CODE"] ?>
-					<? endif; ?>
-				<? endforeach; ?>
-
-				<? if ($arResult["isUseCaptcha"] == "Y"): ?>
-					<div class="captcha-block <?= (!empty($arResult["FORM_ERRORS"][0]) ? 'invalid-fld' : '') ?>">
-						<input type="hidden" name="captcha_sid" value="<?= htmlspecialcharsbx($arResult["CAPTCHACode"]); ?>" />
-						<div class="main-input-wrapper">
-							<input type="text" placeholder="Введите символы с картинки" name="captcha_word" size="30" maxlength="50" value="" class="inputtext" />
-						</div>
-						<div class="captcha-block__img-wrapper">
-							<img src="/bitrix/tools/captcha.php?captcha_sid=<?= htmlspecialcharsbx($arResult["CAPTCHACode"]); ?>" width="180" height="40" alt="" />
-						</div>
+				<? if (($arParams["REVIEW_FORM"] ?? "N") === "Y"): ?>
+					<div class="callback-form__header">
+						<h2>Спасибо, что оставили отзыв!</h2>
+					</div>
+				<? else: ?>
+					<div class="callback-form__header">
+						<h2>Заявка отправлена успешно!</h2>
+						<p>Спасибо, мы скоро свяжемся с Вами!</p>
 					</div>
 				<? endif; ?>
 
 
-				<input class="main-btn"
-					<?= (intval($arResult["F_RIGHT"]) < 10 ? "disabled=\"disabled\"" : ""); ?>
-					type="submit" name="web_form_submit"
-					value="<?= htmlspecialcharsbx(trim($arResult["arForm"]["BUTTON"]) == '' ? 'Отправить' : $arResult["arForm"]["BUTTON"]); ?>" />
+			<? else: ?>
+				<div class="callback-form__header">
+					<h2><?= $arResult["FORM_TITLE"] ?></h2>
 
+					<? if ($arResult["FORM_DESCRIPTION"]): ?>
+						<p><?= $arResult["FORM_DESCRIPTION"] ?></p>
+					<? endif; ?>
+
+				</div>
+				<?/* if ($arResult["isFormErrors"] == "Y"): ?>
+					<?= $arResult["FORM_ERRORS_TEXT"] ?>
+				<? endif; */ ?>
+				<div class="callback-form__content">
+					<? foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion): ?>
+						<? $hasFieldError = !empty($arResult["FORM_ERRORS"][$FIELD_SID]) || riseFormQuestionHasBlockedEmailValue($arQuestion, $arResult["arrVALUES"] ?? []); ?>
+						<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "text"): ?>
+							<div class="main-input-wrapper <?= ($hasFieldError ? 'invalid-fld' : '') ?>">
+								<label>
+									<?= $arQuestion["HTML_CODE"] ?>
+								</label>
+							</div>
+						<? endif; ?>
+						<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "textarea"): ?>
+							<div class="main-textarea-wrapper  <?= ($hasFieldError ? 'invalid-fld' : '') ?>">
+								<label>
+									<?= $arQuestion["HTML_CODE"] ?>
+								</label>
+							</div>
+						<? endif; ?>
+						<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "checkbox"): ?>
+							<label class="main-checkbox-wrapper <?= ($hasFieldError ? 'invalid-fld' : '') ?>">
+								<input type="checkbox" id="<?= $arQuestion["STRUCTURE"][0]["ID"] . ($arParams["IS_MODAL"] ? '_modal' : null) ?>" name="form_checkbox_<?= $FIELD_SID ?>[]" value="<?= $arQuestion["STRUCTURE"][0]["ID"] ?>">
+								<span><?= $arQuestion["CAPTION"] ?><?= ($arQuestion["REQUIRED"] == "Y" ? '*' : '') ?></span>
+							</label>
+						<? endif; ?>
+						<? if ($arQuestion['STRUCTURE'][0]["FIELD_TYPE"] == 'radio'): ?>
+							<div class="rate <?= ($arResult["FORM_ERRORS"][$FIELD_SID] ? 'invalid-fld' : '') ?>">
+								<? foreach ($arQuestion['STRUCTURE'] as $arRadio): ?>
+									<label>
+										<input type="radio" name="form_radio_<?= $FIELD_SID ?>" value="<?= $arRadio["ID"] ?>">
+										<svg width="40" height="38" role="img" aria-hidden="true" focusable="false">
+											<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-star"></use>
+										</svg>
+									</label>
+								<? endforeach; ?>
+							</div>
+						<? endif; ?>
+						<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] == "hidden"): ?>
+							<?= $arQuestion["HTML_CODE"] ?>
+						<? endif; ?>
+					<? endforeach; ?>
+
+					<? if ($arResult["isUseCaptcha"] == "Y"): ?>
+						<div class="captcha-block <?= (!empty($arResult["FORM_ERRORS"][0]) ? 'invalid-fld' : '') ?>">
+							<input type="hidden" name="captcha_sid" value="<?= htmlspecialcharsbx($arResult["CAPTCHACode"]); ?>" />
+							<div class="main-input-wrapper">
+								<input type="text" placeholder="Введите символы с картинки" name="captcha_word" size="30" maxlength="50" value="" class="inputtext" />
+							</div>
+							<div class="captcha-block__img-wrapper">
+								<img src="/bitrix/tools/captcha.php?captcha_sid=<?= htmlspecialcharsbx($arResult["CAPTCHACode"]); ?>" width="180" height="40" alt="" />
+							</div>
+						</div>
+					<? endif; ?>
+
+
+					<input class="main-btn"
+						<?= (intval($arResult["F_RIGHT"]) < 10 ? "disabled=\"disabled\"" : ""); ?>
+						type="submit" name="web_form_submit"
+						value="<?= htmlspecialcharsbx(trim($arResult["arForm"]["BUTTON"]) == '' ? 'Отправить' : $arResult["arForm"]["BUTTON"]); ?>" />
+				</div>
 			<? endif; ?>
 			<?= $arResult["FORM_FOOTER"] ?>
 		</div>
 
-		<? if ($arParams["INNER_PAGE"] == "Y"): ?>
-			<?
-			$APPLICATION->IncludeFile(
-				SITE_DIR . 'include/callback-form-img--inner-page.php',
-				array(),
-				array('MODE' => 'html', 'NAME' => 'Изображение в форме', 'SHOW_BORDER' => true)
-			);
-			?>
-		<? else: ?>
-			<?
-			$APPLICATION->IncludeFile(
-				SITE_DIR . 'include/callback-form-img.php',
-				array(),
-				array('MODE' => 'html', 'NAME' => 'Изображение в форме', 'SHOW_BORDER' => true)
-			);
-			?>
+		<? if ($arParams["FULL_WIDTH"] !== "Y"): ?>
+			<? if ($arParams["INNER_PAGE"] == "Y"): ?>
+				<?
+				$APPLICATION->IncludeFile(
+					SITE_DIR . 'include/callback-form-img--inner-page.php',
+					array(),
+					array('MODE' => 'html', 'NAME' => 'Изображение в форме', 'SHOW_BORDER' => true)
+				);
+				?>
+			<? else: ?>
+				<?
+				$APPLICATION->IncludeFile(
+					SITE_DIR . 'include/callback-form-img.php',
+					array(),
+					array('MODE' => 'html', 'NAME' => 'Изображение в форме', 'SHOW_BORDER' => true)
+				);
+				?>
+			<? endif; ?>
 		<? endif; ?>
-
 	</div>
 </section>
 
