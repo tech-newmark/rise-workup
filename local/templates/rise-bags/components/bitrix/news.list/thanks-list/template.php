@@ -17,6 +17,7 @@ $this->setFrameMode(true);
 					"bitrix:news.list",
 					"gallery-slider",
 					array(
+						"USE_FANCY" => "Y",
 						"CUSTOM_CLASS" => "thanks",
 						"SHOW_FOOTER" => "Y",
 						"ACTIVE_DATE_FORMAT" => "d.m.Y",
@@ -95,7 +96,8 @@ $this->setFrameMode(true);
 							"NAME" => "Текст",
 							"TEMPLATE" => "include_area.php",
 						)
-					); ?></p>
+					); ?>
+				</p>
 				<button class="main-btn" data-form-id="5">Оставить отзыв</button>
 			</div>
 		</div>
