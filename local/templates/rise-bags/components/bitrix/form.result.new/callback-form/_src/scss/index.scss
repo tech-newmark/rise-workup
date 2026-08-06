@@ -124,26 +124,29 @@
 			display: flex;
 		}
 	}
-}
 
-.rate {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	grid-column: 1/-1;
-	justify-content: center;
-}
+	.rate {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		grid-column: 1/-1;
+		justify-content: center;
+	}
 
-.rate label input[type="radio"] {
-	display: none;
-}
-.rate label svg {
-	width: clamp(24px, 2.4vw, 40px);
-	height: auto;
-	fill: var(--white);
-	transition: fill var(--main-transition);
-}
-.rate label:has(input:checked) svg,
-.rate label.filled svg {
-	fill: var(--warning);
+	.rate label input[type="radio"] {
+		display: none;
+	}
+	.rate label svg {
+		width: clamp(24px, 2.4vw, 40px);
+		height: auto;
+		fill: var(--white);
+		transition: fill var(--main-transition);
+	}
+
+	.rate label:has(input:checked) svg,
+	.rate label:has(~ label input:checked) svg,
+	.rate label:hover svg,
+	.rate label:has(~ label:hover) svg {
+		fill: var(--warning);
+	}
 }
