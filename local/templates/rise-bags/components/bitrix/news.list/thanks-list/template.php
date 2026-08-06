@@ -96,7 +96,7 @@ $this->setFrameMode(true);
 							"TEMPLATE" => "include_area.php",
 						)
 					); ?></p>
-				<button class="main-btn" data-form-id="1">Оставить отзыв</button>
+				<button class="main-btn" data-form-id="5">Оставить отзыв</button>
 			</div>
 		</div>
 	</div>
