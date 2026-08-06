@@ -55,4 +55,29 @@
 	.main-checkbox-wrapper a {
 		color: var(--primary);
 	}
+
+	.rate {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		grid-column: 1/-1;
+		justify-content: center;
+	}
+
+	.rate label input[type="radio"] {
+		display: none;
+	}
+	.rate label svg {
+		width: 18px;
+		height: auto;
+		fill: var(--gray-600);
+		transition: fill var(--main-transition);
+	}
+
+	.rate label:has(input:checked) svg,
+	.rate label:has(~ label input:checked) svg,
+	.rate label:hover svg,
+	.rate label:has(~ label:hover) svg {
+		fill: var(--warning);
+	}
 }
