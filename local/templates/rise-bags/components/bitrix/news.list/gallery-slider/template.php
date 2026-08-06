@@ -13,8 +13,8 @@ $this->setFrameMode(true);
 					$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
 				?>
 					<div class="swiper-slide" id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
-						<div class="gallery-item">
-							<img class="gallery-item__img" data-fancybox="gallery-slider" src="<?= $arItem["PREVIEW_PICTURE"]["SRC"] ?>" alt="<?= (($arItem["PREVIEW_PICTURE"]["DESCRIPTION"]) ? ($arItem["PREVIEW_PICTURE"]["DESCRIPTION"]) : $arItem["NAME"]) ?>" width="<?= $arItem["PREVIEW_PICTURE"]["WIDTH"] ?>" height="<?= $arItem["PREVIEW_PICTURE"]["HEIGHT"] ?>">
+						<div class="gallery-item <?= ($arParams["USE_FANCY"]) ? "gallery-item--fancybox" : "" ?>">
+							<img class="gallery-item__img" <?= ($arParams["USE_FANCY"]) ? 'data-fancybox="gallery-slider"' : "" ?> src="<?= $arItem["PREVIEW_PICTURE"]["SRC"] ?>" alt="<?= (($arItem["PREVIEW_PICTURE"]["DESCRIPTION"]) ? ($arItem["PREVIEW_PICTURE"]["DESCRIPTION"]) : $arItem["NAME"]) ?>" width="<?= $arItem["PREVIEW_PICTURE"]["WIDTH"] ?>" height="<?= $arItem["PREVIEW_PICTURE"]["HEIGHT"] ?>">
 							<? if ($arParams["SHOW_FOOTER"] === "Y"): ?>
 								<div class="gallery-item__footer">
 									<? if ($arItem["PREVIEW_TEXT"]): ?>

@@ -14,6 +14,12 @@
 				background-color: var(--primary);
 			}
 		}
+
+		&.gallery-slider--narrow {
+			.swiper-slide {
+				max-width: clamp(120px, 15vw, 246px);
+			}
+		}
 	}
 
 	&-item {
@@ -27,27 +33,30 @@
 		border-radius: var(--base-br);
 		height: 100%;
 
-		&::before {
-			content: "";
-			position: absolute;
-			top: 24px;
-			right: 24px;
-			width: 30px;
-			height: 30px;
-			background-image: url("/local/templates/rise-bags/_dist/images/loupe.png");
-			background-position: center;
-			background-repeat: no-repeat;
-			background-size: contain;
-			transition: opacity var(--main-transition);
-		}
+		&--fancybox {
+			&::before {
+				content: "";
+				position: absolute;
+				top: 24px;
+				right: 24px;
+				width: 30px;
+				height: 30px;
+				background-image: url("/local/templates/rise-bags/_dist/images/loupe.png");
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: contain;
+				transition: opacity var(--main-transition);
+				pointer-events: none;
+			}
 
-		&:hover::before,
-		&:focus::before {
-			opacity: 0.6;
-		}
+			&:hover::before,
+			&:focus::before {
+				opacity: 0.6;
+			}
 
-		&:active::before {
-			opacity: 0.4;
+			&:active::before {
+				opacity: 0.4;
+			}
 		}
 
 		&__footer {
@@ -63,12 +72,6 @@
 			span:last-child {
 				color: var(--gray-900);
 			}
-		}
-
-		&__icon {
-			position: absolute;
-			top: 24px;
-			right: 24px;
 		}
 
 		&__img {
