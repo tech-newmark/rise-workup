@@ -36,6 +36,10 @@ body {
 	}
 }
 
+html.with-fancybox body.hide-scrollbar {
+	margin-right: 0 !important;
+}
+
 body {
 	position: relative;
 	display: flex;
