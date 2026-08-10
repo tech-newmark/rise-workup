@@ -289,7 +289,9 @@ $APPLICATION->SetTitle("Отзывы");
 		"STRICT_SECTION_CHECK" => "N",
 		"SECTION_TITLE" => "Нам доверяют компании из разных сфер",
 		"SECTION_DESCRIPTION" => "",
-		"SECTION_GALLERY" => "Y"
+		"SECTION_GALLERY" => "Y",
+		"SHOW_FOOTER" => "N",
+		"USE_FANCY" => "N"
 	],
 	false
 ); ?>
