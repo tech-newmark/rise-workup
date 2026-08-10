@@ -12,7 +12,7 @@ $stars = 5;
 		?>
 			<? $starsFilled = (!empty($arItem["PROPERTIES"]["STARS_FILLED"]["VALUE"])) ? $arItem["PROPERTIES"]["STARS_FILLED"]["VALUE"] : 5; ?>
 			<li id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
-				<a class="company-rating" href="<?= $arItem["CODE"] ?>" rel="nofollow noreferrer noopoener">
+				<a class="company-rating" href="<?= $arItem["CODE"] ?>" rel="nofollow noreferrer noopener">
 					<img class="company-rating__logo" src="<?= $arItem["PREVIEW_PICTURE"]["SRC"] ?>" alt="" width="<?= $arItem["PREVIEW_PICTURE"]["WIDTH"] ?>" height="<?= $arItem["PREVIEW_PICTURE"]["HEIGHT"] ?>">
 					<div class="company-rating__content">
 						<span class="company-rating__name">Рейтинг в <?= $arItem["NAME"] ?></span>
