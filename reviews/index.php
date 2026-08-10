@@ -16,7 +16,8 @@ $APPLICATION->SetTitle("Отзывы");
 						"NAME" => "Верхний текст",
 						"TEMPLATE" => "include_area.php",
 					)
-				); ?> </h1>
+				); ?>
+			</h1>
 			<p>
 				<? $APPLICATION->IncludeFile(
 					SITE_DIR . "include/reviews/reviews-desc.php",
@@ -87,8 +88,6 @@ $APPLICATION->SetTitle("Отзывы");
 				"STRICT_SECTION_CHECK" => "N"
 			)
 		); ?>
-		<br>
-		<br>
 		<? $APPLICATION->IncludeComponent(
 			"bitrix:news.list",
 			"reviews-list",
@@ -153,8 +152,8 @@ $APPLICATION->SetTitle("Отзывы");
 
 <!-- Благодарности -->
 <? $APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"gallery-slider", 
+	"bitrix:news.list",
+	"gallery-slider",
 	[
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
@@ -225,8 +224,8 @@ $APPLICATION->SetTitle("Отзывы");
 
 <!-- Клиенты -->
 <? $APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"gallery-slider", 
+	"bitrix:news.list",
+	"gallery-slider",
 	[
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "N",
