@@ -571,7 +571,7 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 								</button>
 							<? endif; ?>
 
-							<button type="button" class="main-btn" data-1clickbuy-id="317">
+							<button type="button" class="main-btn" data-1clickbuy-id="<?= (int)$actualItem['ID'] ?>">
 								<span>Купить в 1 клик</span>
 							</button>
 						</div>

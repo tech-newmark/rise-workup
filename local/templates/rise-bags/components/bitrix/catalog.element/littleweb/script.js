@@ -1972,6 +1972,16 @@
 			}
 
 			if (index > -1) {
+				var oneClickBuyButtons = this.obProduct.querySelectorAll(
+					"[data-1clickbuy-id]",
+				);
+				for (i = 0; i < oneClickBuyButtons.length; i++) {
+					oneClickBuyButtons[i].setAttribute(
+						"data-1clickbuy-id",
+						this.offers[index].ID,
+					);
+				}
+
 				offerChanged = index != this.offerNum;
 
 				if (index != this.offerNum) {
