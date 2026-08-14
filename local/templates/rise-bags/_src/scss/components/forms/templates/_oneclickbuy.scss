@@ -51,7 +51,9 @@
 				font-size: 18px;
 				font-weight: 500;
 				margin-bottom: 8px;
+				text-align: left;
 			}
+
 			&-props {
 				display: flex;
 				flex-direction: column;
@@ -101,6 +103,11 @@
 
 	*[type="submit"] {
 		margin-top: 12px;
+	}
+
+	.main-switcher-wrapper label {
+		display: flex;
+		flex-direction: row-reverse;
 	}
 }
 
