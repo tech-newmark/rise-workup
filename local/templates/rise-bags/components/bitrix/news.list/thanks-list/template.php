@@ -8,7 +8,7 @@ $this->setFrameMode(true);
 	<div class="container">
 		<div class="grid">
 			<div class="grid__item grid__item--yandex">
-				<iframe style="width:100%;height:100%;border:1px solid #e6e6e6;border-radius:8px;box-sizing:border-box" src="https://yandex.ru/maps-reviews-widget/241677942487?comments"></iframe><a href="https://yandex.ru/maps/org/rays/241677942487/" target="_blank" style="box-sizing:border-box;text-decoration:none;font-family:YS Text,sans-serif;;position:absolute;bottom:8px;text-align:center;overflow:hidden;text-overflow:ellipsis;display:block;box-sizing:border-box">Больше отзывов на Яндекс Картах</a>
+				<iframe style="width:100%;height:100%;border:1px solid #e6e6e6;border-radius:8px;box-sizing:border-box" src="https://yandex.ru/maps-reviews-widget/241677942487?comments"></iframe>
 			</div>
 			<div class="grid__item grid__item--gallery">
 				<h3>Благодарности</h3>
