@@ -20,7 +20,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 			|| $arParams["SHOW_ORDER_PAYMENT"] == 'Y'
 		):
 		?>
-			<table class=" bx_order_list_table" style="width:100%; min-width: 0">
+			<table class=" bx_order_list_table" style="width:100%; min-width: 0; border-collapse: collapse;">
 				<thead>
 					<tr>
 						<td colspan="2">
@@ -305,7 +305,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 
 
 		if ($arParams["SHOW_ORDER_BASKET"] == 'Y'): ?>
-			Состав заказа
 			<table class="bx_order_list_table_order" style="width:100%; min-width: 0; border-collapse: collapse;">
 				<thead>
 					<tr>
@@ -384,7 +383,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 																																																																																																																elseif ($headerId == "PROPS" && $actuallyHasProps):
 
 																																					?>
-										<table cellspacing="0" class="bx_ol_sku_prop" style="width:100%; min-width: 0">
+										<table cellspacing="0" class="bx_ol_sku_prop" style="width:100%; min-width: 0; border-collapse: collapse;">
 											<? foreach ($prod["PROPS"] as $prop): ?>
 												<tr>
 													<td>
@@ -429,7 +428,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 		<? endif;
 
 		if ($arParams["SHOW_ORDER_SUM"] == 'Y'): ?>
-			<table class="bx_ordercart_order_sum" style="width:100%; min-width: 0">
+			<table class="bx_ordercart_order_sum" style="width:100%; min-width: 0; border-collapse: collapse;">
 				<tbody>
 
 					<? ///// WEIGHT 
