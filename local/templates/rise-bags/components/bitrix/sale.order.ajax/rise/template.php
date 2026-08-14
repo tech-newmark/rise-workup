@@ -325,32 +325,6 @@ $this->addExternalJs($templateFolder . '/script.js');
 
 					<!--	MAIN BLOCK	-->
 					<div class="bx-soa grid__item grid__item--main">
-						<div class="order__section">
-							<!--	AUTH BLOCK	-->
-							<div id="bx-soa-auth" class="bx-soa-section bx-soa-auth" style="display:none">
-								<div class="bx-soa-section-title-container">
-									<h2 class="bx-soa-section-title">
-										<?= $arParams['MESS_AUTH_BLOCK_NAME'] ?>
-									</h2>
-								</div>
-								<div class="bx-soa-section-content"></div>
-							</div>
-							<!--	REGION BLOCK	-->
-							<div id="bx-soa-region" data-visited="false" class="bx-soa-section bx-active">
-								<div class="bx-soa-section-title-container">
-									<h2 class="bx-soa-section-title">
-										<?= $arParams['MESS_REGION_BLOCK_NAME'] ?>
-									</h2>
-									<!-- <div class="text-right"><a href="" class="bx-soa-editstep"><?= $arParams['MESS_EDIT'] ?></a></div> -->
-								</div>
-								<div class="bx-soa-section-content"></div>
-							</div>
-							<!--	BUYER PROPS BLOCK	-->
-							<div id="bx-soa-properties" data-visited="false" class="bx-soa-section bx-active">
-								<div class="bx-soa-section-content"></div>
-							</div>
-						</div>
-
 						<? if ($arParams['DELIVERY_TO_PAYSYSTEM'] === 'p2d'): ?>
 							<!--	PAY SYSTEMS BLOCK	-->
 							<div id="bx-soa-paysystem" data-visited="false" class="bx-soa-section bx-active order__section">
@@ -405,6 +379,34 @@ $this->addExternalJs($templateFolder . '/script.js');
 								<div class="bx-soa-section-content"></div>
 							</div>
 						<? endif; ?>
+
+						<div class="order__section">
+							<!--	AUTH BLOCK	-->
+							<div id="bx-soa-auth" class="bx-soa-section bx-soa-auth" style="display:none">
+								<div class="bx-soa-section-title-container">
+									<h2 class="bx-soa-section-title">
+										<?= $arParams['MESS_AUTH_BLOCK_NAME'] ?>
+									</h2>
+								</div>
+								<div class="bx-soa-section-content"></div>
+							</div>
+							<!--	REGION BLOCK	-->
+							<div id="bx-soa-region" data-visited="false" class="bx-soa-section bx-active">
+								<div class="bx-soa-section-title-container">
+									<h2 class="bx-soa-section-title">
+										<?= $arParams['MESS_REGION_BLOCK_NAME'] ?>
+									</h2>
+									<!-- <div class="text-right"><a href="" class="bx-soa-editstep"><?= $arParams['MESS_EDIT'] ?></a></div> -->
+								</div>
+								<div class="bx-soa-section-content"></div>
+							</div>
+							<!--	BUYER PROPS BLOCK	-->
+							<div id="bx-soa-properties" data-visited="false" class="bx-soa-section bx-active">
+								<div class="bx-soa-section-content"></div>
+							</div>
+						</div>
+
+
 
 						<div style="display: none;">
 							<div id='bx-soa-basket-hidden' class="bx-soa-section"></div>
