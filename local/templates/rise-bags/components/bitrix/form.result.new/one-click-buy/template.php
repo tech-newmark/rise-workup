@@ -11,6 +11,11 @@
 	<? else: ?>
 		<?= $arResult["FORM_HEADER"] ?>
 
+		<input
+			type="hidden"
+			name="product_context_url"
+			value="<?= htmlspecialcharsbx((string)($arParams['PRODUCT_CONTEXT_URL'] ?? '')) ?>">
+
 		<div class="popup-form__header">
 			<? if ($arResult["isFormTitle"]): ?>
 				<span class="popup-form__header-title"><?= $arResult["FORM_TITLE"] ?></span>
@@ -60,9 +65,16 @@
 				<div class="popup-form__content">
 					<? foreach ($arResult["QUESTIONS"] as $FIELD_SID => $arQuestion): ?>
 						<? $hasFieldError = !empty($arResult["FORM_ERRORS"][$FIELD_SID]) || riseFormQuestionHasBlockedEmailValue($arQuestion, $arResult["arrVALUES"] ?? []); ?>
-						<? if ($arQuestion['STRUCTURE'][0]['FIELD_TYPE'] == 'hidden'):
-							echo $arQuestion["HTML_CODE"];
-						else: ?>
+						<? if ($arQuestion['STRUCTURE'][0]['FIELD_TYPE'] == 'hidden'): ?>
+							<? if ($FIELD_SID === 'OFFER_ID'): ?>
+								<input
+									type="hidden"
+									name="form_hidden_<?= (int)$arQuestion['STRUCTURE'][0]['ID'] ?>"
+									value="<?= (int)($arParams['OFFER_ID'] ?? 0) ?>">
+							<? else: ?>
+								<?= $arQuestion["HTML_CODE"]; ?>
+							<? endif; ?>
+						<? else: ?>
 							<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] === "text" || $arQuestion["STRUCTURE"][0]["FIELD_TYPE"] === "email"):
 								$isProductField = isset($arParams["PRODUCT_DATA"][$FIELD_SID]);
 							?>
@@ -82,10 +94,10 @@
 							<? if ($arQuestion["STRUCTURE"][0]["FIELD_TYPE"] === "checkbox"): ?>
 								<div class="main-switcher-wrapper<?= ($hasFieldError ? ' invalid-fld' : '') ?>">
 									<label for="<?= $arQuestion["STRUCTURE"][0]["ID"] ?>">
+										<input type="checkbox" id="<?= $arQuestion["STRUCTURE"][0]["ID"] ?>" value="<?= $arQuestion["STRUCTURE"][0]["ID"] ?>" name="<?= 'form_' . $arQuestion["STRUCTURE"][0]["FIELD_TYPE"] . '_' . $FIELD_SID . '[]' ?>">
 										<span>
 											<?= $arQuestion["CAPTION"] ?>&nbsp;<span class="required-mark"><?= ($arQuestion["REQUIRED"] == "Y" ? '*' : '') ?></span>
 										</span>
-										<input type="checkbox" id="<?= $arQuestion["STRUCTURE"][0]["ID"] ?>" value="<?= $arQuestion["STRUCTURE"][0]["ID"] ?>" name="<?= 'form_' . $arQuestion["STRUCTURE"][0]["FIELD_TYPE"] . '_' . $FIELD_SID . '[]' ?>">
 									</label>
 								</div>
 							<? endif; ?>
