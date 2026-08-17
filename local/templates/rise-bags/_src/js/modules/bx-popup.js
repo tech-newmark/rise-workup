@@ -94,6 +94,13 @@ BX.ready(function () {
 			url =
 				"/local/ajax/oneclickbuy.php?offer_id=" +
 				encodeURIComponent(oneClickBuyProductId);
+
+			const oneClickBuyProductUrl =
+				opener.getAttribute("data-product-url") || window.location.pathname;
+
+			if (oneClickBuyProductUrl) {
+				url += "&product_url=" + encodeURIComponent(oneClickBuyProductUrl);
+			}
 		}
 
 		// быстрый просмотр
