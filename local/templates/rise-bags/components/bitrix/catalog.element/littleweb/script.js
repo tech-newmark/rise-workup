@@ -2313,7 +2313,6 @@
 		},
 
 		checkQuantityControls: function () {
-			console.log(this.obQuantity, "quantity");
 			if (!this.obQuantity) return;
 
 			var reachedTopLimit =
