@@ -65,6 +65,29 @@ Redirect 301 /o_kompanii/stati/kak_vibrat_zhenskiy_ryukzak/ /articles/kak-vybrat
 Redirect 301 /o_kompanii/stati/kak_stirat_shkolniy_ryukzak/ /articles/kak-stirat-shkolnyy-ryukzak/
 Redirect 301 /o_kompanii/stati/kak_pravilno_vibrat_ryukzak_pervoklasniku/ /articles/kak-pravilno-vybrat-ryukzak-pervoklassniku/
 
+Redirect 301 /ryukzaki/muzhskie_ryukzaki/ /services/optovym-klientam/ryukzaki-optom/
+Redirect 301 /ryukzaki/gorodskie_ryukzaki/ /services/optovym-klientam/ryukzaki-optom/
+Redirect 301 /ryukzaki/ryukzaki_dlya_noutbukov/ /services/optovym-klientam/ryukzaki-optom/
+Redirect 301 /ryukzaki/zhenskie_ryukzaki/ /services/optovym-klientam/ryukzaki-optom/
+Redirect 301 /ryukzaki/takticheskie_ryukzaki/ /services/optovym-klientam/ryukzaki-optom/
+Redirect 301 /ryukzaki/sumka_ryukzak/ /services/optovym-klientam/ryukzaki-optom/
+Redirect 301 /ryukzaki/shkolnie_ryukzaki/ /services/optovym-klientam/ryukzaki-optom/
+Redirect 301 /ryukzaki/detskie_ryukzaki/ /services/optovym-klientam/ryukzaki-optom/
+Redirect 301 /ryukzaki/ryukzaki_iz_tekstilya/ /services/optovym-klientam/ryukzaki-optom/
+Redirect 301 /ryukzaki/ryukzaki_iz_ekokozhi/ /services/optovym-klientam/ryukzaki-optom/
+Redirect 301 /ryukzaki/voennie/ /services/optovym-klientam/ryukzaki-optom/
+Redirect 301 /ryukzaki/molodyozhnye-ryukzaki/ /services/optovym-klientam/ryukzaki-optom/
+Redirect 301 /ryukzaki/ /services/optovym-klientam/ryukzaki-optom/
+Redirect 301 /kontakti/ /contacts/
+
+RewriteRule ^poshiv_sumok_na_zakaz/?$ /services/poshiv-i-proizvodstvo-na-zakaz/ [R=301,L]
+RewriteRule ^poshiv_sumok_na_zakaz/izgotovlenie_sumok_s_logotipom/?$ /services/poshiv-i-proizvodstvo-na-zakaz/ [R=301,L]
+RewriteRule ^poshiv_sumok_na_zakaz/izgotovlenie_ryukzakov_s_logotipom/?$ /services/poshiv-i-proizvodstvo-na-zakaz/ [R=301,L]
+RewriteRule ^poshiv_sumok_na_zakaz/izgotovlenie_papok_s_logotipom/?$ /services/poshiv-i-proizvodstvo-na-zakaz/ [R=301,L]
+RewriteRule ^poshiv_sumok_na_zakaz/konferents_sumki_s_logotipom/?$ /services/poshiv-i-proizvodstvo-na-zakaz/ [R=301,L]
+
+
+
 <IfModule mod_rewrite.c>
 	Options +FollowSymLinks
 	RewriteCond %{REQUEST_FILENAME} !-f
