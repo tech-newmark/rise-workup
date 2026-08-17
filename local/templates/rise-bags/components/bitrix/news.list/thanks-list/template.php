@@ -6,6 +6,17 @@ $this->setFrameMode(true);
 ?>
 <section class="section thanks">
 	<div class="container">
+		<h2 class="title">
+			<? $APPLICATION->IncludeFile(
+				SITE_DIR . "include/thanks-title.php",
+				array(),
+				array(
+					"MODE" => "html",
+					"NAME" => "Заголовок",
+					"TEMPLATE" => "include_area.php",
+				)
+			); ?>
+		</h2>
 		<div class="grid">
 			<div class="grid__item grid__item--yandex">
 				<iframe style="width:100%;height:100%;border:1px solid #e6e6e6;border-radius:8px;box-sizing:border-box" src="https://yandex.ru/maps-reviews-widget/241677942487?comments"></iframe>
