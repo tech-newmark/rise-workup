@@ -1,7 +1,7 @@
 <?
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
-$formId = 1; // ID формы для покупки в 1 клик
+$formId = 6; // ID формы для покупки в 1 клик
 
 if (!$formId) {
   http_response_code(400);
@@ -15,6 +15,7 @@ $APPLICATION->IncludeComponent(
   array(
     "WEB_FORM_ID" => $formId,
     "OFFER_ID" => $_GET['offer_id'],
+    "PRODUCT_CONTEXT_URL" => (string)($_GET['product_url'] ?? ''),
     "AJAX_MODE" => "Y",
     "AJAX_OPTION_JUMP" => "N",
     "AJAX_OPTION_STYLE" => "Y",
