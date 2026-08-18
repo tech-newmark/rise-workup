@@ -39,11 +39,6 @@
 					url("../images/circles-bg.png") bottom 20px center / 85% no-repeat,
 					url("../images/bags-bg.png") bottom center / 52% no-repeat,
 					var(--gray-800);
-				// background-color: var(--gray-800);
-				// background-image: url("../images/thanks-bg.png");
-				// background-repeat: no-repeat;
-				// background-position: center bottom;
-				// background-size: 80%;
 				padding: 20px 30px clamp(80px, 20vw, 150px);
 			}
 		}
