@@ -12,6 +12,30 @@
 	@media (min-width: 768px) {
 		grid-template-columns: repeat(2, 1fr);
 	}
+
+	&-filter {
+		display: flex;
+		gap: 10px;
+		margin-bottom: 10px;
+		overflow-x: auto;
+		white-space: nowrap;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-color: transparent transparent;
+		padding-bottom: 10px;
+
+		&__link {
+			flex: 0 0 auto;
+			border: 1px solid var(--primary);
+			border-radius: 4px;
+			color: var(--primary);
+			padding: clamp(6px, 1vw, 10px) clamp(10px, 1.2vw, 20px);
+
+			&.active {
+				background-color: var(--primary);
+				color: var(--white);
+			}
+		}
+	}
 }
 
 .review {

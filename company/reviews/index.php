@@ -1,6 +1,59 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Отзывы");
+
+$request = \Bitrix\Main\Context::getCurrent()->getRequest();
+$requestedYear = (string)$request->getQuery('year');
+
+$selectedReviewYear = null;
+$reviewsFilter = [];
+
+if (preg_match('/^\d{4}$/', $requestedYear)) {
+	$year = (int)$requestedYear;
+	$currentYear = (int)date('Y');
+
+	if ($year >= 2000 && $year <= $currentYear) {
+		$selectedReviewYear = $year;
+
+		$reviewsFilter = [
+			'>=DATE_ACTIVE_FROM' => "01.01.{$year} 00:00:00",
+			'<DATE_ACTIVE_FROM' => "01.01." . ($year + 1) . " 00:00:00",
+		];
+	}
+}
+
+$reviewYears = [];
+
+$reviewDatesResult = CIBlockElement::GetList(
+	[
+		'ACTIVE_FROM' => 'DESC',
+	],
+	[
+		'IBLOCK_ID' => 21,
+		'ACTIVE' => 'Y',
+		'ACTIVE_DATE' => 'Y',
+		'!DATE_ACTIVE_FROM' => false,
+	],
+	false,
+	false,
+	[
+		'ID',
+		'DATE_ACTIVE_FROM',
+	]
+);
+
+while ($review = $reviewDatesResult->Fetch()) {
+	$timestamp = MakeTimeStamp($review['DATE_ACTIVE_FROM']);
+
+	if ($timestamp) {
+		$reviewYears[] = (int)date('Y', $timestamp);
+	}
+}
+
+$reviewYears = array_values(array_unique($reviewYears));
+rsort($reviewYears);
+
+$reviewsBaseUrl = $APPLICATION->GetCurPage();
 ?>
 
 <!-- Отзывы -->
@@ -91,71 +144,77 @@ $APPLICATION->SetTitle("Отзывы");
 		); ?>
 		<br>
 		<br>
+
+
+
 		<? $APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"reviews-list", 
-	[
-		"ACTIVE_DATE_FORMAT" => "j F Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"COMPONENT_TEMPLATE" => "reviews-list",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "Y",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => [
-			0 => "DATE_ACTIVE_FROM",
-			1 => "",
-		],
-		"FILTER_NAME" => "",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "21",
-		"IBLOCK_TYPE" => "site_content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"INCLUDE_SUBSECTIONS" => "Y",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => "round",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => [
-			0 => "RATING",
-			1 => "",
-		],
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "ACTIVE_FROM",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "ASC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N"
-	],
-	false
-); ?>
+			"bitrix:news.list",
+			"reviews-list",
+			[
+				"ACTIVE_DATE_FORMAT" => "j F Y",
+				"ADD_SECTIONS_CHAIN" => "N",
+				"AJAX_MODE" => "N",
+				"AJAX_OPTION_ADDITIONAL" => "",
+				"AJAX_OPTION_HISTORY" => "N",
+				"AJAX_OPTION_JUMP" => "N",
+				"AJAX_OPTION_STYLE" => "Y",
+				"CACHE_FILTER" => "Y",
+				"CACHE_GROUPS" => "Y",
+				"CACHE_TIME" => "36000000",
+				"CACHE_TYPE" => "A",
+				"CHECK_DATES" => "Y",
+				"COMPONENT_TEMPLATE" => "reviews-list",
+				"DETAIL_URL" => "",
+				"DISPLAY_BOTTOM_PAGER" => "Y",
+				"DISPLAY_DATE" => "Y",
+				"DISPLAY_NAME" => "Y",
+				"DISPLAY_PICTURE" => "Y",
+				"DISPLAY_PREVIEW_TEXT" => "Y",
+				"DISPLAY_TOP_PAGER" => "N",
+				"FIELD_CODE" => [
+					0 => "DATE_ACTIVE_FROM",
+					1 => "",
+				],
+				"FILTER_NAME" => "reviewsFilter",
+				"SELECTED_YEAR" => $selectedReviewYear,
+				"REVIEWS_YEARS" => $reviewYears,
+				"REVIEWS_BASE_URL" => $reviewsBaseUrl,
+				"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+				"IBLOCK_ID" => "21",
+				"IBLOCK_TYPE" => "site_content",
+				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+				"INCLUDE_SUBSECTIONS" => "Y",
+				"MESSAGE_404" => "",
+				"NEWS_COUNT" => "4",
+				"PAGER_BASE_LINK_ENABLE" => "N",
+				"PAGER_DESC_NUMBERING" => "N",
+				"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+				"PAGER_SHOW_ALL" => "N",
+				"PAGER_SHOW_ALWAYS" => "N",
+				"PAGER_TEMPLATE" => "round",
+				"PAGER_TITLE" => "Новости",
+				"PARENT_SECTION" => "",
+				"PARENT_SECTION_CODE" => "",
+				"PREVIEW_TRUNCATE_LEN" => "",
+				"PROPERTY_CODE" => [
+					0 => "RATING",
+					1 => "",
+				],
+				"SET_BROWSER_TITLE" => "N",
+				"SET_LAST_MODIFIED" => "N",
+				"SET_META_DESCRIPTION" => "N",
+				"SET_META_KEYWORDS" => "N",
+				"SET_STATUS_404" => "N",
+				"SET_TITLE" => "N",
+				"SHOW_404" => "N",
+				"SORT_BY1" => "ACTIVE_FROM",
+				"SORT_BY2" => "SORT",
+				"SORT_ORDER1" => "ASC",
+				"SORT_ORDER2" => "ASC",
+				"STRICT_SECTION_CHECK" => "N"
+			],
+			false
+		); ?>
 	</div>
 </section>
 <!-- Отзывы -->

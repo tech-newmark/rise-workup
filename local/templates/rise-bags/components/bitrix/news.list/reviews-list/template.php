@@ -3,6 +3,41 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 $this->setFrameMode(true);
 ?>
 
+<?
+$selectedYear = isset($arParams['SELECTED_YEAR'])
+	? (int)$arParams['SELECTED_YEAR']
+	: null;
+
+$reviewYears = is_array($arParams['REVIEWS_YEARS'])
+	? $arParams['REVIEWS_YEARS']
+	: [];
+
+$reviewsBaseUrl = $arParams['REVIEWS_BASE_URL']
+	?: $APPLICATION->GetCurPage();
+?>
+
+<? if ($reviewYears): ?>
+	<nav class="reviews-filter" aria-label="Фильтр отзывов по годам">
+		<a
+			class="reviews-filter__link<?= $selectedYear === null ? ' active' : '' ?>"
+			href="<?= htmlspecialcharsbx($reviewsBaseUrl) ?>">
+			За всё время
+		</a>
+
+		<? foreach ($reviewYears as $year): ?>
+			<?
+			$year = (int)$year;
+			$yearUrl = $reviewsBaseUrl . '?year=' . $year;
+			?>
+			<a
+				class="reviews-filter__link<?= $selectedYear === $year ? ' active' : '' ?>"
+				href="<?= htmlspecialcharsbx($yearUrl) ?>">
+				<?= $year ?>
+			</a>
+		<? endforeach; ?>
+	</nav>
+<? endif; ?>
+
 <? if ($arResult["ITEMS"]): ?>
 	<ul class="reviews">
 		<? foreach ($arResult["ITEMS"] as $arItem): ?>
@@ -50,8 +85,8 @@ $this->setFrameMode(true);
 	<? if ($arParams["DISPLAY_BOTTOM_PAGER"]): ?>
 		<?= $arResult["NAV_STRING"] ?>
 	<? endif; ?>
+<? elseif ($selectedYear !== null): ?>
+	<p class="reviews-filter__empty">
+		За <?= $selectedYear ?> год отзывов нет.
+	</p>
 <? endif; ?>
-
-<template>
-	<div class="content"><?= $arItem["~PREVIEW_TEXT"] ?></div>
-</template>
