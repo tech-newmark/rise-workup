@@ -6,23 +6,28 @@ $this->setFrameMode(true);
 	<div class="container">
 		<div class="article-detail-container">
 			<article class="article-detail">
-				<? if ($arResult['DETAIL_PICTURE']['SRC'] || $arResult['PREVIEW_PICTURE']['SRC']): ?>
-					<img class="article-detail__img" src="<?= ($arResult['DETAIL_PICTURE']['SRC']) ? $arResult['DETAIL_PICTURE']['SRC'] : $arResult['PREVIEW_PICTURE']['SRC'] ?>" alt="<?= $arResult['NAME'] ?>" width="840" height="280">
-				<? endif; ?>
-				<div class="article-detail__header">
-					<h1><?= $arResult['NAME'] ?></h1>
-					<? if ($arParams['SHOW_DATE_ACTIVE_FROM'] == "Y" && $arResult['DISPLAY_ACTIVE_FROM']): ?>
-						<time><?= $arResult['DISPLAY_ACTIVE_FROM'] ?></time>
+				<div class="article-detail__intro">
+					<? if ($arResult['DETAIL_PICTURE']['SRC'] || $arResult['PREVIEW_PICTURE']['SRC']): ?>
+						<img class="article-detail__img" src="<?= ($arResult['DETAIL_PICTURE']['SRC']) ? $arResult['DETAIL_PICTURE']['SRC'] : $arResult['PREVIEW_PICTURE']['SRC'] ?>" alt="<?= $arResult['NAME'] ?>" width="840" height="560">
 					<? endif; ?>
-					<? if ($arParams['SHOW_DATE_ACTIVE_TO'] == "Y" && $arResult['DATE_ACTIVE_TO']): ?>
-						<time>Действует до <?= FormatDate("j F Y", MakeTimeStamp($arResult['DATE_ACTIVE_TO'], "DD.MM.YYYY")) ?></time>
-					<? endif; ?>
+					<div class="article-detail__header">
+						<? if ($arParams['SHOW_DATE_ACTIVE_FROM'] == "Y" && $arResult['DISPLAY_ACTIVE_FROM']): ?>
+							<span class="article-detail__date">Опубликовано: <time><?= $arResult['DISPLAY_ACTIVE_FROM'] ?></time></span>
+						<? endif; ?>
+						<? if ($arParams['SHOW_DATE_ACTIVE_TO'] == "Y" && $arResult['DATE_ACTIVE_TO']): ?>
+							<span class="article-detail__date">Действует до <time><?= FormatDate("j F Y", MakeTimeStamp($arResult['DATE_ACTIVE_TO'], "DD.MM.YYYY")) ?></time></span>
+						<? endif; ?>
+						<h1><?= $arResult['NAME'] ?></h1>
+						<? if ($arResult['PREVIEW_TEXT']): ?>
+							<div class="content">
+								<?= $arResult['PREVIEW_TEXT'] ?>
+							</div>
+						<? endif; ?>
+					</div>
 				</div>
 				<? if ($arResult['DETAIL_TEXT']): ?>
-					<div class="article-detail__body">
-						<div class="content">
-							<?= $arResult['DETAIL_TEXT'] ?>
-						</div>
+					<div class="content">
+						<?= $arResult['DETAIL_TEXT'] ?>
 					</div>
 				<? endif; ?>
 			</article>
