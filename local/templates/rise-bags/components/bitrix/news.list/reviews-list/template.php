@@ -12,13 +12,18 @@ $this->setFrameMode(true);
 			?>
 			<li class="review" id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
 				<div class="review-card">
-					<? if ($arItem["PROPERTIES"]["RATING"]["VALUE"]): ?>
-						<div class="review-card__rating">
-							<? for ($i = 1; $i <= 5; $i++) : ?>
-								<svg class="<?= ($i <= $arItem["PROPERTIES"]["RATING"]["VALUE"]) ? "active" : "" ?>" width="20" height="20" viewBox="0 0 20 20" role="img" aria-hidden="true" focusable="false">
-									<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-star"></use>
-								</svg>
-							<? endfor; ?>
+					<? if ($arItem["PROPERTIES"]["RATING"]["VALUE"] || $arItem["DISPLAY_ACTIVE_FROM"]): ?>
+						<div class="review-card__header">
+							<div class="review-card__rating">
+								<? for ($i = 1; $i <= 5; $i++) : ?>
+									<svg class="<?= ($i <= $arItem["PROPERTIES"]["RATING"]["VALUE"]) ? "active" : "" ?>" width="20" height="20" viewBox="0 0 20 20" role="img" aria-hidden="true" focusable="false">
+										<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-star"></use>
+									</svg>
+								<? endfor; ?>
+							</div>
+							<div class="review-card__date">
+								<span><?= $arItem["DISPLAY_ACTIVE_FROM"] ?></span>
+							</div>
 						</div>
 					<? endif; ?>
 					<? if ($arItem["~PREVIEW_TEXT"]): ?>

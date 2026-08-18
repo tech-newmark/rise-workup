@@ -3,11 +3,11 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetPageProperty("description", "Полезные статьи RISE о сумках, рюкзаках, шопперах, аксессуарах, материалах, выборе моделей, уходе за изделиями и оптовых закупках.");
 $APPLICATION->SetPageProperty("title", "Статьи о сумках, рюкзаках и аксессуарах | RISE");
 $APPLICATION->SetTitle("Статьи");
-?><?$APPLICATION->IncludeComponent(
+?><? $APPLICATION->IncludeComponent(
 	"bitrix:news", 
 	"articles", 
 	[
-		"ADD_ELEMENT_CHAIN" => "N",
+		"ADD_ELEMENT_CHAIN" => "Y",
 		"ADD_SECTIONS_CHAIN" => "N",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
@@ -22,7 +22,7 @@ $APPLICATION->SetTitle("Статьи");
 		"CACHE_TYPE" => "A",
 		"CHECK_DATES" => "Y",
 		"DESC_IN_LINKED_ARTICLES" => "Возможно вам так же будет интересно",
-		"DETAIL_ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"DETAIL_ACTIVE_DATE_FORMAT" => "j F Y",
 		"DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",
 		"DETAIL_DISPLAY_TOP_PAGER" => "N",
 		"DETAIL_FIELD_CODE" => [
@@ -51,7 +51,7 @@ $APPLICATION->SetTitle("Статьи");
 		"IBLOCK_ID" => "11",
 		"IBLOCK_TYPE" => "site_content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"LIST_ACTIVE_DATE_FORMAT" => "j F Y",
 		"LIST_FIELD_CODE" => [
 			0 => "PREVIEW_TEXT",
 			1 => "PREVIEW_PICTURE",
@@ -82,7 +82,7 @@ $APPLICATION->SetTitle("Статьи");
 		"SET_STATUS_404" => "Y",
 		"SET_TITLE" => "N",
 		"SHOW_404" => "Y",
-		"SHOW_DATE_ACTIVE_FROM" => "N",
+		"SHOW_DATE_ACTIVE_FROM" => "Y",
 		"SHOW_DATE_ACTIVE_TO" => "N",
 		"SORT_BY1" => "ACTIVE_FROM",
 		"SORT_BY2" => "SORT",
@@ -108,4 +108,4 @@ $APPLICATION->SetTitle("Статьи");
 		]
 	],
 	false
-);?><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
+); ?><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

@@ -84,8 +84,7 @@ use Bitrix\Main\Localization\Loc;
 					aria-label="<?= $isFavorite ? 'Удалить товар из избранного' : 'Добавить товар в избранное' ?>"
 					aria-pressed="<?= $isFavorite ? 'true' : 'false' ?>"
 					data-favorite-toggle
-					data-product-id="<?= $favoriteProductId ?>"
-				>
+					data-product-id="<?= $favoriteProductId ?>">
 					<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
 						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-heart'></use>
 					</svg>
@@ -100,8 +99,7 @@ use Bitrix\Main\Localization\Loc;
 						data-compare-iblock-id="<?= (int)$item['IBLOCK_ID'] ?>"
 						data-compare-name="<?= htmlspecialcharsbx($arParams['COMPARE_NAME'] ?: 'CATALOG_COMPARE_LIST') ?>"
 						data-compare-add-url="<?= htmlspecialcharsbx($compareAddUrl) ?>"
-						data-compare-delete-url="<?= htmlspecialcharsbx($compareDeleteUrl) ?>"
-					>
+						data-compare-delete-url="<?= htmlspecialcharsbx($compareDeleteUrl) ?>">
 						<input type="checkbox" data-entity="compare-checkbox" <?= $isCompared ? 'checked' : '' ?>>
 						<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
 							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-compare'></use>
@@ -458,7 +456,7 @@ use Bitrix\Main\Localization\Loc;
 					<button type="button" class="main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
 						<?= ($arParams['ADD_TO_BASKET_ACTION'] === 'BUY' ? $arParams['MESS_BTN_BUY'] : $arParams['MESS_BTN_ADD_TO_BASKET']) ?>
 					</button>
-					<button type="button" class="main-btn" data-1clickbuy-id="<?= $item["ID"] ?>">
+					<button type="button" class="main-btn" data-1clickbuy-id="<?= (int)$actualItem['ID'] ?>" data-product-url="<?= htmlspecialcharsbx($detailPageUrl) ?>">
 						<span>Купить в 1 клик</span>
 					</button>
 				</div>
@@ -467,7 +465,7 @@ use Bitrix\Main\Localization\Loc;
 					<a class="main-btn outlined" href="<?= $detailPageUrl ?>" data-detail-link="Y">
 						<?= $arParams['MESS_BTN_DETAIL'] ?>
 					</a>
-					<button type="button" class="main-btn" data-1clickbuy-id="<?= $item["ID"] ?>">
+					<button type="button" class="main-btn" data-1clickbuy-id="<?= (int)$actualItem['ID'] ?>" data-product-url="<?= htmlspecialcharsbx($detailPageUrl) ?>">
 						<span>Купить в 1 клик</span>
 					</button>
 				</div>
@@ -484,7 +482,7 @@ use Bitrix\Main\Localization\Loc;
 						<?= ($arParams['ADD_TO_BASKET_ACTION'] === 'BUY' ? $arParams['MESS_BTN_BUY'] : $arParams['MESS_BTN_ADD_TO_BASKET']) ?>
 					</button>
 
-					<button type="button" class="main-btn" data-1clickbuy-id="<?= $item["ID"] ?>">
+					<button type="button" class="main-btn" data-1clickbuy-id="<?= (int)$actualItem['ID'] ?>" data-product-url="<?= htmlspecialcharsbx($detailPageUrl) ?>">
 						<span>Купить в 1 клик</span>
 					</button>
 				<? endif; ?>
@@ -494,7 +492,7 @@ use Bitrix\Main\Localization\Loc;
 				<a class="main-btn outlined" href="<?= $detailPageUrl ?>" data-detail-link="Y">
 					<?= $arParams['MESS_BTN_DETAIL'] ?>
 				</a>
-				<button type="button" class="main-btn" data-1clickbuy-id="<?= $item["ID"] ?>">
+				<button type="button" class="main-btn" data-1clickbuy-id="<?= (int)$actualItem['ID'] ?>" data-product-url="<?= htmlspecialcharsbx($detailPageUrl) ?>">
 					<span>Купить в 1 клик</span>
 				</button>
 			</div>

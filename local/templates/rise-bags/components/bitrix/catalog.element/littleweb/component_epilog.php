@@ -102,7 +102,7 @@ if (isset($templateData['JS_OBJ'])) {
 		$offerNum = array_search($offerCode, $templateData['OFFER_CODES']);
 	}
 
-	if (!empty($offerNum)) {
+	if ($offerNum !== false) {
 		?>
 		<script>
 			BX.ready(function() {

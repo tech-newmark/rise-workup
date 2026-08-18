@@ -28,7 +28,16 @@
 	border: 2px solid var(--primary);
 	border-radius: var(--base-br);
 
+	&__header {
+		display: flex;
+		gap: 10px 20px;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		color: var(--primary);
+	}
+
 	&__rating {
+		min-width: fit-content;
 		svg {
 			fill: var(--gray-500);
 		}
