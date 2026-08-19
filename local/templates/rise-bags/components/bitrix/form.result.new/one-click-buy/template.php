@@ -7,7 +7,10 @@
 
 	<!-- <? debug($arParams["PRODUCT_DATA"]) ?> -->
 	<? if ($arResult["FORM_NOTE"]): ?>
-		<?= $arResult["FORM_NOTE"] ?>
+		<div class="popup-form__header">
+			<h2 class="title">Спасибо!</h2>
+			<p>Мы скоро свяжемся с вами.</p>
+		</div>
 	<? else: ?>
 		<?= $arResult["FORM_HEADER"] ?>
 
