@@ -42,6 +42,7 @@ RewriteRule ^sumki-optom/letnie_sumki/?$ /services/optovym-klientam/sumki-optom/
 RewriteRule ^sumki-optom/barsetki/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
 RewriteRule ^sumki-optom/studencheskie/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
 RewriteRule ^sumki-optom/?$ /services/optovym-klientam/sumki-optom/ [R=301,L]
+RewriteRule ^sumki-optom/shoppery/?$ https://rise-bags.ru/services/optovym-klientam/shoppery-optom/ [R=301,L]
 
 Redirect 301 /o_kompanii/stati/sumki-dlya-mam-s-detmi-kak-vybrat/ /articles/sumki-dlya-mam-s-detmi-kak-vybrat/
 Redirect 301 /o_kompanii/stati/kak-upakovat-ryukzak-v-ruchnuyu-klad/ /articles/kak-upakovat-ryukzak-v-ruchnuyu-klad/
