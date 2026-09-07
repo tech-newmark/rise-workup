@@ -28,6 +28,39 @@
     window.RiseBagsFavoriteIds = <?= CUtil::PhpToJSObject($favoriteProductIds) ?>;
     window.RiseBagsCompareIds = <?= CUtil::PhpToJSObject($compareProductIds) ?>;
   </script>
+  <meta name="google-site-verification" content="S0kLsfwLXgZyiwweFnmvlozqFcr-vOM_X9MActjAGsM" />
+
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript" data-skip-moving="true">
+    (function(m, e, t, r, i, k, a) {
+      m[i] = m[i] || function() {
+        (m[i].a = m[i].a || []).push(arguments)
+      };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) {
+        if (document.scripts[j].src === r) {
+          return;
+        }
+      }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+
+    ym(34643115, 'init', {
+      webvisor: true,
+      clickmap: true,
+      referrer: document.referrer,
+      url: location.href,
+      accurateTrackBounce: true,
+      trackLinks: true
+    });
+  </script>
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/34643115" style="position:absolute; left:-9999px;" alt="" /></div>
+  </noscript>
+  <!-- /Yandex.Metrika counter -->
+
+
 
 </head>
 
@@ -48,7 +81,7 @@
       </a>
     </noindex>
   </div>
-  <header class="header">
+  <header class="header еуые">
     <div class="container">
       <div class="header__top">
         <a href="/" class="header__logo" aria-label="На главную страницу">
@@ -169,7 +202,7 @@
                   "CONVERT_CURRENCY" => "Y",
                   "COMPONENT_TEMPLATE" => "search-title",
                   "ORDER" => "date",
-                  "USE_LANGUAGE_GUESS" => "Y"
+                  "USE_LANGUAGE_GUESS" => "N"
                 ],
                 false
               ); ?>
@@ -193,7 +226,7 @@
               "POSITION_FIXED" => "N",
               "SHOW_AUTHOR" => "Y",
               "PATH_TO_REGISTER" => SITE_DIR . "login/",
-              "PATH_TO_PROFILE" => SITE_DIR . "personal/private/",
+              "PATH_TO_PROFILE" => SITE_DIR . "personal/",
               "COMPONENT_TEMPLATE" => "header-basket-line",
               "PATH_TO_ORDER" => SITE_DIR . "personal/order/make/",
               "SHOW_EMPTY_VALUES" => "N",

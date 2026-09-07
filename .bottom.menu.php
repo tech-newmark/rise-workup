@@ -16,7 +16,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Сертификаты", 
-		"/certificates/", 
+		"/company/certificates/", 
 		Array(), 
 		Array(), 
 		"" 

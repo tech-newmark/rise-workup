@@ -10,6 +10,10 @@ use Bitrix\Main\Context;
 $component = $this->getComponent();
 $arParams = $component->applyTemplateModifications();
 
+if (class_exists('RiseCatalogProductUrl') && !empty($arResult['ID'])) {
+	RiseCatalogProductUrl::addProductBreadcrumbs((int)$arResult['ID']);
+}
+
 if (!empty($arResult['OFFERS']) && is_array($arResult['OFFERS'])) {
 	$request = Context::getCurrent()->getRequest();
 	$offerId = (int)($request->getQuery('offer') ?: $request->getQuery('offer_id'));

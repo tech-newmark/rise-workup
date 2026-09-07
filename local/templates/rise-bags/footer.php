@@ -1,57 +1,6 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 </main>
 
-<?/* $APPLICATION->IncludeComponent(
-	"bitrix:form.result.new", 
-	".default", 
-	[
-		"AJAX_MODE" => "Y",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "N",
-		"AJAX_OPTION_HISTORY" => "N",
-		"CACHE_TIME" => "3600",
-		"CACHE_TYPE" => "A",
-		"CHAIN_ITEM_LINK" => "",
-		"CHAIN_ITEM_TEXT" => "",
-		"EDIT_URL" => "",
-		"IGNORE_CUSTOM_TEMPLATE" => "N",
-		"LIST_URL" => "",
-		"SEF_MODE" => "N",
-		"SUCCESS_URL" => "",
-		"USE_EXTENDED_ERRORS" => "Y",
-		"WEB_FORM_ID" => "1",
-		"COMPONENT_TEMPLATE" => ".default",
-		"VARIABLE_ALIASES" => [
-			"WEB_FORM_ID" => "WEB_FORM_ID",
-			"RESULT_ID" => "RESULT_ID",
-		]
-	],
-	false
-); */ ?>
-
-<?/* $APPLICATION->IncludeComponent(
-	"bitrix:subscribe.edit", 
-	"rise", 
-	[
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"ALLOW_ANONYMOUS" => "Y",
-		"CACHE_TIME" => "3600",
-		"CACHE_TYPE" => "A",
-		"SET_TITLE" => "N",
-		"SHOW_AUTH_LINKS" => "N",
-		"SHOW_HIDDEN" => "N",
-		"COMPONENT_TEMPLATE" => "rise",
-		"TITLE" => "Подпишитесь на рассылку и получите скидку 10% на товары в розницу",
-		"DESCRIPTION" => "Добро пожаловать в сообщество Rise Bags! Ваш промокод на скидку 10% внутри",
-		"ANSWER" => "Спасибо! Вы успешно подписались на рассылку!"
-	],
-	false
-); */ ?>
-
 <footer class="footer">
   <div class="container">
     <div class="grid">
@@ -128,26 +77,28 @@
 
       <div class="grid__item grid__item--menu">
         <? $APPLICATION->IncludeComponent(
-          "bitrix:menu",
-          "bottom-menu",
-          [
-            "TITLE" => "Каталог",
-            "COLUMN_VIEW" => "Y",
-            "ALLOW_MULTI_SELECT" => "N",
-            "CHILD_MENU_TYPE" => "bottom.left",
-            "DELAY" => "N",
-            "MAX_LEVEL" => "1",
-            "MENU_CACHE_GET_VARS" => [],
-            "MENU_CACHE_TIME" => "3600",
-            "MENU_CACHE_TYPE" => "N",
-            "MENU_CACHE_USE_GROUPS" => "Y",
-            "MENU_THEME" => "site",
-            "ROOT_MENU_TYPE" => "bottom.left",
-            "USE_EXT" => "Y",
-            "COMPONENT_TEMPLATE" => "bottom-menu"
-          ],
-          false
-        ); ?>
+	"bitrix:menu", 
+	"bottom-menu", 
+	[
+		"TITLE" => "Каталог",
+		"COLUMN_VIEW" => "Y",
+		"ALLOW_MULTI_SELECT" => "N",
+		"CHILD_MENU_TYPE" => "bottom.left",
+		"DELAY" => "N",
+		"MAX_LEVEL" => "1",
+		"MENU_CACHE_GET_VARS" => [
+		],
+		"MENU_CACHE_TIME" => "3600",
+		"MENU_CACHE_TYPE" => "N",
+		"MENU_CACHE_USE_GROUPS" => "Y",
+		"MENU_THEME" => "site",
+		"ROOT_MENU_TYPE" => "bottom_1",
+		"USE_EXT" => "Y",
+		"COMPONENT_TEMPLATE" => "bottom-menu",
+		"TITLE_LINK" => "/catalog/"
+	],
+	false
+); ?>
       </div>
 
       <div class="grid__item grid__item--menu">
@@ -155,8 +106,34 @@
 	"bitrix:menu", 
 	"bottom-menu", 
 	[
-		"TITLE" => "Информация",
-		"COLUMN_VIEW" => "N",
+		"TITLE" => "Пошив на заказ",
+		"COLUMN_VIEW" => "Y",
+		"ALLOW_MULTI_SELECT" => "N",
+		"CHILD_MENU_TYPE" => "bottom.left",
+		"DELAY" => "N",
+		"MAX_LEVEL" => "1",
+		"MENU_CACHE_GET_VARS" => [
+		],
+		"MENU_CACHE_TIME" => "3600",
+		"MENU_CACHE_TYPE" => "N",
+		"MENU_CACHE_USE_GROUPS" => "Y",
+		"MENU_THEME" => "site",
+		"ROOT_MENU_TYPE" => "bottom_2",
+		"USE_EXT" => "Y",
+		"COMPONENT_TEMPLATE" => "bottom-menu",
+		"TITLE_LINK" => "/services/poshiv-i-proizvodstvo-na-zakaz/"
+	],
+	false
+); ?>
+      </div>
+
+      <div class="grid__item grid__item--menu">
+        <? $APPLICATION->IncludeComponent(
+	"bitrix:menu", 
+	"bottom-menu", 
+	[
+		"TITLE" => "Оптовым клиентам",
+		"COLUMN_VIEW" => "Y",
 		"ALLOW_MULTI_SELECT" => "N",
 		"CHILD_MENU_TYPE" => "left",
 		"DELAY" => "N",
@@ -167,12 +144,37 @@
 		"MENU_CACHE_TYPE" => "N",
 		"MENU_CACHE_USE_GROUPS" => "Y",
 		"MENU_THEME" => "site",
-		"ROOT_MENU_TYPE" => "bottom",
+		"ROOT_MENU_TYPE" => "bottom_3",
 		"USE_EXT" => "Y",
-		"COMPONENT_TEMPLATE" => "bottom-menu"
+		"COMPONENT_TEMPLATE" => "bottom-menu",
+		"TITLE_LINK" => "/services/optovym-klientam/"
 	],
 	false
 ); ?>
+      </div>
+
+      <div class="grid__item grid__item--menu">
+        <? $APPLICATION->IncludeComponent(
+          "bitrix:menu",
+          "bottom-menu",
+          [
+            "TITLE" => "Информация",
+            "COLUMN_VIEW" => "N",
+            "ALLOW_MULTI_SELECT" => "N",
+            "CHILD_MENU_TYPE" => "left",
+            "DELAY" => "N",
+            "MAX_LEVEL" => "1",
+            "MENU_CACHE_GET_VARS" => [],
+            "MENU_CACHE_TIME" => "3600",
+            "MENU_CACHE_TYPE" => "N",
+            "MENU_CACHE_USE_GROUPS" => "Y",
+            "MENU_THEME" => "site",
+            "ROOT_MENU_TYPE" => "bottom",
+            "USE_EXT" => "Y",
+            "COMPONENT_TEMPLATE" => "bottom-menu"
+          ],
+          false
+        ); ?>
       </div>
 
       <div class="grid__item grid__item--contacts">
