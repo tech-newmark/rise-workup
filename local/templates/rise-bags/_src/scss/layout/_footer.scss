@@ -12,19 +12,19 @@
 	.grid {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 20px clamp(30px, 3.6vw, 60px);
+		gap: 32px clamp(30px, 3.6vw, 60px);
 
 		@include container-up(footer, 768px) {
-			grid-template-columns: 240px repeat(2, auto);
+			grid-template-columns: repeat(4, 1fr);
 			justify-content: space-between;
 		}
 
-		@include container-up(footer, 880px) {
-			grid-template-columns: 240px repeat(2, 150px) auto;
-		}
+		// @include container-up(footer, 880px) {
+		// 	grid-template-columns: 240px repeat(2, 150px) auto;
+		// }
 
-		@include container-up(footer, 1080px) {
-			grid-template-columns: 240px repeat(2, 150px) minmax(auto, 460px);
+		@include container-up(footer, 1440px) {
+			grid-template-columns: 240px repeat(4, 150px) minmax(auto, 460px);
 		}
 
 		&__item {
@@ -35,22 +35,26 @@
 
 			&--company {
 				align-items: center;
+
+				grid-column: 1/-1;
+
+				@include container-up(footer, 1440px) {
+					grid-column: auto;
+				}
 			}
 
 			&--contacts {
-				@include container-up(footer, 768px) {
-					grid-column: 1/-1;
-				}
+				grid-column: 1/-1;
 
-				@include container-up(footer, 880px) {
+				@include container-up(footer, 1440px) {
 					grid-column: auto;
 				}
 			}
 
 			&--menu {
-				@include container-up(footer, 768px) {
-					max-width: 150px;
-				}
+				// @include container-up(footer, 768px) {
+				// 	max-width: 150px;
+				// }
 			}
 		}
 	}
@@ -101,7 +105,7 @@
 		@include container-up(footer, 768px) {
 			align-items: flex-start;
 			text-align: left;
-			max-width: 680px;
+			max-width: 100%;
 			margin: 0;
 			padding: 20px;
 			background-color: var(--white);
