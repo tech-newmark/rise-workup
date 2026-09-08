@@ -416,7 +416,7 @@ $isSidebar = ($arParams['SIDEBAR_DETAIL_SHOW'] == 'Y' && !empty($arParams['SIDEB
 								'PRICE_CODE' => $arParams['~PRICE_CODE'],
 								'USE_PRICE_COUNT' => $arParams['USE_PRICE_COUNT'],
 								'SHOW_PRICE_COUNT' => $arParams['SHOW_PRICE_COUNT'],
-								'PAGE_ELEMENT_COUNT' => 4,
+								'PAGE_ELEMENT_COUNT' => 10,
 								'FILTER_IDS' => array($elementId),
 
 								"SET_TITLE" => "N",
@@ -540,7 +540,7 @@ $isSidebar = ($arParams['SIDEBAR_DETAIL_SHOW'] == 'Y' && !empty($arParams['SIDEB
 							'PRICE_CODE' => $arParams['~PRICE_CODE'],
 							'USE_PRICE_COUNT' => $arParams['USE_PRICE_COUNT'],
 							'SHOW_PRICE_COUNT' => $arParams['SHOW_PRICE_COUNT'],
-							'PAGE_ELEMENT_COUNT' => 4,
+							'PAGE_ELEMENT_COUNT' => 10,
 							'SECTION_ELEMENT_ID' => $elementId,
 
 							"SET_TITLE" => "N",

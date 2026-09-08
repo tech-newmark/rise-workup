@@ -1,0 +1,11 @@
+@use "@scss/base/container-queries" as *;
+
+.catalog-slider {
+	.swiper-slide {
+		max-width: 80%;
+
+		@include container-up("catalog-section", 534px) {
+			max-width: 100%;
+		}
+	}
+}
