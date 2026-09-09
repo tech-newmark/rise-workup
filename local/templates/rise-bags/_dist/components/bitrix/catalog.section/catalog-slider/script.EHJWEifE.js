@@ -1,0 +1,2 @@
+const t=()=>{typeof window.Swiper>"u"||document.querySelectorAll(".catalog-popular-slider").forEach(e=>{if(e.swiper)return;const a=e.querySelector(".catalog-popular-slider__pagination");new window.Swiper(e,{slidesPerView:"auto",spaceBetween:20,watchOverflow:!0,pagination:{el:a,clickable:!0}})})};window.BX?BX.ready(t):document.readyState==="loading"?document.addEventListener("DOMContentLoaded",t):t();
+//# sourceMappingURL=script.EHJWEifE.js.map
