@@ -175,35 +175,39 @@ $containerName = 'catalog-products-viewed-container';
 				'ADD_PICT_PROP' => $arParams['ADD_PICT_PROP']
 			];
 		?>
-			<div class="catalog-section-grid" data-entity="<?= $containerName ?>">
-				<? foreach ($arResult['ITEMS'] as $item):
-					$uniqueId = $item['ID'] . '_' . md5($this->randString() . $component->getAction());
-					$areaId = $this->GetEditAreaId($uniqueId);
-					$this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);
-					$this->AddDeleteAction($uniqueId, $item['DELETE_LINK'], $elementDelete, $elementDeleteParams);
+			<div class="swiper catalog-viewed-slider" data-entity="<?= $containerName ?>">
+				<div class="swiper-wrapper">
+					<? foreach ($arResult['ITEMS'] as $item):
+						$uniqueId = $item['ID'] . '_' . md5($this->randString() . $component->getAction());
+						$areaId = $this->GetEditAreaId($uniqueId);
+						$this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);
+						$this->AddDeleteAction($uniqueId, $item['DELETE_LINK'], $elementDelete, $elementDeleteParams);
 
-					$itemParameters = [
-						'SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']],
-					];
-				?>
-					<div class="catalog-section-grid-item" data-entity="items-row">
-						<?
-						$APPLICATION->IncludeComponent(
-							'bitrix:catalog.item',
-							'littleweb',
-							array(
-								'RESULT' => array(
-									'ITEM' => $item,
-									'AREA_ID' => $areaId,
+						$itemParameters = [
+							'SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']],
+						];
+					?>
+
+						<div class="swiper-slide" data-entity="items-row">
+							<?
+							$APPLICATION->IncludeComponent(
+								'bitrix:catalog.item',
+								'littleweb',
+								array(
+									'RESULT' => array(
+										'ITEM' => $item,
+										'AREA_ID' => $areaId,
+									),
+									'PARAMS' => $generalParams + $itemParameters,
 								),
-								'PARAMS' => $generalParams + $itemParameters,
-							),
-							$component,
-							array('HIDE_ICONS' => 'Y')
-						);
-						?>
-					</div>
-				<? endforeach; ?>
+								$component,
+								array('HIDE_ICONS' => 'Y')
+							);
+							?>
+						</div>
+					<? endforeach; ?>
+				</div>
+				<div class="swiper-pagination catalog-viewed-slider__pagination"></div>
 			</div>
 		<? else:
 			// load css for bigData/deferred load

@@ -1138,6 +1138,11 @@
 						slidesPerView: 1,
 						spaceBetween: 0,
 						loop: slideCount > 1,
+						nested: Boolean(
+							swiperContainer.closest(
+								".catalog-viewed-slider, .catalog-popular-slider",
+							),
+						),
 
 						// Пагинация - ищем внутри текущего контейнера
 						pagination: {

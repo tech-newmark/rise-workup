@@ -1,0 +1,2 @@
+BX.ready(function(){const t=document.querySelectorAll(".catalog-viewed-slider");t.length&&t.forEach(e=>{if(e.swiper)return;const n=e.querySelector(".catalog-viewed-slider__pagination"),o=e.querySelector(".swiper-button-next"),r=e.querySelector(".swiper-button-prev");new window.Swiper(e,{slidesPerView:"auto",spaceBetween:20,watchOverflow:!0,navigation:{nextEl:o||null,prevEl:r||null},pagination:{el:n||null,clickable:!0}})})});
+//# sourceMappingURL=script.D5TTUGuL.js.map

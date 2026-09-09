@@ -25,7 +25,7 @@ $this->setFrameMode(true);
 							<div class="swiper-slide" id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
 								<div class="gallery-item <?= ($arParams["USE_FANCY"] === "Y") ? "gallery-item--fancybox" : "" ?>">
 									<img class="gallery-item__img" <?= ($arParams["USE_FANCY"] === "Y") ? 'data-fancybox="gallery-slider"' : "" ?> src="<?= $arItem["PREVIEW_PICTURE"]["SRC"] ?>" alt="<?= (($arItem["PREVIEW_PICTURE"]["DESCRIPTION"]) ? ($arItem["PREVIEW_PICTURE"]["DESCRIPTION"]) : $arItem["NAME"]) ?>" width="<?= $arItem["PREVIEW_PICTURE"]["WIDTH"] ?>" height="<?= $arItem["PREVIEW_PICTURE"]["HEIGHT"] ?>">
-									<? if ($arParams["SHOW_FOOTER"] === "Y"): ?>
+									<? if ($arParams["SHOW_FOOTER"] === "Y" && (!empty($arItem["PREVIEW_TEXT"]) || $arItem["DETAIL_TEXT"])): ?>
 										<div class="gallery-item__footer">
 											<? if ($arItem["PREVIEW_TEXT"]): ?>
 												<span><?= $arItem["PREVIEW_TEXT"] ?></span>
