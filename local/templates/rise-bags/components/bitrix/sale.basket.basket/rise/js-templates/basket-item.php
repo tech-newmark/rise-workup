@@ -58,7 +58,7 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 				<? if (in_array('PREVIEW_PICTURE', $arParams['COLUMNS_LIST'])): ?>
 
 					{{#DETAIL_PAGE_URL}}
-						<a href="/catalog/{{DETAIL_PAGE_URL}}">
+						<a href="{{DETAIL_PAGE_URL}}">
 					{{/DETAIL_PAGE_URL}}
 
 					<img alt="{{NAME}}" src="{{{IMAGE_URL}}}{{^IMAGE_URL}}<?= $templateFolder ?>/images/no_photo.png{{/IMAGE_URL}}">
