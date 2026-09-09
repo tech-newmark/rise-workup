@@ -1,9 +1,15 @@
 BX.ready(function () {
-	const sliders = document.querySelectorAll(".catalog-slider");
+	const sliders = document.querySelectorAll(".catalog-viewed-slider");
 
 	if (sliders.length) {
 		sliders.forEach((slider) => {
-			const pagination = slider.querySelector(".swiper-pagination");
+			if (slider.swiper) {
+				return;
+			}
+
+			const pagination = slider.querySelector(
+				".catalog-viewed-slider__pagination",
+			);
 			const btnNext = slider.querySelector(".swiper-button-next");
 			const btnPrev = slider.querySelector(".swiper-button-prev");
 
@@ -11,17 +17,6 @@ BX.ready(function () {
 				slidesPerView: "auto",
 				spaceBetween: 20,
 				watchOverflow: true,
-				breakpoints: {
-					560: {
-						slidesPerView: 2,
-					},
-					960: {
-						slidesPerView: 4,
-					},
-					1280: {
-						slidesPerView: 6,
-					},
-				},
 
 				navigation: {
 					nextEl: btnNext ? btnNext : null,

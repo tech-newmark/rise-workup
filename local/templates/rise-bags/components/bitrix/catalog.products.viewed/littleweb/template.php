@@ -175,7 +175,7 @@ $containerName = 'catalog-products-viewed-container';
 				'ADD_PICT_PROP' => $arParams['ADD_PICT_PROP']
 			];
 		?>
-			<div class="swiper catalog-slider" data-entity="<?= $containerName ?>">
+			<div class="swiper catalog-viewed-slider" data-entity="<?= $containerName ?>">
 				<div class="swiper-wrapper">
 					<? foreach ($arResult['ITEMS'] as $item):
 						$uniqueId = $item['ID'] . '_' . md5($this->randString() . $component->getAction());
@@ -207,6 +207,7 @@ $containerName = 'catalog-products-viewed-container';
 						</div>
 					<? endforeach; ?>
 				</div>
+				<div class="swiper-pagination catalog-viewed-slider__pagination"></div>
 			</div>
 		<? else:
 			// load css for bigData/deferred load
