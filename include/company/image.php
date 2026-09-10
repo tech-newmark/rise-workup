@@ -1,1 +1,1 @@
-<img width="540" alt="о компании" src="/upload/medialibrary/2a6/80l7tdtc770l7100tsp1qej719s3v0k3.png" height="372" title="о компании"><br>
+<img width="922" alt="Продукция компании РАЙС" src="/upload/medialibrary/556/k3d5lono4f8fbqj052l12hk0i766dxey.png" height="518" title="Продукция компании РАЙС"><br>
