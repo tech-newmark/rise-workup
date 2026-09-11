@@ -69,7 +69,7 @@ use Bitrix\Main\Localization\Loc;
 				<div class="product-label-container" id="<?= $itemIds['STICKER_ID'] ?>">
 					<? if ($item['LABEL'] && !empty($item['LABEL_ARRAY_VALUE'])): ?>
 						<? foreach ($item['LABEL_ARRAY_VALUE'] as $code => $value): ?>
-							<span class="product-label product-label--<?= strtolower($code) ?>" title="Новинка">
+							<span class="product-label product-label--<?= strtolower($code) ?>">
 								<?= $value ?>
 							</span>
 						<? endforeach; ?>
