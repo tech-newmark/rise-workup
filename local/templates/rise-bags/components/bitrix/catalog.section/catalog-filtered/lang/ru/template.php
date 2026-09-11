@@ -26,3 +26,11 @@ $MESS["CT_BCS_CATALOG_SHOW_MAX_QUANTITY"] = "Наличие";
 $MESS["CT_BCS_CATALOG_RELATIVE_QUANTITY_MANY"] = "много";
 $MESS["CT_BCS_CATALOG_RELATIVE_QUANTITY_FEW"] = "мало";
 $MESS["CT_BCS_CATALOG_MESS_BTN_LAZY_LOAD"] = "Показать ещё";
+
+$MESS["CATALOG_FILTERED_TITLE"] = "Наши товары";
+$MESS["CATALOG_FILTERED_POPULAR"] = "Популярные";
+$MESS["CATALOG_FILTERED_NEW"] = "Новинки";
+$MESS["CATALOG_FILTERED_HIT"] = "Хит продаж";
+$MESS["CATALOG_FILTERED_EMPTY"] = "В этой категории пока нет товаров.";
+$MESS["CATALOG_FILTERED_ERROR"] = "Не удалось загрузить товары. Попробуйте ещё раз.";
+$MESS["CATALOG_FILTERED_RETRY"] = "Повторить";

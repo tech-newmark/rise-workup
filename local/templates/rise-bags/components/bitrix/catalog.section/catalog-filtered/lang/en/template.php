@@ -25,3 +25,11 @@ $MESS["CT_BCS_TPL_MESS_BTN_COMPARE"] = "Compare";
 $MESS["CT_BCS_TPL_MESS_BTN_DETAIL"] = "More";
 $MESS["CT_BCS_TPL_MESS_BTN_SUBSCRIBE"] = "Notify when back in stock";
 $MESS["CT_BCS_TPL_MESS_PRODUCT_NOT_AVAILABLE"] = "not available from stock";
+
+$MESS["CATALOG_FILTERED_TITLE"] = "Our products";
+$MESS["CATALOG_FILTERED_POPULAR"] = "Popular";
+$MESS["CATALOG_FILTERED_NEW"] = "New arrivals";
+$MESS["CATALOG_FILTERED_HIT"] = "Bestsellers";
+$MESS["CATALOG_FILTERED_EMPTY"] = "There are no products in this category yet.";
+$MESS["CATALOG_FILTERED_ERROR"] = "Unable to load products. Please try again.";
+$MESS["CATALOG_FILTERED_RETRY"] = "Retry";

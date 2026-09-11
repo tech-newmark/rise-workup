@@ -1,5 +1,8 @@
-<? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
-includeComponentAssets('catalog.section/littleweb');
+<?php if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
+includeComponentAssets([
+	'catalog.section/catalog-filtered',
+	'catalog.item/littleweb',
+]);
 /**
  * @var array $arParams
  * @var array $templateData
@@ -8,11 +11,6 @@ includeComponentAssets('catalog.section/littleweb');
  */
 
 global $APPLICATION;
-
-// if (isset($templateData['TEMPLATE_THEME'])) {
-// 	$APPLICATION->SetAdditionalCSS($templateFolder . '/themes/' . $templateData['TEMPLATE_THEME'] . '/style.css');
-// 	$APPLICATION->SetAdditionalCSS('/bitrix/css/main/themes/' . $templateData['TEMPLATE_THEME'] . '/style.css', true);
-// }
 
 if (!empty($templateData['TEMPLATE_LIBRARY'])) {
 	$loadCurrency = false;
@@ -27,7 +25,7 @@ if (!empty($templateData['TEMPLATE_LIBRARY'])) {
 		<script>
 			BX.Currency.setCurrencies(<?= $templateData['CURRENCIES'] ?>);
 		</script>
-<?
+<?php
 	}
 }
 
@@ -37,12 +35,15 @@ if ($request->isAjaxRequest() && ($request->get('action') === 'showMore' || $req
 	$content = ob_get_contents();
 	ob_end_clean();
 
-	[, $itemsContainer] = explode('<!-- items-container -->', $content);
+	$itemsParts = explode('<!-- items-container -->', (string)$content, 3);
+	$itemsContainer = $itemsParts[1] ?? '';
 	$paginationContainer = '';
-	if ($templateData['USE_PAGINATION_CONTAINER']) {
-		[, $paginationContainer] = explode('<!-- pagination-container -->', $content);
+	if (!empty($templateData['USE_PAGINATION_CONTAINER'])) {
+		$paginationParts = explode('<!-- pagination-container -->', (string)$content, 3);
+		$paginationContainer = $paginationParts[1] ?? '';
 	}
-	[, $epilogue] = explode('<!-- component-end -->', $content);
+	$epilogueParts = explode('<!-- component-end -->', (string)$content, 2);
+	$epilogue = $epilogueParts[1] ?? '';
 
 	if (isset($arParams['AJAX_MODE']) && $arParams['AJAX_MODE'] === 'Y') {
 		$component->prepareLinks($paginationContainer);
