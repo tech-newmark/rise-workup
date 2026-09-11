@@ -94,23 +94,13 @@
 		</div>
 
 		<? if ($arParams["FULL_WIDTH"] !== "Y"): ?>
-			<? if ($arParams["INNER_PAGE"] == "Y"): ?>
-				<?
-				$APPLICATION->IncludeFile(
-					SITE_DIR . 'include/callback-form-img--inner-page.php',
-					array(),
-					array('MODE' => 'html', 'NAME' => 'Изображение в форме', 'SHOW_BORDER' => true)
-				);
-				?>
-			<? else: ?>
-				<?
-				$APPLICATION->IncludeFile(
-					SITE_DIR . 'include/callback-form-img.php',
-					array(),
-					array('MODE' => 'html', 'NAME' => 'Изображение в форме', 'SHOW_BORDER' => true)
-				);
-				?>
-			<? endif; ?>
+			<?
+			$APPLICATION->IncludeFile(
+				SITE_DIR . 'include/callback-form-img.php',
+				array(),
+				array('MODE' => 'html', 'NAME' => 'Изображение в форме', 'SHOW_BORDER' => true)
+			);
+			?>
 		<? endif; ?>
 	</div>
 </section>
