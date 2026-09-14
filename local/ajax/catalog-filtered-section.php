@@ -134,7 +134,7 @@ $APPLICATION->IncludeComponent(
     "PAGER_SHOW_ALWAYS" => "N",
     "PAGER_TEMPLATE" => "round",
     "PAGER_TITLE" => "Товары",
-    "PAGE_ELEMENT_COUNT" => "5",
+    "PAGE_ELEMENT_COUNT" => "10",
     "PARTIAL_PRODUCT_PROPERTIES" => "N",
     "PRICE_CODE" => [
       0 => "BASE",
