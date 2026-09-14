@@ -19,7 +19,6 @@
 			};
 		}
 
-		this.bigData = params.bigData || { enabled: false };
 		this.root = document.querySelector(
 			'[data-catalog-list="' + params.container + '"]:not([data-list-initialized])',
 		);
@@ -29,25 +28,17 @@
 		this.error = this.root.querySelector('[data-catalog-list-error]');
 		this.showMoreButton = null;
 		this.showMoreButtonMessage = null;
-
-		if (
-			this.bigData.enabled &&
-			BX.util.object_keys(this.bigData.rows).length > 0
-		) {
-			BX.cookie_prefix = this.bigData.js.cookiePrefix || "";
-			BX.cookie_domain = this.bigData.js.cookieDomain || "";
-			BX.current_server_time = this.bigData.js.serverTime;
-
-			BX.ready(BX.delegate(this.bigDataLoad, this));
-		}
-
-		if (params.initiallyShowHeader) {
-			BX.ready(BX.delegate(this.showHeader, this));
-		}
-
-		if (params.deferredLoad) {
-			BX.ready(BX.delegate(this.deferredLoad, this));
-		}
+		this.mobileQuery = window.matchMedia("(max-width: 767px)");
+		this.visibleLimit = this.getPageSize();
+		this.pendingLimit = this.visibleLimit;
+		this.hasExpanded = false;
+		this.mobileQuery.addEventListener("change", BX.proxy(function () {
+			if (!this.hasExpanded) {
+				this.visibleLimit = this.getPageSize();
+				this.pendingLimit = this.visibleLimit;
+				this.updateVisibility();
+			}
+		}, this));
 
 		if (params.lazyLoad) {
 			this.showMoreButton = this.root.querySelector('[data-catalog-show-more]');
@@ -56,18 +47,32 @@
 			BX.bind(this.showMoreButton, "click", BX.proxy(this.showMore, this));
 		}
 
+		this.updateVisibility();
+
 		if (params.loadOnScroll) {
 			BX.bind(window, "scroll", BX.proxy(this.loadOnScroll, this));
 		}
 	};
 
 	window.RiseCatalogFilteredSection.prototype = {
+		getPageSize: function () {
+			return this.mobileQuery.matches ? 6 : 10;
+		},
+
+		updateVisibility: function () {
+			var rows = this.container.querySelectorAll('[data-entity="items-row"]');
+			for (var i = 0; i < rows.length; i++) {
+				rows[i].hidden = i >= this.visibleLimit;
+			}
+			this.root.dataset.visibilityReady = "true";
+			this.checkButton();
+		},
+
 		checkButton: function () {
-			if (
-				this.showMoreButton &&
-				this.navParams.NavPageNomer == this.navParams.NavPageCount
-			) {
-				BX.remove(this.showMoreButton);
+			if (this.showMoreButton) {
+				this.showMoreButton.hidden =
+					this.navParams.NavPageNomer >= this.navParams.NavPageCount &&
+					this.container.querySelectorAll('[data-entity="items-row"]').length <= this.visibleLimit;
 			}
 		},
 
@@ -100,6 +105,16 @@
 		},
 
 		showMore: function () {
+			if (this.formPosting) return;
+			this.hasExpanded = true;
+			this.pendingLimit = this.visibleLimit + this.getPageSize();
+			var loadedCount = this.container.querySelectorAll('[data-entity="items-row"]').length;
+			if (loadedCount >= this.pendingLimit || this.navParams.NavPageNomer >= this.navParams.NavPageCount) {
+				this.visibleLimit = this.pendingLimit;
+				if (this.error) this.error.hidden = true;
+				this.updateVisibility();
+				return;
+			}
 			if (this.navParams.NavPageNomer < this.navParams.NavPageCount) {
 				var data = {};
 				data["action"] = "showMore";
@@ -114,14 +129,6 @@
 					this.sendRequest(data);
 				}
 			}
-		},
-
-		bigDataLoad: function () {
-			// need remove all use this method
-		},
-
-		deferredLoad: function () {
-			this.sendRequest({ action: "deferredLoad" });
 		},
 
 		finishRequest: function (failed) {
@@ -185,43 +192,28 @@
 		},
 
 		showAction: function (result, data) {
-			if (!data) return;
-
-			switch (data.action) {
-				case "showMore":
-					this.processShowMoreAction(result);
-					break;
-				case "deferredLoad":
-					this.processDeferredLoadAction(result, data.bigData === "Y");
-					break;
+			if (data && data.action === "showMore") {
+				this.processShowMoreAction(result);
 			}
 		},
 
 		processShowMoreAction: function (result) {
 			if (result) {
 				this.processItems(result.items);
-				this.processPagination(result.pagination);
 				this.processEpilogue(result.epilogue);
 				this.navParams.NavPageNomer++;
-				this.checkButton();
+				this.visibleLimit = this.pendingLimit;
+				this.updateVisibility();
 			}
 		},
 
-		processDeferredLoadAction: function (result, bigData) {
-			if (!result) return;
-
-			var position = bigData ? this.bigData.rows : {};
-
-			this.processItems(result.items, BX.util.array_keys(position));
-		},
-
-		processItems: function (itemsHtml, position) {
+		processItems: function (itemsHtml) {
 			if (!itemsHtml) return;
 
 			var processed = BX.processHTML(itemsHtml, false),
 				temporaryNode = BX.create("DIV");
 
-			var items, k, origRows;
+			var items, k;
 
 			temporaryNode.innerHTML = processed.HTML;
 			if (!temporaryNode.querySelector(".catalog-filtered__grid")) {
@@ -230,23 +222,11 @@
 			items = temporaryNode.querySelectorAll('[data-entity="items-row"]');
 
 			if (items.length) {
-				this.showHeader(true);
-
 				for (k in items) {
 					if (items.hasOwnProperty(k)) {
-						origRows = position
-							? this.container.querySelectorAll('[data-entity="items-row"]')
-							: false;
+						items[k].hidden = true;
 						items[k].style.opacity = 0;
-
-						if (origRows && BX.type.isDomNode(origRows[position[k]])) {
-							origRows[position[k]].parentNode.insertBefore(
-								items[k],
-								origRows[position[k]],
-							);
-						} else {
-							this.container.appendChild(items[k]);
-						}
+						this.container.appendChild(items[k]);
 					}
 				}
 
@@ -275,57 +255,11 @@
 			BX.ajax.processScripts(processed.SCRIPT);
 		},
 
-		processPagination: function (paginationHtml) {
-			if (!paginationHtml) return;
-
-			var pagination = this.root.querySelectorAll(
-				'[data-pagination-num="' + this.navParams.NavNum + '"]',
-			);
-			for (var k in pagination) {
-				if (pagination.hasOwnProperty(k)) {
-					pagination[k].innerHTML = paginationHtml;
-				}
-			}
-		},
-
 		processEpilogue: function (epilogueHtml) {
 			if (!epilogueHtml) return;
 
 			var processed = BX.processHTML(epilogueHtml, false);
 			BX.ajax.processScripts(processed.SCRIPT);
-		},
-
-		showHeader: function (animate) {
-			var parentNode = BX.findParent(this.container, {
-					attr: { "data-entity": "parent-container" },
-				}),
-				header;
-
-			if (parentNode && BX.type.isDomNode(parentNode)) {
-				header = parentNode.querySelector('[data-entity="header"]');
-
-				if (header && header.getAttribute("data-showed") != "true") {
-					header.style.display = "";
-
-					if (animate) {
-						new BX.easing({
-							duration: 2000,
-							start: { opacity: 0 },
-							finish: { opacity: 100 },
-							transition: BX.easing.makeEaseOut(BX.easing.transitions.quad),
-							step: function (state) {
-								header.style.opacity = state.opacity / 100;
-							},
-							complete: function () {
-								header.removeAttribute("style");
-								header.setAttribute("data-showed", "true");
-							},
-						}).animate();
-					} else {
-						header.style.opacity = 100;
-					}
-				}
-			}
 		},
 	};
 })();

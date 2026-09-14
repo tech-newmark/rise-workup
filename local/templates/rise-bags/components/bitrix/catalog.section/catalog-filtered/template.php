@@ -28,6 +28,8 @@ if ($arParams['PAGE_ELEMENT_COUNT'] > 0 && $navParams['NavPageCount'] > 1) {
 	$showLazyLoad = $arParams['LAZY_LOAD'] === 'Y' && $navParams['NavPageNomer'] != $navParams['NavPageCount'];
 }
 
+$showMoreButton = $showLazyLoad || count($arResult['ITEMS'] ?? []) > 6;
+
 $templateLibrary = array('popup', 'ajax', 'fx');
 $currencyList = '';
 
@@ -194,7 +196,7 @@ $tabs = [
 		</div>
 		<!-- items-container -->
 
-		<?php if ($showLazyLoad): ?>
+		<?php if ($showMoreButton): ?>
 			<div class="row bx-<?= $arParams['TEMPLATE_THEME'] ?>">
 				<button type="button" class="btn main-btn show-more-btn" data-catalog-show-more>
 					<?= htmlspecialcharsbx($arParams['MESS_BTN_LAZY_LOAD']) ?>
@@ -245,10 +247,7 @@ $signedParams = $signer->sign(base64_encode(serialize($arResult['ORIGINAL_PARAME
 			siteId: '<?= CUtil::JSEscape($component->getSiteId()) ?>',
 			componentPath: '<?= CUtil::JSEscape($componentPath) ?>',
 			navParams: <?= CUtil::PhpToJSObject($navParams) ?>,
-			deferredLoad: false,
-			initiallyShowHeader: '<?= !empty($arResult['ITEMS']) ?>',
-			bigData: <?= CUtil::PhpToJSObject($arResult['BIG_DATA'] ?? []) ?>,
-			lazyLoad: !!'<?= $showLazyLoad ?>',
+			lazyLoad: !!'<?= $showMoreButton ?>',
 			loadOnScroll: !!'<?= ($arParams['LOAD_ON_SCROLL'] === 'Y') ?>',
 			template: '<?= CUtil::JSEscape($signedTemplate) ?>',
 			ajaxId: '<?= CUtil::JSEscape($arParams['AJAX_ID'] ?? '') ?>',
