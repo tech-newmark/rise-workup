@@ -127,7 +127,7 @@ $containerName = 'catalog-products-viewed-container';
 	];
 ?>
 
-	<div class="catalog-section">
+	<div class="catalog-section catalog-viewed">
 		<h2 class="title">
 			<?= GetMessage('CATALOG_VIEWED') ?>
 		</h2>

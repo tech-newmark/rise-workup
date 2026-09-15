@@ -1,4 +1,8 @@
+@use "@scss/base/container-queries" as *;
+
 .catalog-filtered {
+	container: catalog-filtered / inline-size;
+
 	[data-catalog-panel][hidden],
 	[data-catalog-list-error][hidden],
 	[data-entity="items-row"][hidden],
@@ -11,7 +15,7 @@
 		gap: clamp(10px, 2.6vw, 18px);
 		grid-template-columns: repeat(2, 1fr);
 
-		@media (min-width: 768px) {
+		@include container-up("catalog-filtered", 780px) {
 			grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
 			gap: 24px;
 		}
@@ -19,6 +23,7 @@
 
 	.product-item {
 		height: 100%;
+		box-shadow: none;
 
 		&-header {
 			padding: clamp(8px, 3vw, 16px);
@@ -34,6 +39,10 @@
 			font-size: clamp(16px, 2.2vw, 20px);
 		}
 
+		.product-label-container {
+			padding: 0 12px;
+		}
+
 		.fast-view-btn,
 		.oneclickbuy-btn,
 		.favourite-add-btn {
@@ -41,20 +50,36 @@
 			height: clamp(28px, 4vw, 32px);
 		}
 
+		&-footer {
+			display: none;
+		}
+
 		.sku-prop-list button:has(img) img {
 			width: clamp(14px, 2.4vw, 16px);
 			height: clamp(14px, 2.4vw, 16px);
 		}
 
-		@media (max-width: 1090px) {
-			box-shadow: none;
-
-			&-footer {
-				display: none;
+		@include container-up("catalog-filtered", 780px) {
+			.product-label-container {
+				padding: 0 20px;
 			}
 
-			.product-label-container {
-				padding: 0 12px;
+			&:hover {
+				border-radius: 12px 12px 0 0;
+				box-shadow: 0 4px 4px #00000040;
+
+				.product-item-footer {
+					display: flex;
+					position: absolute;
+					top: 100%;
+					left: 0;
+					width: 100%;
+					height: auto;
+					background-color: white;
+					z-index: 13;
+					padding-bottom: 16px;
+					box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+				}
 			}
 		}
 	}

@@ -70,46 +70,48 @@ $generalParams = [
 ];
 ?>
 
-<div class="catalog-popular-slider swiper">
-	<div class="swiper-wrapper">
-		<?php foreach ($arResult['ITEMS'] as $item):
-			$uniqueId = $item['ID'] . '_' . $this->randString();
-			$areaId = $this->GetEditAreaId($uniqueId);
+<div class="catalog-popular">
+	<div class=" catalog-popular-slider swiper">
+		<div class="swiper-wrapper">
+			<?php foreach ($arResult['ITEMS'] as $item):
+				$uniqueId = $item['ID'] . '_' . $this->randString();
+				$areaId = $this->GetEditAreaId($uniqueId);
 
-			$this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);
-			$this->AddDeleteAction($uniqueId, $item['DELETE_LINK'], $elementDelete, $elementDeleteParams);
+				$this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);
+				$this->AddDeleteAction($uniqueId, $item['DELETE_LINK'], $elementDelete, $elementDeleteParams);
 
-			$itemParameters = [
-				'SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']] ?? [],
-				'MESS_NOT_AVAILABLE' => (
-					!empty($arResult['MODULES']['catalog'])
-					&& $item['PRODUCT']['TYPE'] === ProductTable::TYPE_SERVICE
-					? $arParams['~MESS_NOT_AVAILABLE_SERVICE']
-					: $arParams['~MESS_NOT_AVAILABLE']
-				),
-			];
-		?>
-			<div class="swiper-slide">
-				<?php
-				$APPLICATION->IncludeComponent(
-					'bitrix:catalog.item',
-					'littleweb',
-					[
-						'RESULT' => [
-							'ITEM' => $item,
-							'AREA_ID' => $areaId,
+				$itemParameters = [
+					'SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']] ?? [],
+					'MESS_NOT_AVAILABLE' => (
+						!empty($arResult['MODULES']['catalog'])
+						&& $item['PRODUCT']['TYPE'] === ProductTable::TYPE_SERVICE
+						? $arParams['~MESS_NOT_AVAILABLE_SERVICE']
+						: $arParams['~MESS_NOT_AVAILABLE']
+					),
+				];
+			?>
+				<div class="swiper-slide">
+					<?php
+					$APPLICATION->IncludeComponent(
+						'bitrix:catalog.item',
+						'littleweb',
+						[
+							'RESULT' => [
+								'ITEM' => $item,
+								'AREA_ID' => $areaId,
+							],
+							'PARAMS' => $generalParams + $itemParameters,
 						],
-						'PARAMS' => $generalParams + $itemParameters,
-					],
-					$component,
-					['HIDE_ICONS' => 'Y']
-				);
-				?>
-			</div>
-		<?php endforeach; ?>
-	</div>
+						$component,
+						['HIDE_ICONS' => 'Y']
+					);
+					?>
+				</div>
+			<?php endforeach; ?>
+		</div>
 
-	<div class="swiper-pagination catalog-popular-slider__pagination"></div>
+		<div class="swiper-pagination catalog-popular-slider__pagination"></div>
+	</div>
 </div>
 
 <script>
