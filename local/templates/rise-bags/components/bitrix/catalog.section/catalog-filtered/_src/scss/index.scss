@@ -59,7 +59,7 @@
 			height: clamp(14px, 2.4vw, 16px);
 		}
 
-		@include container-up("catalog-filtered", 780px) {
+		@include container-up("catalog-filtered", 1047px) {
 			.product-label-container {
 				padding: 0 20px;
 			}
