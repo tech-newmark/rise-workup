@@ -91,7 +91,7 @@ $useActionColumn = in_array('DELETE', $arParams['COLUMNS_LIST']);
 				<div class="bx-basket__list-item-info-row">
 					<!-- Название товара -->
 					{{#DETAIL_PAGE_URL}}
-						<a class="bx-basket__list-item-title" href="/catalog/{{DETAIL_PAGE_URL}}">
+						<a class="bx-basket__list-item-title" href="{{DETAIL_PAGE_URL}}">
 					{{/DETAIL_PAGE_URL}}
 					{{^DETAIL_PAGE_URL}}
 						<h2 class="bx-basket__list-item-title">
