@@ -20,3 +20,4 @@ require_once $includesPath . 'favorites.php';
 require_once $includesPath . 'compare.php';
 require_once $includesPath . 'form_validation.php';
 require_once $includesPath . 'one-click-buy.php';
+require_once $includesPath . 'basket_offer_article.php';
