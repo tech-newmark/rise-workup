@@ -1,7 +1,10 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Персональный раздел");
-?><? $APPLICATION->IncludeComponent(
+?>
+<section class="section">
+	<div class="container">
+		<? $APPLICATION->IncludeComponent(
 	"bitrix:sale.personal.section", 
 	"rise", 
 	[
@@ -78,12 +81,14 @@ $APPLICATION->SetTitle("Персональный раздел");
 			"account" => "account/",
 			"subscribe" => "subscribe/",
 			"profile" => "profiles/",
-			"profile_detail" => "profiles/#ID#",
+			"profile_detail" => "profiles/#ID#/",
 			"private" => "private/",
-			"order_detail" => "orders/#ID#",
+			"order_detail" => "orders/#ID#/",
 			"order_cancel" => "cancel/#ID#",
 		]
 	],
 	false
 ); ?>
+	</div>
+</section>
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
