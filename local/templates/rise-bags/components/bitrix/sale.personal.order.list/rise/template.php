@@ -101,6 +101,7 @@ if ($USER->isAuthorized()) {
 					}
 					?>
 				</div>
+				<br>
 				<?
 				if (empty($arResult['ORDERS'])) {
 				?>
