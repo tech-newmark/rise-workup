@@ -127,6 +127,8 @@
 			paused: null,
 			controls: [],
 		};
+		this.swiperInstance = null;
+		this.thumbsSwiperInstance = null;
 
 		this.quantityDelay = null;
 		this.quantityTimer = null;
@@ -147,7 +149,6 @@
 		this.obBuyBtn = null;
 		this.obAddToBasketBtn = null;
 		this.obBasketActions = null;
-		this.obNotAvail = null;
 		this.obSubscribe = null;
 		this.obSkuProps = null;
 		this.obDescription = null;
@@ -387,6 +388,14 @@
 				this.obProduct,
 				"images-slider-block",
 			);
+			this.node.thumbsSliderBlock = this.getEntity(
+				this.obProduct,
+				"thumbs-slider-block",
+			);
+			this.node.thumbsContainer = this.getEntity(
+				this.node.thumbsSliderBlock,
+				"thumbs-container",
+			);
 			this.node.name = this.getEntity(this.obProduct, "name");
 			// this.node.sliderProgressBar = this.getEntity(
 			// 	this.obProduct,
@@ -443,7 +452,6 @@
 						this.obAddToBasketBtn = BX(this.visual.ADD_BASKET_LINK);
 					}
 				}
-				this.obNotAvail = BX(this.visual.NOT_AVAILABLE_MESS);
 			}
 
 			if (this.config.showQuantity) {
@@ -470,7 +478,7 @@
 					this.obMeasure = BX(this.visual.QUANTITY_MEASURE);
 				}
 
-				if (this.visual.QUANTITY_LIMIT && this.config.showMaxQuantity !== "N") {
+				if (this.visual.QUANTITY_LIMIT) {
 					this.obQuantityLimit.all = BX(this.visual.QUANTITY_LIMIT);
 					if (this.obQuantityLimit.all) {
 						this.obQuantityLimit.value = this.getEntity(
@@ -587,10 +595,8 @@
 					case 7: // service
 						if (this.product.useSlider) {
 							this.setCurrentImg(this.product.sliderPict[0], true, true);
-							if (this.product.sliderCount > 1) {
-								this.initSlider();
-							}
 						}
+						this.initSlider();
 
 						this.checkQuantityControls();
 						// this.fixFontCheck();
@@ -681,6 +687,7 @@
 			this.config.useCompare = this.params.CONFIG.DISPLAY_COMPARE;
 			this.config.useStickers = this.params.CONFIG.USE_STICKERS;
 			this.config.useSubscribe = this.params.CONFIG.USE_SUBSCRIBE;
+			this.config.availabilityTexts = this.params.CONFIG.AVAILABILITY_TEXTS;
 			this.config.showMaxQuantity = this.params.CONFIG.SHOW_MAX_QUANTITY;
 			this.config.relativeQuantityFactor = parseInt(
 				this.params.CONFIG.RELATIVE_QUANTITY_FACTOR,
@@ -933,31 +940,85 @@
 			}
 		},
 
-		initSlider: function () {
-			var swiperContainer = this.node.imageSliderBlock;
-
-			if (swiperContainer) {
-				this.clearSliderHoverAreas(swiperContainer);
+		destroySliders: function () {
+			if (this.node.imageSliderBlock) {
+				this.clearSliderHoverAreas(this.node.imageSliderBlock);
 			}
 
 			if (this.swiperInstance) {
 				this.swiperInstance.destroy(true, true);
 				this.swiperInstance = null;
 			}
+			if (this.thumbsSwiperInstance) {
+				this.thumbsSwiperInstance.destroy(true, true);
+				this.thumbsSwiperInstance = null;
+			}
+		},
 
-			if (typeof Swiper === "undefined" || !swiperContainer) {
+		initSlider: function () {
+			var swiperContainer = this.node.imageSliderBlock,
+				thumbsContainer = this.node.thumbsSliderBlock;
+
+			this.destroySliders();
+
+			var slideCount = swiperContainer
+				? swiperContainer.querySelectorAll(".swiper-slide").length
+				: 0;
+			var thumbsCount = this.node.thumbsContainer
+				? this.getEntities(this.node.thumbsContainer, "thumbs").length
+				: 0;
+			if (thumbsContainer) {
+				BX.style(
+					thumbsContainer,
+					"display",
+					slideCount && thumbsCount ? "" : "none",
+				);
+			}
+
+			if (typeof Swiper === "undefined" || !swiperContainer || slideCount < 1) {
 				return;
 			}
 
-			var slideCount = swiperContainer.querySelectorAll(".swiper-slide").length;
-			if (slideCount < 1) {
-				return;
+			if (thumbsContainer && thumbsCount === slideCount) {
+				this.thumbsSwiperInstance = new Swiper(thumbsContainer, {
+					direction: "horizontal",
+
+					// Ширина именно этой карточки bx-catalog-element
+					breakpointsBase: '[id="' + this.visual.ID + '"]',
+
+					breakpoints: {
+						950: {
+							direction: "vertical",
+							navigation: { enabled: true },
+						},
+					},
+
+					navigation: {
+						enabled: false,
+						prevEl: thumbsContainer.parentNode.querySelector(
+							".swiper-button-prev",
+						),
+						nextEl: thumbsContainer.parentNode.querySelector(
+							".swiper-button-next",
+						),
+					},
+
+					slidesPerView: "auto",
+					spaceBetween: 8,
+					loop: false,
+					watchSlidesProgress: true,
+					watchOverflow: true,
+				});
 			}
 
 			this.swiperInstance = new Swiper(swiperContainer, {
 				slidesPerView: 1,
 				spaceBetween: 0,
 				loop: slideCount > 1,
+				thumbs: {
+					swiper: this.thumbsSwiperInstance,
+					multipleActiveThumbs: false,
+				},
 				pagination: {
 					el:
 						swiperContainer.querySelector(".swiper-pagination") ||
@@ -1504,7 +1565,7 @@
 		},
 
 		quantitySet: function (index) {
-			var strLimit, resetQuantity;
+			var resetQuantity;
 
 			var newOffer = this.offers[index],
 				oldOffer = this.offers[this.offerNum];
@@ -1528,7 +1589,6 @@
 					this.smallCardNodes.addButton &&
 						BX.style(this.smallCardNodes.addButton, "display", "");
 
-					this.obNotAvail && BX.style(this.obNotAvail, "display", "none");
 					this.smallCardNodes.notAvailableButton &&
 						BX.style(this.smallCardNodes.notAvailableButton, "display", "none");
 
@@ -1543,7 +1603,6 @@
 					this.smallCardNodes.addButton &&
 						BX.style(this.smallCardNodes.addButton, "display", "none");
 
-					this.obNotAvail && BX.style(this.obNotAvail, "display", "");
 					this.smallCardNodes.notAvailableButton &&
 						BX.style(this.smallCardNodes.notAvailableButton, "display", "");
 
@@ -1628,28 +1687,30 @@
 					}
 				}
 
-				if (this.obQuantityLimit.all) {
-					if (!this.checkQuantity || this.maxQuantity == 0) {
-						BX.adjust(this.obQuantityLimit.value, { html: "" });
-						BX.adjust(this.obQuantityLimit.all, { style: { display: "none" } });
-					} else {
-						if (this.config.showMaxQuantity === "M") {
-							strLimit =
-								this.maxQuantity / this.stepQuantity >=
-								this.config.relativeQuantityFactor
-									? BX.message("RELATIVE_QUANTITY_MANY")
-									: BX.message("RELATIVE_QUANTITY_FEW");
-						} else {
-							strLimit = this.maxQuantity;
-
-							if (newOffer.MEASURE) {
-								strLimit += " " + newOffer.MEASURE;
-							}
-						}
-
-						BX.adjust(this.obQuantityLimit.value, { html: strLimit });
-						BX.adjust(this.obQuantityLimit.all, { style: { display: "" } });
-					}
+				if (this.obQuantityLimit.all && this.obQuantityLimit.value) {
+					var inStock = Number(newOffer.MAX_QUANTITY) > 0,
+						unavailable = !inStock && !!newOffer.CHECK_QUANTITY,
+						availabilityStatus = inStock
+							? "InStock"
+							: unavailable
+								? "OutOfStock"
+								: "MadeToOrder";
+					BX.adjust(this.obQuantityLimit.value, {
+						text: this.config.availabilityTexts[availabilityStatus],
+					});
+					BX.adjust(this.obQuantityLimit.all, { style: { display: "" } });
+					this.obQuantityLimit.all.classList.toggle(
+						"product-label--quantity",
+						inStock,
+					);
+					this.obQuantityLimit.all.classList.toggle(
+						"product-label--preorder",
+						!inStock && !unavailable,
+					);
+					this.obQuantityLimit.all.classList.toggle(
+						"product-label--unavailable",
+						unavailable,
+					);
 				}
 
 				if (this.config.usePriceRanges && this.obPriceRanges) {
@@ -1988,7 +2049,18 @@
 					this.isGift = false;
 				}
 
-				this.drawImages(this.offers[index].SLIDER);
+				var galleryImages = this.offers[index].SLIDER || [];
+				if (!galleryImages.length) {
+					var fallbackPicture =
+						this.offers[index].DETAIL_PICTURE ||
+						this.offers[index].PREVIEW_PICTURE ||
+						this.defaultPict.detail ||
+						this.defaultPict.preview;
+					if (fallbackPicture && fallbackPicture.SRC) {
+						galleryImages = [fallbackPicture];
+					}
+				}
+				this.drawImages(galleryImages);
 
 				for (i = 0; i < this.offers.length; i++) {
 					if (this.config.showOfferGroup && this.offers[i].OFFER_GROUP) {
@@ -2000,8 +2072,8 @@
 					}
 				}
 
-				if (this.offers[index].SLIDER_COUNT > 0) {
-					this.setCurrentImg(this.offers[index].SLIDER[0], true, true);
+				if (galleryImages.length > 0) {
+					this.setCurrentImg(galleryImages[0], true, true);
 				} else {
 					this.setMainPictFromItem(index);
 				}
@@ -2129,6 +2201,10 @@
 		drawImages: function (images) {
 			if (!this.node.imageContainer) return;
 
+			this.destroySliders();
+			images = BX.type.isArray(images) ? images : [];
+			this.drawThumbs(images);
+
 			var i,
 				img,
 				entities = this.getEntities(this.node.imageContainer, "image");
@@ -2164,6 +2240,37 @@
 							className: "swiper-slide" + (i == 0 ? " active" : ""),
 						},
 						children: [img],
+					}),
+				);
+			}
+		},
+
+		drawThumbs: function (images) {
+			if (!this.node.thumbsContainer) return;
+
+			var entities = this.getEntities(this.node.thumbsContainer, "thumbs"),
+				i;
+			for (i = 0; i < entities.length; i++) {
+				BX.remove(entities[i]);
+			}
+
+			for (i = 0; i < images.length; i++) {
+				this.node.thumbsContainer.appendChild(
+					BX.create("DIV", {
+						attrs: {
+							"data-entity": "thumbs",
+							"data-id": images[i].ID,
+						},
+						props: { className: "swiper-slide" },
+						children: [
+							BX.create("IMG", {
+								props: {
+									src: images[i].SRC,
+									alt: this.config.alt,
+									title: this.config.title,
+								},
+							}),
+						],
 					}),
 				);
 			}

@@ -141,11 +141,26 @@
 	}
 
 	.product-label {
-		&--quantity {
-			padding: 0;
+		&--quantity,
+		&--preorder,
+		&--unavailable {
+			padding: 4px 10px;
 			margin: 6px 0;
-			background-color: transparent;
-			font-weight: 400;
+			font-weight: 500;
+			border-radius: 6px;
+			font-size: 14px;
+		}
+		&--quantity {
+			background-color: #d1f0db;
+			color: #17783b;
+		}
+		&--preorder {
+			background-color: #ffd9ad;
+			color: #8a5a00;
+		}
+		&--unavailable {
+			background-color: #eeeeee;
+			color: #666666;
 		}
 		&--discount {
 			position: absolute;

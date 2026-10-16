@@ -29,7 +29,7 @@
 		// this.secondPict = false;
 		this.showOldPrice = false;
 		this.showMaxQuantity = "N";
-		this.relativeQuantityFactor = 5;
+		this.availabilityTexts = {};
 		this.showPercent = false;
 		this.showSkuProps = false;
 		this.basketAction = "ADD";
@@ -126,7 +126,6 @@
 		this.obTree = null;
 		this.obBuyBtn = null;
 		this.obBasketActions = null;
-		this.obNotAvail = null;
 		this.obSubscribe = null;
 		this.obDscPerc = null;
 		this.obSecondDscPerc = null;
@@ -159,7 +158,7 @@
 			// this.secondPict = arParams.SECOND_PICT;
 			this.showOldPrice = arParams.SHOW_OLD_PRICE;
 			this.showMaxQuantity = arParams.SHOW_MAX_QUANTITY;
-			this.relativeQuantityFactor = parseInt(arParams.RELATIVE_QUANTITY_FACTOR);
+			this.availabilityTexts = arParams.AVAILABILITY_TEXTS || {};
 			this.showPercent = arParams.SHOW_DISCOUNT_PERCENT;
 			this.showSkuProps = arParams.SHOW_SKU_PROPS;
 			this.showSubscription = arParams.USE_SUBSCRIBE;
@@ -458,8 +457,6 @@
 					this.obBuyBtn = BX(this.visual.BUY_ID);
 				}
 			}
-
-			this.obNotAvail = BX(this.visual.NOT_AVAILABLE_MESS);
 
 			if (this.showSubscription) {
 				this.obSubscribe = BX(this.visual.SUBSCRIBE_ID);
@@ -961,7 +958,7 @@
 		},
 
 		quantitySet: function (index) {
-			var resetQuantity, strLimit;
+			var resetQuantity;
 
 			var newOffer = this.offers[index],
 				oldOffer = this.offers[this.offerNum];
@@ -985,10 +982,6 @@
 						BX.style(this.obBasketActions, "display", "");
 					}
 
-					if (this.obNotAvail) {
-						BX.style(this.obNotAvail, "display", "none");
-					}
-
 					if (this.obSubscribe) {
 						BX.style(this.obSubscribe, "display", "none");
 					}
@@ -999,10 +992,6 @@
 
 					if (this.obBasketActions) {
 						BX.style(this.obBasketActions, "display", "none");
-					}
-
-					if (this.obNotAvail) {
-						BX.style(this.obNotAvail, "display", "");
 					}
 
 					if (this.obSubscribe) {
@@ -1086,28 +1075,22 @@
 					}
 				}
 
-				if (this.obQuantityLimit.all) {
-					if (!this.checkQuantity || this.maxQuantity == 0) {
-						BX.adjust(this.obQuantityLimit.value, { html: "" });
-						BX.adjust(this.obQuantityLimit.all, { style: { display: "none" } });
-					} else {
-						if (this.showMaxQuantity === "M") {
-							strLimit =
-								this.maxQuantity / this.stepQuantity >=
-								this.relativeQuantityFactor
-									? BX.message("RELATIVE_QUANTITY_MANY")
-									: BX.message("RELATIVE_QUANTITY_FEW");
-						} else {
-							strLimit = this.maxQuantity;
+				if (this.obQuantityLimit.all && this.obQuantityLimit.value) {
+					var inStock = Number(newOffer.MAX_QUANTITY) > 0,
+						unavailable = !inStock && !!newOffer.CHECK_QUANTITY,
+						availabilityStatus = inStock
+							? "InStock"
+							: unavailable
+								? "OutOfStock"
+								: "MadeToOrder";
 
-							if (newOffer.MEASURE) {
-								strLimit += " " + newOffer.MEASURE;
-							}
-						}
-
-						BX.adjust(this.obQuantityLimit.value, { html: strLimit });
-						BX.adjust(this.obQuantityLimit.all, { style: { display: "" } });
-					}
+					BX.adjust(this.obQuantityLimit.value, {
+						text: this.availabilityTexts[availabilityStatus],
+					});
+					BX.style(this.obQuantityLimit.all, "display", "");
+					this.obQuantityLimit.all.classList.toggle("product-label--quantity", inStock);
+					this.obQuantityLimit.all.classList.toggle("product-label--preorder", !inStock && !unavailable);
+					this.obQuantityLimit.all.classList.toggle("product-label--unavailable", unavailable);
 				}
 			}
 		},
@@ -1798,6 +1781,11 @@
 			price = this.currentPrices[this.currentPriceSelected];
 
 			if (this.obPrice) {
+				var priceBlock = this.obPrice.closest('[data-entity="price-block"]');
+				if (priceBlock) {
+					BX.style(priceBlock, "display", price ? "" : "none");
+				}
+
 				if (price) {
 					BX.adjust(this.obPrice, {
 						html: this.formatPrice(price.RATIO_PRICE, price.CURRENCY),

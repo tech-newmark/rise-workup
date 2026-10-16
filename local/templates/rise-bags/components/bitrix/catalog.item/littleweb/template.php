@@ -5,6 +5,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 }
 
 use Bitrix\Main;
+use Bitrix\Main\Localization\Loc;
 
 /**
  * @global CMain $APPLICATION
@@ -36,7 +37,6 @@ if (isset($arResult['ITEM'])) {
 		'QUANTITY_LIMIT' => $areaId . '_quant_limit',
 		'BUY_LINK' => $areaId . '_buy_link',
 		'BASKET_ACTIONS' => $areaId . '_basket_actions',
-		'NOT_AVAILABLE_MESS' => $areaId . '_not_avail',
 		'SUBSCRIBE_LINK' => $areaId . '_subscribe',
 		'COMPARE_LINK' => $areaId . '_compare_link',
 		'PRICE' => $areaId . '_price',
@@ -243,6 +243,28 @@ if (isset($arResult['ITEM'])) {
 		$actualItem = $item;
 	}
 
+	$arParams['SHOW_MAX_QUANTITY'] = $arParams['SHOW_MAX_QUANTITY'] ?? 'N';
+	$arParams['MESS_SHOW_MAX_QUANTITY'] = ($arParams['MESS_SHOW_MAX_QUANTITY'] ?? '')
+		?: Loc::getMessage('CT_BCI_TPL_IN_STOCK');
+	$arParams['MESS_MADE_TO_ORDER'] = ($arParams['MESS_MADE_TO_ORDER'] ?? '')
+		?: Loc::getMessage('CT_BCI_TPL_MADE_TO_ORDER');
+	$arParams['MESS_NOT_AVAILABLE'] = ($arParams['MESS_NOT_AVAILABLE'] ?? '')
+		?: Loc::getMessage('CT_BCI_TPL_NOT_AVAILABLE');
+
+	$availabilityStatus = (float)($actualItem['PRODUCT']['QUANTITY'] ?? 0) > 0
+		? 'InStock'
+		: (!empty($actualItem['CHECK_QUANTITY']) ? 'OutOfStock' : 'MadeToOrder');
+	$availabilityTexts = [
+		'InStock' => htmlspecialcharsback($arParams['MESS_SHOW_MAX_QUANTITY']),
+		'OutOfStock' => htmlspecialcharsback($arParams['MESS_NOT_AVAILABLE']),
+		'MadeToOrder' => htmlspecialcharsback($arParams['MESS_MADE_TO_ORDER']),
+	];
+	$availabilityClasses = [
+		'InStock' => 'product-label--quantity',
+		'OutOfStock' => 'product-label--unavailable',
+		'MadeToOrder' => 'product-label--preorder',
+	];
+
 	$displayTitle = $haveOffers && !empty($actualItem['NAME'])
 		? $actualItem['NAME']
 		: $productTitle;
@@ -384,7 +406,6 @@ if (isset($arResult['ITEM'])) {
 					'BUY_ID' => $itemIds['BUY_LINK'],
 					'BASKET_PROP_DIV' => $itemIds['BASKET_PROP_DIV'],
 					'BASKET_ACTIONS_ID' => $itemIds['BASKET_ACTIONS'],
-					'NOT_AVAILABLE_MESS' => $itemIds['NOT_AVAILABLE_MESS'],
 					'COMPARE_LINK_ID' => $itemIds['COMPARE_LINK'],
 					'SUBSCRIBE_ID' => $itemIds['SUBSCRIBE_LINK']
 				)
@@ -432,7 +453,6 @@ if (isset($arResult['ITEM'])) {
 					'SECOND_DSC_PERC' => $itemIds['SECOND_DSC_PERC'],
 					'DISPLAY_PROP_DIV' => $itemIds['DISPLAY_PROP_DIV'],
 					'BASKET_ACTIONS_ID' => $itemIds['BASKET_ACTIONS'],
-					'NOT_AVAILABLE_MESS' => $itemIds['NOT_AVAILABLE_MESS'],
 					'COMPARE_LINK_ID' => $itemIds['COMPARE_LINK'],
 					'SUBSCRIBE_ID' => $itemIds['SUBSCRIBE_LINK']
 				),
@@ -478,6 +498,8 @@ if (isset($arResult['ITEM'])) {
 			$jsParams['PRODUCT']['RCM_ID'] = $item['RCM_ID'];
 		}
 
+		$jsParams['SHOW_MAX_QUANTITY'] = $arParams['SHOW_MAX_QUANTITY'];
+		$jsParams['AVAILABILITY_TEXTS'] = $availabilityTexts;
 		$jsParams['PRODUCT_DISPLAY_MODE'] = $arParams['PRODUCT_DISPLAY_MODE'];
 		$jsParams['USE_ENHANCED_ECOMMERCE'] = $arParams['USE_ENHANCED_ECOMMERCE'];
 		$jsParams['DATA_LAYER_NAME'] = $arParams['DATA_LAYER_NAME'];
