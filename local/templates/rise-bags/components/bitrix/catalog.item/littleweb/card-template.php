@@ -135,92 +135,58 @@ use Bitrix\Main\Localization\Loc;
 		</a>
 	<? endif; ?>
 
-	<? //Вывод доступного количества товара(настраивается в параметрах и в самом товаре)
+	<? // Статус выбранного товара или предложения.
 	?>
 	<? if ($arParams['SHOW_MAX_QUANTITY'] !== 'N'): ?>
-		<? if ($haveOffers): ?>
-			<? if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y'): ?>
-				<span class="product-label product-label--quantity" id="<?= $itemIds['QUANTITY_LIMIT'] ?>" data-entity="quantity-limit-block">
-					<?= $arParams['MESS_SHOW_MAX_QUANTITY'] ?>:&nbsp;<span class="product-item-quantity" data-entity="quantity-limit-value"></span>
-				</span>
-			<? endif; ?>
-		<? else : ?>
-			<? if (
-				$measureRatio
-				&& (float)$actualItem['CATALOG_QUANTITY'] > 0
-				&& $actualItem['CATALOG_QUANTITY_TRACE'] === 'Y'
-				&& $actualItem['CATALOG_CAN_BUY_ZERO'] === 'N'
-			):
-			?>
-				<span class="product-label product-label--quantity" id="<?= $itemIds['QUANTITY_LIMIT'] ?>">
-					<?= $arParams['MESS_SHOW_MAX_QUANTITY'] ?>:&nbsp;<span class="product-item-quantity">
-						<?
-						if ($arParams['SHOW_MAX_QUANTITY'] === 'M') {
-							if ((float)$actualItem['CATALOG_QUANTITY'] / $measureRatio >= $arParams['RELATIVE_QUANTITY_FACTOR']) {
-								echo $arParams['MESS_RELATIVE_QUANTITY_MANY'];
-							} else {
-								echo $arParams['MESS_RELATIVE_QUANTITY_FEW'];
-							}
-						} else {
-							echo $actualItem['CATALOG_QUANTITY'] . ' ' . $actualItem['ITEM_MEASURE']['TITLE'];
-						}
-						?>
-					</span>
-				</span>
-			<? endif; ?>
+		<span class="product-label <?= $availabilityClasses[$availabilityStatus] ?>" id="<?= $itemIds['QUANTITY_LIMIT'] ?>" data-entity="quantity-limit-block">
+			<span class="product-item-quantity" data-entity="quantity-limit-value" aria-live="polite"><?= htmlspecialcharsbx($availabilityTexts[$availabilityStatus]) ?></span>
+		</span>
+	<? endif; ?>
+
+	<div class="product-item-price-container" data-entity="price-block" style="display: <?= !empty($price) ? '' : 'none' ?>;">
+		<? if ($arParams['SHOW_OLD_PRICE'] === 'Y' && !empty($price)): ?>
+			<span class="product-item-price product-item-price--old" id="<?= $itemIds['PRICE_OLD'] ?>"
+				<?= ($price['RATIO_PRICE'] >= $price['RATIO_BASE_PRICE'] ? 'style="display: none;"' : '') ?>>
+				<?= $price['PRINT_RATIO_BASE_PRICE'] ?>
+			</span>
 		<? endif; ?>
-	<? endif; ?>
-
-	<? if (!empty($price) && $actualItem['CAN_BUY']): ?>
-		<div class="product-item-price-container" data-entity="price-block">
-			<? if ($arParams['SHOW_OLD_PRICE'] === 'Y' && !empty($price)): ?>
-				<span class="product-item-price product-item-price--old" id="<?= $itemIds['PRICE_OLD'] ?>"
-					<?= ($price['RATIO_PRICE'] >= $price['RATIO_BASE_PRICE'] ? 'style="display: none;"' : '') ?>>
-					<?= $price['PRINT_RATIO_BASE_PRICE'] ?>
-				</span>
+		<span class="product-item-price product-item-price--current" id="<?= $itemIds['PRICE'] ?>">
+			<? if (!empty($price)): ?>
+				<?
+				if ($arParams['PRODUCT_DISPLAY_MODE'] === 'N' && $haveOffers):
+					echo Loc::getMessage(
+						'CT_BCI_TPL_MESS_PRICE_SIMPLE_MODE',
+						array(
+							'#PRICE#' => $price['PRINT_RATIO_PRICE'],
+							'#VALUE#' => $measureRatio,
+							'#UNIT#' => $minOffer['ITEM_MEASURE']['TITLE']
+						)
+					);
+				else:
+					echo $price['PRINT_RATIO_PRICE'];
+				endif;
+				?>
 			<? endif; ?>
-			<span class="product-item-price product-item-price--current" id="<?= $itemIds['PRICE'] ?>">
-				<? if (!empty($price)): ?>
-					<?
-					if ($arParams['PRODUCT_DISPLAY_MODE'] === 'N' && $haveOffers):
-						echo Loc::getMessage(
-							'CT_BCI_TPL_MESS_PRICE_SIMPLE_MODE',
-							array(
-								'#PRICE#' => $price['PRINT_RATIO_PRICE'],
-								'#VALUE#' => $measureRatio,
-								'#UNIT#' => $minOffer['ITEM_MEASURE']['TITLE']
-							)
-						);
-					else:
-						echo $price['PRINT_RATIO_PRICE'];
-					endif;
-					?>
-				<? endif; ?>
-			</span>
-		</div>
-	<? endif; ?>
+		</span>
+	</div>
 
-	<? if (!$actualItem["CAN_BUY"]): ?>
+	<? if ($showSubscribe && !$actualItem['CAN_BUY']): ?>
 		<div class="product-item-subscribe-block">
-			<span class="product-item-subscribe-text" id="<?= $itemIds['NOT_AVAILABLE_MESS'] ?>">
-				<?= $arParams['MESS_NOT_AVAILABLE'] ?>
-			</span>
-
-			<? if ($showSubscribe):
-				$APPLICATION->IncludeComponent(
-					'bitrix:catalog.product.subscribe',
-					'littleweb',
-					array(
-						'PRODUCT_ID' => $item['ID'],
-						'BUTTON_ID' => $itemIds['SUBSCRIBE_LINK'],
-						'BUTTON_CLASS' => 'product-item-subscribe-btn',
-						'DEFAULT_DISPLAY' => !$actualItem['CAN_BUY'],
-						'MESS_BTN_SUBSCRIBE' => $arParams['~MESS_BTN_SUBSCRIBE'],
-					),
-					$component,
-					array('HIDE_ICONS' => 'N')
-				);
-			endif; ?>
+			<?php
+			$APPLICATION->IncludeComponent(
+				'bitrix:catalog.product.subscribe',
+				'littleweb',
+				array(
+					'PRODUCT_ID' => $item['ID'],
+					'BUTTON_ID' => $itemIds['SUBSCRIBE_LINK'],
+					'BUTTON_CLASS' => 'product-item-subscribe-btn',
+					'DEFAULT_DISPLAY' => !$actualItem['CAN_BUY'],
+					'MESS_BTN_SUBSCRIBE' => $arParams['~MESS_BTN_SUBSCRIBE'],
+				),
+				$component,
+				array('HIDE_ICONS' => 'N')
+			);
+			?>
 		</div>
 	<? endif; ?>
 
@@ -300,12 +266,96 @@ use Bitrix\Main\Localization\Loc;
 
 <?/* product-item-hover-content */ ?>
 <div class="product-item-footer">
-	<? if ($actualItem['CAN_BUY']): ?>
-		<? if (!$haveOffers): ?>
-			<? if (!empty($item['DISPLAY_PROPERTIES'])): ?>
-				<div class="product-item-props" data-entity="props-block">
-					<small class="product-item-props-title">Характеристики товара:</small>
-					<ul class="prop-list">
+	<? if (!$haveOffers): ?>
+		<? if (!empty($item['DISPLAY_PROPERTIES'])): ?>
+			<div class="product-item-props" data-entity="props-block">
+				<small class="product-item-props-title">Характеристики товара:</small>
+				<ul class="prop-list">
+					<? foreach ($item['DISPLAY_PROPERTIES'] as $code => $displayProperty): ?>
+						<li class="prop-list-item">
+							<span class="prop-list-item-name"><?= $displayProperty['NAME'] ?></span>
+							<span class="prop-list-item-value">
+								<?= (is_array($displayProperty['DISPLAY_VALUE'])
+									? implode(' / ', $displayProperty['DISPLAY_VALUE'])
+									: $displayProperty['DISPLAY_VALUE']) ?>
+							</span>
+						</li>
+					<? endforeach; ?>
+				</ul>
+			</div>
+		<? endif; ?>
+
+		<? if ($actualItem['CAN_BUY'] && $arParams['ADD_PROPERTIES_TO_BASKET'] === 'Y' && !empty($item['PRODUCT_PROPERTIES'])): ?>
+			<div id="<?= $itemIds['BASKET_PROP_DIV'] ?>">
+				<? if (!empty($item['PRODUCT_PROPERTIES_FILL'])): ?>
+					<? foreach ($item['PRODUCT_PROPERTIES_FILL'] as $propID => $propInfo): ?>
+						<input type="hidden" name="<?= $arParams['PRODUCT_PROPS_VARIABLE'] ?>[<?= $propID ?>]"
+							value="<?= htmlspecialcharsbx($propInfo['ID']) ?>">
+					<?
+						unset($item['PRODUCT_PROPERTIES'][$propID]);
+					endforeach; ?>
+				<? endif; ?>
+
+				<?/* if (!empty($item['PRODUCT_PROPERTIES'])): ?>
+
+					<table>
+						<? foreach ($item['PRODUCT_PROPERTIES'] as $propID => $propInfo): ?>
+							<tr>
+								<td><?= $item['PROPERTIES'][$propID]['NAME'] ?></td>
+								<td>
+									<?
+									if (
+										$item['PROPERTIES'][$propID]['PROPERTY_TYPE'] === 'L'
+										&& $item['PROPERTIES'][$propID]['LIST_TYPE'] === 'C'
+									):
+										foreach ($propInfo['VALUES'] as $valueID => $value):
+									?>
+											<label>
+												<? $checked = $valueID === $propInfo['SELECTED'] ? 'checked' : ''; ?>
+												<input type="radio" name="<?= $arParams['PRODUCT_PROPS_VARIABLE'] ?>[<?= $propID ?>]"
+													value="<?= $valueID ?>" <?= $checked ?>>
+												<?= $value ?>
+											</label>
+											<br />
+										<?
+										endforeach;
+									else:
+										?>
+										<select name="<?= $arParams['PRODUCT_PROPS_VARIABLE'] ?>[<?= $propID ?>]">
+											<?
+											foreach ($propInfo['VALUES'] as $valueID => $value):
+												$selected = $valueID === $propInfo['SELECTED'] ? 'selected' : '';
+											?>
+												<option value="<?= $valueID ?>" <?= $selected ?>>
+													<?= $value ?>
+												</option>
+											<?
+											endforeach;
+											?>
+										</select>
+									<?
+									endif;
+									?>
+								</td>
+							</tr>
+						<?
+						endforeach;
+						?>
+					</table>
+				<? endif; */ ?>
+			</div>
+		<? endif; ?>
+
+	<? else: ?>
+		<?
+		$showProductProps = !empty($item['DISPLAY_PROPERTIES']);
+		$showOfferProps = $arParams['PRODUCT_DISPLAY_MODE'] === 'Y' && $item['OFFERS_PROPS_DISPLAY'];
+
+		if ($showProductProps || $showOfferProps): ?>
+			<div class="product-item-props" data-entity="props-block">
+				<small class=" product-item-props-title">Характеристики товара:</small>
+				<ul class="prop-list">
+					<? if ($showProductProps): ?>
 						<? foreach ($item['DISPLAY_PROPERTIES'] as $code => $displayProperty): ?>
 							<li class="prop-list-item">
 								<span class="prop-list-item-name"><?= $displayProperty['NAME'] ?></span>
@@ -316,98 +366,12 @@ use Bitrix\Main\Localization\Loc;
 								</span>
 							</li>
 						<? endforeach; ?>
-					</ul>
-				</div>
-			<? endif; ?>
-
-			<? if ($arParams['ADD_PROPERTIES_TO_BASKET'] === 'Y' && !empty($item['PRODUCT_PROPERTIES'])): ?>
-				<div id="<?= $itemIds['BASKET_PROP_DIV'] ?>">
-					<? if (!empty($item['PRODUCT_PROPERTIES_FILL'])): ?>
-						<? foreach ($item['PRODUCT_PROPERTIES_FILL'] as $propID => $propInfo): ?>
-							<input type="hidden" name="<?= $arParams['PRODUCT_PROPS_VARIABLE'] ?>[<?= $propID ?>]"
-								value="<?= htmlspecialcharsbx($propInfo['ID']) ?>">
-						<?
-							unset($item['PRODUCT_PROPERTIES'][$propID]);
-						endforeach; ?>
 					<? endif; ?>
-
-					<?/* if (!empty($item['PRODUCT_PROPERTIES'])): ?>
-
-						<table>
-							<? foreach ($item['PRODUCT_PROPERTIES'] as $propID => $propInfo): ?>
-								<tr>
-									<td><?= $item['PROPERTIES'][$propID]['NAME'] ?></td>
-									<td>
-										<?
-										if (
-											$item['PROPERTIES'][$propID]['PROPERTY_TYPE'] === 'L'
-											&& $item['PROPERTIES'][$propID]['LIST_TYPE'] === 'C'
-										):
-											foreach ($propInfo['VALUES'] as $valueID => $value):
-										?>
-												<label>
-													<? $checked = $valueID === $propInfo['SELECTED'] ? 'checked' : ''; ?>
-													<input type="radio" name="<?= $arParams['PRODUCT_PROPS_VARIABLE'] ?>[<?= $propID ?>]"
-														value="<?= $valueID ?>" <?= $checked ?>>
-													<?= $value ?>
-												</label>
-												<br />
-											<?
-											endforeach;
-										else:
-											?>
-											<select name="<?= $arParams['PRODUCT_PROPS_VARIABLE'] ?>[<?= $propID ?>]">
-												<?
-												foreach ($propInfo['VALUES'] as $valueID => $value):
-													$selected = $valueID === $propInfo['SELECTED'] ? 'selected' : '';
-												?>
-													<option value="<?= $valueID ?>" <?= $selected ?>>
-														<?= $value ?>
-													</option>
-												<?
-												endforeach;
-												?>
-											</select>
-										<?
-										endif;
-										?>
-									</td>
-								</tr>
-							<?
-							endforeach;
-							?>
-						</table>
-					<? endif; */ ?>
-				</div>
-			<? endif; ?>
-
-		<? else: ?>
-			<?
-			$showProductProps = !empty($item['DISPLAY_PROPERTIES']);
-			$showOfferProps = $arParams['PRODUCT_DISPLAY_MODE'] === 'Y' && $item['OFFERS_PROPS_DISPLAY'];
-
-			if ($showProductProps || $showOfferProps): ?>
-				<div class="product-item-props" data-entity="props-block">
-					<small class=" product-item-props-title">Характеристики товара:</small>
-					<ul class="prop-list">
-						<? if ($showProductProps): ?>
-							<? foreach ($item['DISPLAY_PROPERTIES'] as $code => $displayProperty): ?>
-								<li class="prop-list-item">
-									<span class="prop-list-item-name"><?= $displayProperty['NAME'] ?></span>
-									<span class="prop-list-item-value">
-										<?= (is_array($displayProperty['DISPLAY_VALUE'])
-											? implode(' / ', $displayProperty['DISPLAY_VALUE'])
-											: $displayProperty['DISPLAY_VALUE']) ?>
-									</span>
-								</li>
-							<? endforeach; ?>
-						<? endif; ?>
-					</ul>
-					<? if ($showOfferProps && $item['JS_OFFERS']): ?>
-						<div class="prop-list prop-list--sku" id="<?= $itemIds['DISPLAY_PROP_DIV'] ?>"></div>
-					<? endif; ?>
-				</div>
-			<? endif; ?>
+				</ul>
+				<? if ($showOfferProps && $item['JS_OFFERS']): ?>
+					<div class="prop-list prop-list--sku" id="<?= $itemIds['DISPLAY_PROP_DIV'] ?>"></div>
+				<? endif; ?>
+			</div>
 		<? endif; ?>
 	<? endif; ?>
 
@@ -419,8 +383,8 @@ use Bitrix\Main\Localization\Loc;
 
 	if ($showQuantityBlock):
 	?>
-		<div class="counter-block">
-			<div class="counter counter--sm" data-entity="quantity-block">
+		<div class="counter-block" data-entity="quantity-block" style="display: <?= $actualItem['CAN_BUY'] ? '' : 'none' ?>;">
+			<div class="counter counter--sm">
 				<button type="button" class="counter-btn counter-btn--dec" id="<?= $itemIds['QUANTITY_DOWN'] ?>">
 					<svg width="24" height="24" role="img" aria-hidden="true" focusable="false">
 						<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#icon-minus"></use>
@@ -476,25 +440,25 @@ use Bitrix\Main\Localization\Loc;
 		<? // расширенный режим показа карточки товара
 		if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y'):
 		?>
-			<div class="product-item-button-container" <? if ($actualItem['CAN_BUY']): ?> id="<?= $itemIds['BASKET_ACTIONS'] ?>" <? endif; ?>>
-				<? if ($actualItem['CAN_BUY']): ?>
-					<button type="button" class="main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
-						<?= ($arParams['ADD_TO_BASKET_ACTION'] === 'BUY' ? $arParams['MESS_BTN_BUY'] : $arParams['MESS_BTN_ADD_TO_BASKET']) ?>
-					</button>
+			<div class="product-item-button-container" id="<?= $itemIds['BASKET_ACTIONS'] ?>" style="display: <?= $actualItem['CAN_BUY'] ? '' : 'none' ?>;">
+				<button type="button" class="main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
+					<?= ($arParams['ADD_TO_BASKET_ACTION'] === 'BUY' ? $arParams['MESS_BTN_BUY'] : $arParams['MESS_BTN_ADD_TO_BASKET']) ?>
+				</button>
 
-					<button type="button" class="main-btn" data-1clickbuy-id="<?= (int)$actualItem['ID'] ?>" data-product-url="<?= htmlspecialcharsbx($detailPageUrl) ?>">
-						<span>Купить в 1 клик</span>
-					</button>
-				<? endif; ?>
+				<button type="button" class="main-btn" data-1clickbuy-id="<?= (int)$actualItem['ID'] ?>" data-product-url="<?= htmlspecialcharsbx($detailPageUrl) ?>">
+					<span>Купить в 1 клик</span>
+				</button>
 			</div>
 		<? else: ?>
 			<div class="product-item-button-container">
 				<a class="main-btn outlined" href="<?= $detailPageUrl ?>" data-detail-link="Y">
 					<?= $arParams['MESS_BTN_DETAIL'] ?>
 				</a>
-				<button type="button" class="main-btn" data-1clickbuy-id="<?= (int)$actualItem['ID'] ?>" data-product-url="<?= htmlspecialcharsbx($detailPageUrl) ?>">
-					<span>Купить в 1 клик</span>
-				</button>
+				<? if ($actualItem['CAN_BUY']): ?>
+					<button type="button" class="main-btn" data-1clickbuy-id="<?= (int)$actualItem['ID'] ?>" data-product-url="<?= htmlspecialcharsbx($detailPageUrl) ?>">
+						<span>Купить в 1 клик</span>
+					</button>
+				<? endif; ?>
 			</div>
 		<? endif; ?>
 	<? endif; ?>
