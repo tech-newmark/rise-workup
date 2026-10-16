@@ -668,7 +668,7 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 						$keyPropIconAlt = $keyProp["SUB_VALUES"]["KEY_PROP_ALT"]["VALUE"];
 						?>
 						<li class="bx-catalog-element__key-prop">
-							<img src="<?= $keyPropIconSrc ?>" alt="<?= $keyProp["SUB_VALUES"]["KEY_PROP_ALT"]["VALUE"] ?>">
+							<img src="<?= $keyPropIconSrc ?>" alt="<?= $keyProp["SUB_VALUES"]["KEY_PROP_ALT"]["VALUE"] ?>" width="20" height="20">
 							<span><?= $keyPropName = $keyProp["SUB_VALUES"]["KEY_PROP_NAME"]["VALUE"] ?></span>
 						</li>
 					<? endforeach; ?>
@@ -757,7 +757,7 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 						array(),
 						array(
 							"MODE" => "html",
-							"NAME" => "текст",
+							"NAME" => "Описание доставки",
 							"TEMPLATE" => "include_area.php",
 						)
 					); ?>
@@ -768,7 +768,7 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 						array(),
 						array(
 							"MODE" => "html",
-							"NAME" => "текст",
+							"NAME" => "Описание оптовым клиентам",
 							"TEMPLATE" => "include_area.php",
 						)
 					); ?>
@@ -779,7 +779,7 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 						array(),
 						array(
 							"MODE" => "html",
-							"NAME" => "текст",
+							"NAME" => "Описание гарантии",
 							"TEMPLATE" => "include_area.php",
 						)
 					); ?>

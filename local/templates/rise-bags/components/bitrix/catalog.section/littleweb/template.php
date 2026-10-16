@@ -189,6 +189,13 @@ if (!empty($arResult['CURRENCIES'])) {
 	$currencyList = CUtil::PhpToJSObject($arResult['CURRENCIES'], false, true, true);
 }
 
+$templateData = array(
+	'TEMPLATE_THEME' => $arParams['TEMPLATE_THEME'],
+	'TEMPLATE_LIBRARY' => $templateLibrary,
+	'CURRENCIES' => $currencyList,
+	'USE_PAGINATION_CONTAINER' => $showPager,
+);
+
 unset($currencyList, $templateLibrary);
 
 $elementEdit = CIBlock::GetArrayByID($arParams['IBLOCK_ID'], 'ELEMENT_EDIT');
