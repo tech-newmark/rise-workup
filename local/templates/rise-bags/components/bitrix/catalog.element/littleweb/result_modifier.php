@@ -10,6 +10,13 @@ use Bitrix\Main\Context;
 $component = $this->getComponent();
 $arParams = $component->applyTemplateModifications();
 
+unset(
+	$arResult['DISPLAY_PROPERTIES']['KEY_PROP'],
+	$arResult['DISPLAY_PROPERTIES']['KEY_PROP_NAME']
+);
+
+
+
 if (class_exists('RiseCatalogProductUrl') && !empty($arResult['ID'])) {
 	RiseCatalogProductUrl::addProductBreadcrumbs((int)$arResult['ID']);
 }

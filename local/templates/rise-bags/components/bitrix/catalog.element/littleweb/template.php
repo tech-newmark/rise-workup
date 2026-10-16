@@ -66,7 +66,6 @@ $itemIds = array(
 	'BUY_LINK' => $mainId . '_buy_link',
 	'ADD_BASKET_LINK' => $mainId . '_add_basket_link',
 	'BASKET_ACTIONS_ID' => $mainId . '_basket_actions',
-	'NOT_AVAILABLE_MESS' => $mainId . '_not_avail',
 	'COMPARE_LINK' => $mainId . '_compare_link',
 	'TREE_ID' => $mainId . '_skudiv',
 	'DISPLAY_PROP_DIV' => $mainId . '_sku_prop',
@@ -159,9 +158,13 @@ if ($arResult['MODULES']['catalog'] && $arResult['PRODUCT']['TYPE'] === ProductT
 $arParams['MESS_BTN_COMPARE'] = $arParams['MESS_BTN_COMPARE'] ?: Loc::getMessage('CT_BCE_CATALOG_COMPARE');
 $arParams['MESS_PRICE_RANGES_TITLE'] = $arParams['MESS_PRICE_RANGES_TITLE'] ?: Loc::getMessage('CT_BCE_CATALOG_PRICE_RANGES_TITLE');
 $arParams['MESS_DESCRIPTION_TAB'] = $arParams['MESS_DESCRIPTION_TAB'] ?: Loc::getMessage('CT_BCE_CATALOG_DESCRIPTION_TAB');
+$arParams['MESS_DELIVERY_TAB'] = ($arParams['MESS_DELIVERY_TAB'] ?? '') ?: Loc::getMessage('CT_BCE_CATALOG_DELIVERY_TAB');
+$arParams['MESS_WHOLESALE_TAB'] = ($arParams['MESS_WHOLESALE_TAB'] ?? '') ?: Loc::getMessage('CT_BCE_CATALOG_WHOLESALE_TAB');
+$arParams['MESS_GUARANTEE_TAB'] = ($arParams['MESS_GUARANTEE_TAB'] ?? '') ?: Loc::getMessage('CT_BCE_CATALOG_GUARANTEE_TAB');
 $arParams['MESS_PROPERTIES_TAB'] = $arParams['MESS_PROPERTIES_TAB'] ?: Loc::getMessage('CT_BCE_CATALOG_PROPERTIES_TAB');
 $arParams['MESS_COMMENTS_TAB'] = $arParams['MESS_COMMENTS_TAB'] ?: Loc::getMessage('CT_BCE_CATALOG_COMMENTS_TAB');
 $arParams['MESS_SHOW_MAX_QUANTITY'] = $arParams['MESS_SHOW_MAX_QUANTITY'] ?: Loc::getMessage('CT_BCE_CATALOG_SHOW_MAX_QUANTITY');
+$arParams['MESS_MADE_TO_ORDER'] = ($arParams['MESS_MADE_TO_ORDER'] ?? '') ?: Loc::getMessage('CT_BCE_CATALOG_MADE_TO_ORDER');
 $arParams['MESS_RELATIVE_QUANTITY_MANY'] = $arParams['MESS_RELATIVE_QUANTITY_MANY'] ?: Loc::getMessage('CT_BCE_CATALOG_RELATIVE_QUANTITY_MANY');
 $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'] ?: Loc::getMessage('CT_BCE_CATALOG_RELATIVE_QUANTITY_FEW');
 
@@ -171,136 +174,164 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 	<div class="grid">
 		<div class="grid-item grid-item--gallery">
 
-			<!-- discount -->
-			<? if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y'): ?>
-				<? if ($haveOffers): ?>
-					<span class="product-label product-label--discount" id="<?= $itemIds['DISCOUNT_PERCENT_ID'] ?>" style="display: none;">
-					</span>
-				<? else: ?>
-					<? if ($price['DISCOUNT'] > 0): ?>
-						<span class="product-item-label-ring" id="<?= $itemIds['DISCOUNT_PERCENT_ID'] ?>" title="<?= -$price['PERCENT'] ?>%">
-							<span><?= -$price['PERCENT'] ?>%</span>
+			<div class="bx-catalog-element-slider-wrapper">
+				<!-- discount -->
+				<? if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y'): ?>
+					<? if ($haveOffers): ?>
+						<span class="product-label product-label--discount" id="<?= $itemIds['DISCOUNT_PERCENT_ID'] ?>" style="display: none;">
 						</span>
+					<? else: ?>
+						<? if ($price['DISCOUNT'] > 0): ?>
+							<span class="product-item-label-ring" id="<?= $itemIds['DISCOUNT_PERCENT_ID'] ?>" title="<?= -$price['PERCENT'] ?>%">
+								<span><?= -$price['PERCENT'] ?>%</span>
+							</span>
+						<? endif; ?>
 					<? endif; ?>
 				<? endif; ?>
-			<? endif; ?>
-			<!-- discount -->
+				<!-- discount -->
 
-			<!-- sidebar -->
-			<div class="bx-catalog-element__sidebar">
-				<button
-					class="favourite-add-btn<?= $isFavorite ? ' active' : '' ?>"
-					type="button"
-					aria-label="<?= $isFavorite ? 'Удалить товар из избранного' : 'Добавить товар в избранное' ?>"
-					aria-pressed="<?= $isFavorite ? 'true' : 'false' ?>"
-					data-favorite-toggle
-					data-product-id="<?= $favoriteProductId ?>">
-					<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-heart'></use>
-					</svg>
-				</button>
-				<? if (!empty($price) && $actualItem['CAN_BUY'] && $arParams['DISPLAY_COMPARE']): ?>
-					<label class="compare" id="<?= $itemIds['COMPARE_LINK'] ?>">
-						<input type="checkbox" data-entity="compare-checkbox">
+				<!-- sidebar -->
+				<div class="bx-catalog-element__sidebar">
+					<button
+						class="favourite-add-btn<?= $isFavorite ? ' active' : '' ?>"
+						type="button"
+						aria-label="<?= $isFavorite ? 'Удалить товар из избранного' : 'Добавить товар в избранное' ?>"
+						aria-pressed="<?= $isFavorite ? 'true' : 'false' ?>"
+						data-favorite-toggle
+						data-product-id="<?= $favoriteProductId ?>">
 						<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-compare'></use>
+							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-heart'></use>
 						</svg>
-					</label>
-				<? endif; ?>
-				<button class="fast-view-btn" type="button" aria-label="Быстрый просмотр">
-					<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-info'></use>
-					</svg>
-				</button>
-				<button class="oneclickbuy-btn" type="button" aria-label="Информация о доставке">
-					<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
-						<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-cube'></use>
-					</svg>
-				</button>
-			</div>
-			<!-- sidebar -->
-
-			<!-- labels -->
-			<? if ($arResult['LABEL'] && !empty($arResult['LABEL_ARRAY_VALUE'])): ?>
-				<div class="product-label-container" id="<?= $itemIds['STICKER_ID'] ?>">
-					<? foreach ($arResult['LABEL_ARRAY_VALUE'] as $code => $value): ?>
-						<span class="product-label product-label--<?= strtolower($code) ?>" title="<?= $value ?>"><?= $value ?></span>
-					<? endforeach; ?>
+					</button>
+					<? if (!empty($price) && $actualItem['CAN_BUY'] && $arParams['DISPLAY_COMPARE']): ?>
+						<label class="compare" id="<?= $itemIds['COMPARE_LINK'] ?>">
+							<input type="checkbox" data-entity="compare-checkbox">
+							<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
+								<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-compare'></use>
+							</svg>
+						</label>
+					<? endif; ?>
+					<button class="fast-view-btn" type="button" aria-label="Быстрый просмотр">
+						<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
+							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-info'></use>
+						</svg>
+					</button>
+					<button class="oneclickbuy-btn" type="button" aria-label="Информация о доставке">
+						<svg width='24' height='24' role='img' aria-hidden='true' focusable='false'>
+							<use xlink:href='<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#icon-cube'></use>
+						</svg>
+					</button>
 				</div>
-			<? endif; ?>
-			<!-- labels -->
+				<!-- sidebar -->
 
-			<!-- slider -->
-			<div class="bx-catalog-element-slider-container" id="<?= $itemIds['BIG_SLIDER_ID'] ?>">
-				<div class="swiper bx-catalog-element-slider" data-entity="images-slider-block">
-					<div class="swiper-wrapper" id="<?= $itemIds['PICT_SLIDER'] ?>" data-entity="images-container">
+				<!-- labels -->
+				<? if ($arResult['LABEL'] && !empty($arResult['LABEL_ARRAY_VALUE'])): ?>
+					<div class="product-label-container" id="<?= $itemIds['STICKER_ID'] ?>">
+						<? foreach ($arResult['LABEL_ARRAY_VALUE'] as $code => $value): ?>
+							<span class="product-label product-label--<?= strtolower($code) ?>" title="<?= $value ?>"><?= $value ?></span>
+						<? endforeach; ?>
+					</div>
+				<? endif; ?>
+				<!-- labels -->
+
+				<!-- main slider -->
+				<div class="bx-catalog-element-slider-container" id="<?= $itemIds['BIG_SLIDER_ID'] ?>">
+					<div class="swiper bx-catalog-element-slider" data-entity="images-slider-block">
+						<div class="swiper-wrapper" id="<?= $itemIds['PICT_SLIDER'] ?>" data-entity="images-container">
+							<? if (!empty($actualItem['MORE_PHOTO'])): ?>
+								<? foreach ($actualItem['MORE_PHOTO'] as $index => $slide): ?>
+									<div class="swiper-slide<?= ($index === 0 ? ' active' : '') ?>" <?= ($index === 0 ? ' id="' . $itemIds['PICT'] . '"' : '') ?> data-entity="image" data-id="<?= $slide['ID'] ?>">
+										<img data-fancybox="bx-catalog-element-gallery" src="<?= $slide['SRC'] ?>" alt="<?= $alt ?>" title="<?= $title ?>" <?= ($index === 0 ? ' itemprop="image"' : '') ?>>
+									</div>
+								<? endforeach; ?>
+							<? endif; ?>
+						</div>
+						<div class="swiper-pagination" aria-label="Пагинация"></div>
+					</div>
+
+					<?/*НАБОРЫ / НЕ ВЕРСТАЛИСЬ*/ ?>
+					<? if ($haveOffers): ?>
+						<? if ($arResult['OFFER_GROUP']): ?>
+							<? foreach ($arResult['OFFER_GROUP_VALUES'] as $offerId): ?>
+								<span id="<?= $itemIds['OFFER_GROUP'] . $offerId ?>" style="display: none;">
+									<?php
+									$APPLICATION->IncludeComponent(
+										'bitrix:catalog.set.constructor',
+										'.default',
+										array(
+											'CUSTOM_SITE_ID' => $arParams['CUSTOM_SITE_ID'] ?? null,
+											'IBLOCK_ID' => $arResult['OFFERS_IBLOCK'],
+											'ELEMENT_ID' => $offerId,
+											'PRICE_CODE' => $arParams['PRICE_CODE'],
+											'BASKET_URL' => $arParams['BASKET_URL'],
+											'OFFERS_CART_PROPERTIES' => $arParams['OFFERS_CART_PROPERTIES'],
+											'CACHE_TYPE' => $arParams['CACHE_TYPE'],
+											'CACHE_TIME' => $arParams['CACHE_TIME'],
+											'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
+											// 'TEMPLATE_THEME' => $arParams['~TEMPLATE_THEME'],
+											'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
+											'CURRENCY_ID' => $arParams['CURRENCY_ID']
+										),
+										$component,
+										array('HIDE_ICONS' => 'Y')
+									);
+									?>
+								</span>
+							<? endforeach ?>
+						<? endif; ?>
+					<? else: ?>
+						<? if ($arResult['MODULES']['catalog'] && $arResult['OFFER_GROUP']):
+							$APPLICATION->IncludeComponent(
+								'bitrix:catalog.set.constructor',
+								'.default',
+								array(
+									'CUSTOM_SITE_ID' => $arParams['CUSTOM_SITE_ID'] ?? null,
+									'IBLOCK_ID' => $arParams['IBLOCK_ID'],
+									'ELEMENT_ID' => $arResult['ID'],
+									'PRICE_CODE' => $arParams['PRICE_CODE'],
+									'BASKET_URL' => $arParams['BASKET_URL'],
+									'CACHE_TYPE' => $arParams['CACHE_TYPE'],
+									'CACHE_TIME' => $arParams['CACHE_TIME'],
+									'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
+									'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
+									'CURRENCY_ID' => $arParams['CURRENCY_ID']
+								),
+								$component,
+								array('HIDE_ICONS' => 'Y')
+							);
+						endif; ?>
+					<? endif; ?>
+					<?/*НАБОРЫ / НЕ ВЕРСТАЛИСЬ*/ ?>
+
+				</div>
+				<!-- main slider -->
+			</div>
+
+			<!-- thumb slider -->
+			<div class="bx-catalog-element__thumbs-slider-container">
+				<div class="swiper-button swiper-button-prev">
+					<svg width="20" height="20" viewBox="0 0 20 20" role="img" aria-hidden="true" focusable="false">
+						<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#arrow-sm"></use>
+					</svg>
+				</div>
+				<div class=" swiper bx-catalog-element__thumbs-slider" data-entity="thumbs-slider-block">
+					<div class="swiper-wrapper" data-entity="thumbs-container">
 						<? if (!empty($actualItem['MORE_PHOTO'])): ?>
 							<? foreach ($actualItem['MORE_PHOTO'] as $index => $slide): ?>
-								<div class="swiper-slide<?= ($index === 0 ? ' active' : '') ?>" <?= ($index === 0 ? ' id="' . $itemIds['PICT'] . '"' : '') ?> data-entity="image" data-id="<?= $slide['ID'] ?>">
-									<img data-fancybox="bx-catalog-element-gallery" src="<?= $slide['SRC'] ?>" alt="<?= $alt ?>" title="<?= $title ?>" <?= ($index === 0 ? ' itemprop="image"' : '') ?>>
+								<div class="swiper-slide" data-entity="thumbs" data-id="<?= $slide['ID'] ?>">
+									<img src="<?= $slide['SRC'] ?>" alt="<?= $alt ?>" title="<?= $title ?>">
 								</div>
 							<? endforeach; ?>
 						<? endif; ?>
 					</div>
-					<div class="swiper-pagination" aria-label="Пагинация"></div>
 				</div>
-
-				<?/*НАБОРЫ / НЕ ВЕРСТАЛИСЬ*/ ?>
-				<? if ($haveOffers): ?>
-					<? if ($arResult['OFFER_GROUP']): ?>
-						<? foreach ($arResult['OFFER_GROUP_VALUES'] as $offerId): ?>
-							<span id="<?= $itemIds['OFFER_GROUP'] . $offerId ?>" style="display: none;">
-								<?php
-								$APPLICATION->IncludeComponent(
-									'bitrix:catalog.set.constructor',
-									'.default',
-									array(
-										'CUSTOM_SITE_ID' => $arParams['CUSTOM_SITE_ID'] ?? null,
-										'IBLOCK_ID' => $arResult['OFFERS_IBLOCK'],
-										'ELEMENT_ID' => $offerId,
-										'PRICE_CODE' => $arParams['PRICE_CODE'],
-										'BASKET_URL' => $arParams['BASKET_URL'],
-										'OFFERS_CART_PROPERTIES' => $arParams['OFFERS_CART_PROPERTIES'],
-										'CACHE_TYPE' => $arParams['CACHE_TYPE'],
-										'CACHE_TIME' => $arParams['CACHE_TIME'],
-										'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
-										// 'TEMPLATE_THEME' => $arParams['~TEMPLATE_THEME'],
-										'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
-										'CURRENCY_ID' => $arParams['CURRENCY_ID']
-									),
-									$component,
-									array('HIDE_ICONS' => 'Y')
-								);
-								?>
-							</span>
-						<? endforeach ?>
-					<? endif; ?>
-				<? else: ?>
-					<? if ($arResult['MODULES']['catalog'] && $arResult['OFFER_GROUP']):
-						$APPLICATION->IncludeComponent(
-							'bitrix:catalog.set.constructor',
-							'.default',
-							array(
-								'CUSTOM_SITE_ID' => $arParams['CUSTOM_SITE_ID'] ?? null,
-								'IBLOCK_ID' => $arParams['IBLOCK_ID'],
-								'ELEMENT_ID' => $arResult['ID'],
-								'PRICE_CODE' => $arParams['PRICE_CODE'],
-								'BASKET_URL' => $arParams['BASKET_URL'],
-								'CACHE_TYPE' => $arParams['CACHE_TYPE'],
-								'CACHE_TIME' => $arParams['CACHE_TIME'],
-								'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
-								'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
-								'CURRENCY_ID' => $arParams['CURRENCY_ID']
-							),
-							$component,
-							array('HIDE_ICONS' => 'Y')
-						);
-					endif; ?>
-				<? endif; ?>
-				<?/*НАБОРЫ / НЕ ВЕРСТАЛИСЬ*/ ?>
-
+				<div class="swiper-button swiper-button-next">
+					<svg width="20" height="20" viewBox="0 0 20 20" role="img" aria-hidden="true" focusable="false">
+						<use xlink:href="<?= SITE_TEMPLATE_PATH ?>/_dist/sprite.svg#arrow-sm"></use>
+					</svg>
+				</div>
 			</div>
-			<!-- slider -->
+			<!-- thumb slider -->
 		</div>
 
 		<div class="grid-item grid-item--main">
@@ -309,7 +340,9 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 				<h1 class="title" data-entity="name"><?= $displayName ?></h1>
 			<? endif; ?>
 
-			<div class=" bx-catalog-element-buy-info">
+			<div class="bx-catalog-element-buy-info">
+
+
 
 				<!-- RATING -->
 				<? if ($arParams['USE_VOTE_RATING'] === 'Y'): ?>
@@ -338,63 +371,61 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 					</div>
 				<? endif; ?>
 
-				<!-- quantity limit -->
 
-				<? if ($arParams['SHOW_MAX_QUANTITY'] !== 'N'): ?>
-					<? if ($haveOffers): ?>
-						<? if ($arParams['PRODUCT_DISPLAY_MODE'] === 'Y'): ?>
-							<span class="product-label product-label--quantity" id="<?= $itemIds['QUANTITY_LIMIT'] ?>" data-entity="quantity-limit-block">
-								<?= $arParams['MESS_SHOW_MAX_QUANTITY'] ?>:&nbsp;<span class="product-item-quantity" data-entity="quantity-limit-value"></span>
-							</span>
-						<? endif; ?>
-					<? else : ?>
-						<? if (
-							$measureRatio
-							&& (float)$actualItem['CATALOG_QUANTITY'] > 0
-							&& $actualItem['CATALOG_QUANTITY_TRACE'] === 'Y'
-							&& $actualItem['CATALOG_CAN_BUY_ZERO'] === 'N'
-						):
-						?>
-							<span class="product-label product-label--quantity" id="<?= $itemIds['QUANTITY_LIMIT'] ?>">
-								<?= $arParams['MESS_SHOW_MAX_QUANTITY'] ?>:&nbsp;<span class="product-item-quantity">
-									<?
-									if ($arParams['SHOW_MAX_QUANTITY'] === 'M') {
-										if ((float)$actualItem['CATALOG_QUANTITY'] / $measureRatio >= $arParams['RELATIVE_QUANTITY_FACTOR']) {
-											echo $arParams['MESS_RELATIVE_QUANTITY_MANY'];
-										} else {
-											echo $arParams['MESS_RELATIVE_QUANTITY_FEW'];
-										}
-									} else {
-										echo $actualItem['CATALOG_QUANTITY'] . ' ' . $actualItem['ITEM_MEASURE']['TITLE'];
-									}
-									?>
-								</span>
-							</span>
-						<? endif; ?>
+				<div class="bx-catalog-element__header">
+					<!-- artnumber -->
+					<? if ($haveOffers && $arResult['SHOW_OFFERS_PROPS']): ?>
+						<ul class="prop-list" id="<?= $itemIds['DISPLAY_MAIN_PROP_DIV'] ?>">
+						</ul>
 					<? endif; ?>
-				<? endif; ?>
-				<? if ($showSubscribe): ?>
-					<div class="product-item-subscribe-block">
-						<span class="product-item-subscribe-text" id="<?= $itemIds['NOT_AVAILABLE_MESS'] ?>"><?= $arParams['MESS_NOT_AVAILABLE'] ?></span>
-						<?php
-						$APPLICATION->IncludeComponent(
-							'bitrix:catalog.product.subscribe',
-							'littleweb',
-							array(
-								'CUSTOM_SITE_ID' => $arParams['CUSTOM_SITE_ID'] ?? null,
-								'PRODUCT_ID' => $arResult['ID'],
-								'BUTTON_ID' => $itemIds['SUBSCRIBE_LINK'],
-								'BUTTON_CLASS' => 'product-item-subscribe-btn',
-								'DEFAULT_DISPLAY' => !$actualItem['CAN_BUY'],
-								'MESS_BTN_SUBSCRIBE' => $arParams['~MESS_BTN_SUBSCRIBE'],
-							),
-							$component,
-							array('HIDE_ICONS' => 'Y')
-						);
-						?>
-					</div>
-				<? endif; ?>
-				<!-- quantity limit -->
+					<!-- artnumber -->
+
+					<!-- quantity limit -->
+
+					<?php
+					$availabilityStatus = (float)($actualItem['PRODUCT']['QUANTITY'] ?? 0) > 0
+						? 'InStock'
+						: (!empty($actualItem['CHECK_QUANTITY']) ? 'OutOfStock' : 'MadeToOrder');
+
+					$availabilityTexts = [
+						'InStock' => htmlspecialcharsback($arParams['MESS_SHOW_MAX_QUANTITY']),
+						'OutOfStock' => htmlspecialcharsback($arParams['MESS_NOT_AVAILABLE']),
+						'MadeToOrder' => htmlspecialcharsback($arParams['MESS_MADE_TO_ORDER']),
+					];
+
+					$availabilityClasses = [
+						'InStock' => 'product-label--quantity',
+						'OutOfStock' => 'product-label--unavailable',
+						'MadeToOrder' => 'product-label--preorder',
+					];
+					?>
+					<span class="product-label <?= $availabilityClasses[$availabilityStatus] ?>" id="<?= $itemIds['QUANTITY_LIMIT'] ?>" data-entity="quantity-limit-block">
+						<span class="product-item-quantity" data-entity="quantity-limit-value" aria-live="polite"><?= htmlspecialcharsbx($availabilityTexts[$availabilityStatus]) ?></span>
+					</span>
+
+					<? if ($showSubscribe): ?>
+						<div class="product-item-subscribe-block">
+							<?php
+							$APPLICATION->IncludeComponent(
+								'bitrix:catalog.product.subscribe',
+								'littleweb',
+								array(
+									'CUSTOM_SITE_ID' => $arParams['CUSTOM_SITE_ID'] ?? null,
+									'PRODUCT_ID' => $arResult['ID'],
+									'BUTTON_ID' => $itemIds['SUBSCRIBE_LINK'],
+									'BUTTON_CLASS' => 'product-item-subscribe-btn',
+									'DEFAULT_DISPLAY' => !$actualItem['CAN_BUY'],
+									'MESS_BTN_SUBSCRIBE' => $arParams['~MESS_BTN_SUBSCRIBE'],
+								),
+								$component,
+								array('HIDE_ICONS' => 'Y')
+							);
+							?>
+						</div>
+					<? endif; ?>
+					<!-- quantity limit -->
+				</div>
+
 
 				<!-- SKU -->
 				<? if ($haveOffers && !empty($arResult['OFFERS_PROP'])): ?>
@@ -531,15 +562,21 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 					</div>
 				<? endif; */ ?>
 
-				<? if ($arParams['USE_PRODUCT_QUANTITY'] && $actualItem['CAN_BUY']): ?>
-					<div class="counter-block" data-entity="quantity-block">
+				<? if ($arParams['USE_PRODUCT_QUANTITY']): ?>
+					<? $initialQuantity = $price['MIN_QUANTITY'] ?? $measureRatio; ?>
+					<div class="counter-block" data-entity="quantity-block" style="display: <?= $actualItem['CAN_BUY'] ? '' : 'none' ?>;">
 						<div class="counter counter--sm">
 							<button type="button" class="counter-btn counter-btn--dec" id="<?= $itemIds['QUANTITY_DOWN_ID'] ?>">
 								<svg width="24" height="24" role="img" aria-hidden="true" focusable="false">
 									<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#icon-minus"></use>
 								</svg>
 							</button>
-							<input type="number" value="1" disabled="disabled" data-value="1" id="<?= $itemIds['QUANTITY_ID'] ?>" value="<?= $price['MIN_QUANTITY'] ?>">
+							<input
+								type="number"
+								value="<?= htmlspecialcharsbx((string)$initialQuantity) ?>"
+								data-value="<?= htmlspecialcharsbx((string)$initialQuantity) ?>"
+								id="<?= $itemIds['QUANTITY_ID'] ?>"
+								<?= !$actualItem['CAN_BUY'] ? 'disabled="disabled"' : '' ?>>
 							<button type="button" class="counter-btn counter-btn--inc" id="<?= $itemIds['QUANTITY_UP_ID'] ?>">
 								<svg width="24" height="24" role="img" aria-hidden="true" focusable="false">
 									<use xlink:href="/local/templates/rise-bags/_dist/sprite.svg#icon-plus"></use>
@@ -556,25 +593,23 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 					</div>
 				<? endif; ?>
 
-				<div class="bx-catalog-element-buttons-container" id="<?= $itemIds['BASKET_ACTIONS_ID'] ?>" data-entity="main-button-container">
-					<div style="display: <?= ($actualItem['CAN_BUY'] ? '' : 'none') ?>;">
-						<div class="bx-catalog-element-buttons">
-							<? if ($showAddBtn): ?>
-								<button class="main-btn outlined" id="<?= $itemIds['ADD_BASKET_LINK'] ?>">
-									<span><?= $arParams['MESS_BTN_ADD_TO_BASKET'] ?></span>
-								</button>
-							<? endif; ?>
-
-							<? if ($showBuyBtn): ?>
-								<button class="main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
-									<span><?= $arParams['MESS_BTN_BUY'] ?></span>
-								</button>
-							<? endif; ?>
-
-							<button type="button" class="main-btn" data-1clickbuy-id="<?= (int)$actualItem['ID'] ?>">
-								<span>Купить в 1 клик</span>
+				<div class="bx-catalog-element-buttons-container" id="<?= $itemIds['BASKET_ACTIONS_ID'] ?>" data-entity="main-button-container" style="display: <?= $actualItem['CAN_BUY'] ? '' : 'none' ?>;">
+					<div class="bx-catalog-element-buttons">
+						<? if ($showAddBtn): ?>
+							<button class="main-btn outlined" id="<?= $itemIds['ADD_BASKET_LINK'] ?>">
+								<span><?= $arParams['MESS_BTN_ADD_TO_BASKET'] ?></span>
 							</button>
-						</div>
+						<? endif; ?>
+
+						<? if ($showBuyBtn): ?>
+							<button class="main-btn outlined" id="<?= $itemIds['BUY_LINK'] ?>">
+								<span><?= $arParams['MESS_BTN_BUY'] ?></span>
+							</button>
+						<? endif; ?>
+
+						<button type="button" class="main-btn" data-1clickbuy-id="<?= (int)$actualItem['ID'] ?>">
+							<span>Купить в 1 клик</span>
+						</button>
 					</div>
 				</div>
 
@@ -601,7 +636,6 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 					</div>
 				<? else: ?>
 					<div class="product-item-subscribe-block">
-						<span class="product-item-subscribe-text" id="<?= $itemIds['NOT_AVAILABLE_MESS'] ?>"><?= $arParams['MESS_NOT_AVAILABLE'] ?></span>
 
 						<? if ($showSubscribe): ?>
 							<? $APPLICATION->IncludeComponent(
@@ -624,10 +658,28 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 				*/ ?>
 			</div>
 
-			<div class="bx-catalog-element-description">
+			<? if ($arResult["PROPERTIES"]["KEY_PROP"]["VALUE"]): ?>
+				<ul class="bx-catalog-element__key-props">
+					<? foreach ($arResult["PROPERTIES"]["KEY_PROP"]["VALUE"] as $keyProp) : ?>
+						<?
+						$keyPropName = $keyProp["SUB_VALUES"]["KEY_PROP_NAME"]["VALUE"];
+						$keyPropIconId = $keyProp["SUB_VALUES"]["KEY_PROP_ICON"]["VALUE"];
+						$keyPropIconSrc = CFile::GetPath($keyPropIconId);
+						$keyPropIconAlt = $keyProp["SUB_VALUES"]["KEY_PROP_ALT"]["VALUE"];
+						?>
+						<li class="bx-catalog-element__key-prop">
+							<img src="<?= $keyPropIconSrc ?>" alt="<?= $keyProp["SUB_VALUES"]["KEY_PROP_ALT"]["VALUE"] ?>">
+							<span><?= $keyPropName = $keyProp["SUB_VALUES"]["KEY_PROP_NAME"]["VALUE"] ?></span>
+						</li>
+					<? endforeach; ?>
+				</ul>
+			<? endif; ?>
+
+
+			<div class="bx-catalog-element-properties">
 				<? if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS']): ?>
-					<div class="bx-catalog-element-description-section ">
-						<span class="bx-catalog-element-description-section-title"><?= $arParams['MESS_PROPERTIES_TAB'] ?></span>
+					<div class="bx-catalog-element-properties-section">
+						<span class="bx-catalog-element-properties-section-title"><?= $arParams['MESS_PROPERTIES_TAB'] ?></span>
 
 						<? if (!empty($arResult['DISPLAY_PROPERTIES'])): ?>
 							<ul class="prop-list">
@@ -654,11 +706,35 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 						<? endif; ?>
 					</div>
 				<? endif ?>
+			</div>
+		</div>
+	</div>
 
+
+	<div class="bx-catalog-element__tabs">
+		<div class="swiper bx-catalog-element__tabs-slider">
+			<div class="swiper-wrapper">
 				<? if ($showDescription): ?>
-					<div class="bx-catalog-element-description-section">
-						<span class="bx-catalog-element-description-section-title"><?= $arParams['MESS_DESCRIPTION_TAB'] ?></span>
-						<div class="content" itemprop="description" id="<?= $itemIds['DESCRIPTION_ID'] ?>">
+					<div class="swiper-slide">
+						<button class="main-btn active" data-tab-id="description"><?= $arParams['MESS_DESCRIPTION_TAB'] ?></button>
+					</div>
+				<? endif; ?>
+				<div class="swiper-slide">
+					<button class="main-btn <?= $showDescription ? '' : 'active' ?>" data-tab-id="delivery"><?= $arParams['MESS_DELIVERY_TAB'] ?></button>
+				</div>
+				<div class="swiper-slide">
+					<button class="main-btn" data-tab-id="wholesale"><?= $arParams['MESS_WHOLESALE_TAB'] ?></button>
+				</div>
+				<div class="swiper-slide">
+					<button class="main-btn" data-tab-id="guarantee"><?= $arParams['MESS_GUARANTEE_TAB'] ?></button>
+				</div>
+			</div>
+		</div>
+		<div class="bx-catalog-element__tabs-content">
+			<div class="content">
+				<div class="bx-catalog-element__tabs-item <?= $showDescription ? 'active' : '' ?>" data-tab-content-id="description">
+					<? if ($showDescription): ?>
+						<div itemprop="description" id="<?= $itemIds['DESCRIPTION_ID'] ?>">
 							<? if (
 								$arResult['PREVIEW_TEXT'] != ''
 								&& (
@@ -673,11 +749,45 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 								<?= $arResult['DETAIL_TEXT_TYPE'] === 'html' ? $arResult['DETAIL_TEXT'] : '<p>' . $arResult['DETAIL_TEXT'] . '</p>'; ?>
 							<? endif; ?>
 						</div>
-					</div>
-				<? endif; ?>
+					<? endif; ?>
+				</div>
+				<div class="bx-catalog-element__tabs-item <?= $showDescription ? '' : 'active' ?>" data-tab-content-id="delivery">
+					<? $APPLICATION->IncludeFile(
+						SITE_DIR . "include/catalog-item-delivery.php",
+						array(),
+						array(
+							"MODE" => "html",
+							"NAME" => "текст",
+							"TEMPLATE" => "include_area.php",
+						)
+					); ?>
+				</div>
+				<div class="bx-catalog-element__tabs-item" data-tab-content-id="wholesale">
+					<? $APPLICATION->IncludeFile(
+						SITE_DIR . "include/catalog-item-wholesale.php",
+						array(),
+						array(
+							"MODE" => "html",
+							"NAME" => "текст",
+							"TEMPLATE" => "include_area.php",
+						)
+					); ?>
+				</div>
+				<div class="bx-catalog-element__tabs-item" data-tab-content-id="guarantee">
+					<? $APPLICATION->IncludeFile(
+						SITE_DIR . "include/catalog-item-guarantee.php",
+						array(),
+						array(
+							"MODE" => "html",
+							"NAME" => "текст",
+							"TEMPLATE" => "include_area.php",
+						)
+					); ?>
+				</div>
 			</div>
 		</div>
 	</div>
+
 
 	<meta itemprop="name" content="<?= $name ?>" />
 	<meta itemprop="category" content="<?= $arResult['CATEGORY_PATH'] ?>" />
@@ -703,23 +813,30 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
 				}
 			}
 
+			$offerAvailabilityStatus = (float)($offer['MAX_QUANTITY'] ?? 0) > 0
+				? 'InStock'
+				: (!empty($offer['CHECK_QUANTITY']) ? 'OutOfStock' : 'MadeToOrder');
 			$offerPrice = $offer['ITEM_PRICES'][$offer['ITEM_PRICE_SELECTED']];
 	?>
 			<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 				<meta itemprop="sku" content="<?= htmlspecialcharsbx(implode('/', $currentOffersList)) ?>" />
 				<meta itemprop="price" content="<?= $offerPrice['RATIO_PRICE'] ?>" />
 				<meta itemprop="priceCurrency" content="<?= $offerPrice['CURRENCY'] ?>" />
-				<link itemprop="availability" href="http://schema.org/<?= ($offer['CAN_BUY'] ? 'InStock' : 'OutOfStock') ?>" />
+				<link
+					itemprop="availability"
+					href="https://schema.org/<?= $offerAvailabilityStatus ?>" />
 			</span>
 		<? endforeach;
 
-		unset($offerPrice, $currentOffersList);
+		unset($offerPrice, $offerAvailabilityStatus, $currentOffersList);
 	else:
 		?>
 		<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 			<meta itemprop="price" content="<?= $price['RATIO_PRICE'] ?>" />
 			<meta itemprop="priceCurrency" content="<?= $price['CURRENCY'] ?>" />
-			<link itemprop="availability" href="http://schema.org/<?= ($actualItem['CAN_BUY'] ? 'InStock' : 'OutOfStock') ?>" />
+			<link
+				itemprop="availability"
+				href="https://schema.org/<?= $availabilityStatus ?>" />
 		</span>
 	<? endif; ?>
 </div>
@@ -997,6 +1114,8 @@ if ($arParams['DISPLAY_COMPARE']) {
 		'COMPARE_PATH' => $arParams['COMPARE_PATH']
 	);
 }
+
+$jsParams['CONFIG']['AVAILABILITY_TEXTS'] = $availabilityTexts;
 
 $jsParams["IS_FACEBOOK_CONVERSION_CUSTOMIZE_PRODUCT_EVENT_ENABLED"] =
 	$arResult["IS_FACEBOOK_CONVERSION_CUSTOMIZE_PRODUCT_EVENT_ENABLED"];
