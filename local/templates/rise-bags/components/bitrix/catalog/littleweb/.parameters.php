@@ -510,6 +510,24 @@ if ($boolCatalog) {
 		'TYPE' => 'STRING',
 		'DEFAULT' => GetMessage('CP_BC_TPL_MESS_DESCRIPTION_TAB_DEFAULT')
 	);
+	$arTemplateParameters['MESS_DELIVERY_TAB'] = array(
+		'PARENT' => 'DETAIL_SETTINGS',
+		'NAME' => GetMessage('CP_BC_TPL_MESS_DELIVERY_TAB'),
+		'TYPE' => 'STRING',
+		'DEFAULT' => GetMessage('CP_BC_TPL_MESS_DELIVERY_TAB_DEFAULT')
+	);
+	$arTemplateParameters['MESS_WHOLESALE_TAB'] = array(
+		'PARENT' => 'DETAIL_SETTINGS',
+		'NAME' => GetMessage('CP_BC_TPL_MESS_WHOLESALE_TAB'),
+		'TYPE' => 'STRING',
+		'DEFAULT' => GetMessage('CP_BC_TPL_MESS_WHOLESALE_TAB_DEFAULT')
+	);
+	$arTemplateParameters['MESS_GUARANTEE_TAB'] = array(
+		'PARENT' => 'DETAIL_SETTINGS',
+		'NAME' => GetMessage('CP_BC_TPL_MESS_GUARANTEE_TAB'),
+		'TYPE' => 'STRING',
+		'DEFAULT' => GetMessage('CP_BC_TPL_MESS_GUARANTEE_TAB_DEFAULT')
+	);
 	$arTemplateParameters['MESS_PROPERTIES_TAB'] = array(
 		'PARENT' => 'DETAIL_SETTINGS',
 		'NAME' => GetMessage('CP_BC_TPL_MESS_PROPERTIES_TAB'),
@@ -709,6 +727,12 @@ $arTemplateParameters['MESS_BTN_DETAIL'] = array(
 	'NAME' => GetMessage('CP_BC_TPL_MESS_BTN_DETAIL'),
 	'TYPE' => 'STRING',
 	'DEFAULT' => GetMessage('CP_BC_TPL_MESS_BTN_DETAIL_DEFAULT')
+);
+$arTemplateParameters['MESS_MADE_TO_ORDER'] = array(
+	'PARENT' => 'VISUAL',
+	'NAME' => GetMessage('CP_BC_TPL_MESS_MADE_TO_ORDER'),
+	'TYPE' => 'STRING',
+	'DEFAULT' => GetMessage('CP_BC_TPL_MESS_MADE_TO_ORDER_DEFAULT')
 );
 $arTemplateParameters['MESS_NOT_AVAILABLE'] = array(
 	'PARENT' => 'VISUAL',
