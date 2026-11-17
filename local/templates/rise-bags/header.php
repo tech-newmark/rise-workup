@@ -29,7 +29,7 @@
     window.RiseBagsCompareIds = <?= CUtil::PhpToJSObject($compareProductIds) ?>;
   </script>
   <meta name="google-site-verification" content="S0kLsfwLXgZyiwweFnmvlozqFcr-vOM_X9MActjAGsM" />
-
+  <meta name="yandex-verification" content="121e44a2e320f1aa" />
 
   <!-- Yandex.Metrika counter -->
   <script type="text/javascript" data-skip-moving="true">
